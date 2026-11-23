@@ -31,6 +31,7 @@ async function loadData() {
   const topics = [...travel, ...social];
   DATA = { core, topics, lessons, topic: id => topics.find(t => t.id === id), verb: v => core.verbs.find(x => x.verb === v) };
   for (const t of topics) for (const [en, ru] of t.say) if (!ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'say', topic: t.id });
+  for (const t of topics) for (const d of t.dialogs) for (const [who, en, ru] of d.lines) if (who === 'me' && !ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'line', topic: t.id });
   for (const v of core.verbs) v.cells.forEach(([en, ru], i) => { if (!ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'core', verb: v.verb, cell: i }); });
 }
 
@@ -184,17 +185,42 @@ function srsUpdate(results) { // results: Map key -> {ok: true|false|null}
   for (const [key, r] of results) {
     const e = s[key] || { box: -1, ok: 0, bad: 0 };
     if (r.ok === false) { e.box = 0; e.bad++; e.due = addDays(1); }
-    else { e.box = Math.min(e.box + 1, SRS_DAYS.length - 1); e.ok++; e.due = addDays(SRS_DAYS[e.box]); if (r.ok) e.known = true; }
+    else { e.box = Math.min(e.box + 1, SRS_DAYS.length - 1); e.ok++; e.due = addDays(SRS_DAYS[e.box]); }
     e.last = t; s[key] = e;
   }
   store.set('srs', s);
 }
 const isDue = e => e && e.due && e.due <= today();
-// сразу сохранить «фраза известна»; true — если отмечена впервые
-function markKnown(key) {
+// Каждый проверенный ответ сразу сохраняется.
+// Верно с первого раза -> ✓ «известна».
+// Ошибка -> ✓ снимается, фраза уходит на доп. повторение (weak).
+// Снова ✓ только после верных ответов в 2 разных дня без новых ошибок (контроль).
+const FIX_DAYS = 2;
+function recordAnswer(key, ok) {
   const s = srs(); const e = s[key] || { box: -1, ok: 0, bad: 0 };
-  const first = !e.known; e.known = true; e.knownAt = e.knownAt || today(); s[key] = e; store.set('srs', s);
-  return first;
+  let status;
+  if (!ok) {
+    e.known = false; e.weak = true; e.fixDays = []; e.errAt = today(); e.errors = (e.errors || 0) + 1;
+    status = 'weak';
+  } else if (e.weak) {
+    e.fixDays = e.fixDays || [];
+    if (!e.fixDays.includes(today())) e.fixDays.push(today());
+    if (e.fixDays.length >= FIX_DAYS) { e.weak = false; e.known = true; e.knownAt = today(); status = 'fixed'; }
+    else status = 'control';
+  } else if (!e.known) { e.known = true; e.knownAt = today(); status = 'new'; }
+  else status = 'ok';
+  s[key] = e; store.set('srs', s);
+  return { status, days: (e.fixDays || []).length };
+}
+function answerBadge(r) {
+  if (!r) return '';
+  return {
+    weak: ' <span class="verdict no">на доп. повторение</span>',
+    control: ` <span class="verdict warn">контроль ${r.days}/${FIX_DAYS} — проверим в другой день</span>`,
+    fixed: ' <span class="verdict ok">✓ контроль пройден — выучил</span>',
+    new: ' <span class="verdict ok">✓ запомнил</span>',
+    ok: '',
+  }[r.status];
 }
 
 // ---------- прогресс ----------
@@ -247,11 +273,18 @@ function buildLesson(idx) {
   const newSet = new Set(newItems.map(i => i.en));
 
   // 1. разогрев — то, что пора повторить
-  const due = [...ITEMS.values()].filter(it => isDue(s[it.en]) && !newSet.has(it.en))
-    .sort((a, b) => s[a.en].due.localeCompare(s[b.en].due)).slice(0, 8);
-  if (due.length) {
-    steps.push({ t: 'phase', name: 'Разогрев' }, { t: 'narr', ru: 'Сначала вспомним то, что уже учили.' });
-    due.forEach(it => steps.push(P(it, 'review')));
+  const weak = [...ITEMS.values()].filter(it => s[it.en] && s[it.en].weak && !newSet.has(it.en))
+    .sort((a, b) => (s[b.en].errors || 0) - (s[a.en].errors || 0)).slice(0, 8);
+  const due = [...weak, ...[...ITEMS.values()].filter(it => isDue(s[it.en]) && !newSet.has(it.en) && !weak.includes(it))
+    .sort((a, b) => s[a.en].due.localeCompare(s[b.en].due)).slice(0, Math.max(4, 10 - weak.length))];
+  if (weak.length) {
+    steps.push({ t: 'phase', name: 'Доп. повтор' }, { t: 'narr', ru: 'Сначала фразы, в которых были ошибки.' });
+    weak.forEach(it => steps.push(P(it, 'weak')));
+  }
+  const dueRest = due.filter(it => !weak.includes(it));
+  if (dueRest.length) {
+    steps.push({ t: 'phase', name: 'Разогрев' }, { t: 'narr', ru: 'Вспомним то, что уже учили.' });
+    dueRest.forEach(it => steps.push(P(it, 'review')));
   }
 
   // 2. сценка
@@ -396,7 +429,7 @@ async function startLesson(idx, resume) {
   $('#pStop').onclick = () => { saveRun(run); stopAll(); render('lesson'); };
 
   const steps = lesson.steps;
-  const total = steps.filter(isCheck).length; let done = steps.slice(0, run.i).filter(isCheck).length;
+  let total = steps.filter(isCheck).length; let done = steps.slice(0, run.i).filter(isCheck).length;
   if (run.i > 0) { // восстановить название части урока
     const ph = steps.slice(0, run.i).reverse().find(s => s.t === 'phase'); if (ph) $('#pPhase').textContent = ph.name;
     $('#pBar').style.width = (100 * run.i / steps.length) + '%'; $('#pCount').textContent = `${done} / ${total}`;
@@ -416,6 +449,7 @@ async function startLesson(idx, resume) {
       else if (e !== 'skip') { console.error(e); run.i++; }
     }
     if (!run.stopped) saveRun(run);
+    total = steps.filter(isCheck).length;
     const bar = $('#pBar'); if (bar) bar.style.width = (100 * run.i / steps.length) + '%';
     const cnt = $('#pCount'); if (cnt) cnt.textContent = `${done} / ${total}`;
   }
@@ -425,6 +459,16 @@ async function startLesson(idx, resume) {
 }
 
 // ждём речь, проверяем; если сказано верно — сразу записываем фразу как известную
+// после ошибки — ещё два повтора этой фразы позже в этом же уроке (через ~3 и ~8 шагов)
+function addFixSteps(run, item) {
+  if (!run.lesson) return;
+  run.fixes = run.fixes || {};
+  if ((run.fixes[item.en] || 0) >= 2) return;
+  run.fixes[item.en] = (run.fixes[item.en] || 0) + 1;
+  const steps = run.lesson.steps; let pos = run.i + 1, checks = 0;
+  const insertAfter = n => { while (pos < steps.length && checks < n) { if (isCheck(steps[pos])) checks++; pos++; } steps.splice(pos, 0, { t: 'prompt', item, mode: 'fix' }); pos++; };
+  insertAfter(3); checks = 0; insertAfter(5);
+}
 async function checkAnswer(en, item, mode, run, ctx, isNew) {
   const heard = $('#pHeard');
   let res = null;
@@ -436,15 +480,16 @@ async function checkAnswer(en, item, mode, run, ctx, isNew) {
   } else { setState('you', 'Скажи вслух'); await sleep(pauseFor(en), ctx); }
   if (res) {
     const ok = res.score >= PASS;
-    const fresh = ok && item && markKnown(en);
-    heard.innerHTML = res.heard
-      ? `Ты сказал: «${h(res.heard)}» <span class="verdict ${ok ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>${fresh ? ' <span class="verdict ok">✓ запомнил</span>' : ''}`
-      : '<span class="verdict no">Не расслышал</span>';
+    const rec = item ? recordAnswer(en, ok) : null;
+    heard.innerHTML = (res.heard
+      ? `Ты сказал: «${h(res.heard)}» <span class="verdict ${ok ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>`
+      : '<span class="verdict no">Не расслышал</span>') + answerBadge(rec);
+    if (!ok && item) addFixSteps(run, item);
     showEn(en, res.marks, isNew);
     run.checked++; if (ok) run.ok++;
     if (item) {
       const prev = run.results.get(en);
-      const val = (mode === 'final' || mode === 'review') ? ok : (prev && prev.ok === false ? false : ok);
+      const val = (mode === 'final' || mode === 'review' || mode === 'weak') ? ok : (prev && prev.ok === false ? false : ok);
       run.results.set(en, { ok: val });
     }
     setState('speak', ok ? 'Верно' : 'Послушай правильно');
@@ -494,7 +539,7 @@ async function runStep(st, ctx, run) {
       await speak(spoken(st.en), { voice: st.who === 'me' ? 'A' : 'B' }, ctx); await sleep(250, ctx); return;
     case 'prompt': case 'role': {
       const en = st.item ? st.item.en : st.en, ruTx = st.item ? st.item.ru : st.ru;
-      const label = st.t === 'role' ? 'Твоя реплика' : st.item.kind === 'core' ? `Ядро · ${st.item.verb}` : { review: 'Повторение', first: 'Новая фраза', recall: 'Вспомни', filler: 'Вспомни', final: 'Сборка' }[st.mode];
+      const label = st.t === 'role' ? 'Твоя реплика' : st.item.kind === 'core' ? `Ядро · ${st.item.verb}` : { review: 'Повторение', first: 'Новая фраза', recall: 'Вспомни', filler: 'Вспомни', final: 'Сборка', fix: 'Доп. повтор', weak: 'Доп. повтор' }[st.mode];
       ru.textContent = ruTx; showEn(''); heard.textContent = ''; setState('speak', label);
       await speak(`${promptWord(en)}: ${spoken(ruTx)}`, { lang: 'ru', cue: true }, ctx);
       await checkAnswer(en, st.item, st.mode, run, ctx, false);
@@ -533,6 +578,7 @@ function viewLesson() {
   const L = DATA.lessons[idx], lesson = buildLesson(idx), s = srs(), sr = savedRun();
   const learned = Object.values(s).filter(e => e.known).length;
   const dueN = Object.values(s).filter(isDue).length;
+  const weakN = Object.values(s).filter(e => e.weak).length;
   const goal = L.type === 'topic' ? DATA.topic(L.topic).goal : L.type === 'trip' ? 'Сквозная поездка: все фразы этих тем вперемешку и разговоры за тебя.' : 'Повторяем фразы недели, добираем пропущенные и играем диалоги.';
   const last = p.history[p.history.length - 1];
   const repeat = last && last.lesson === idx && last.score < 80 && last.checked;
@@ -553,7 +599,7 @@ function viewLesson() {
     <div class="stats">
       <div class="stat"><b>${streak()}</b><span>дней подряд</span></div>
       <div class="stat"><b>${learned}</b><span>фраз известно</span></div>
-      <div class="stat"><b>${dueN}</b><span>к повтору сегодня</span></div>
+      <div class="stat"><b>${weakN}</b><span>на доп. повторе</span></div>
     </div>
     <div class="card">
       <h3>Все уроки</h3>
@@ -719,9 +765,9 @@ async function runDialog(d, role) {
         else { hd.textContent = 'Скажи вслух…'; await sleep(pauseFor(en), ctx); }
         row.querySelector('.en').style.visibility = ''; row.classList.add('revealed');
         if (res) {
-          const good = res.score >= PASS; if (good) ok++;
+          const good = res.score >= PASS; if (good) ok++; const rec = recordAnswer(en, good);
           row.querySelector('.en').innerHTML = spoken(en).split(/\s+/).map((w, k) => `<span class="w" style="color:var(${res.marks[k] ? '--ok' : '--bad'})">${h(w)}</span>`).join(' ');
-          hd.innerHTML = res.heard ? `«${h(res.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>` : '<span class="verdict no">не расслышал</span>';
+          hd.innerHTML = (res.heard ? `«${h(res.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>` : '<span class="verdict no">не расслышал</span>') + answerBadge(rec);
         } else if (!hd.querySelector('.verdict') || hd.textContent.includes('говори')) hd.textContent = '';
         await speak(spoken(en), { rate: DS.speed, voice: 'A' }, ctx);
       } else {
@@ -769,7 +815,7 @@ async function coreDrill(v) {
       if (S.mic && RecAPI) {
         $('#cHd').innerHTML = '<span class="verdict no">● говори</span>';
         const alts = await listen(3000 + words(en) * 400, ctx);
-        if (typeof alts === 'string') $('#cHd').innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`; else if (alts) { const r = compare(en, alts); good = r.score >= PASS; $('#cHd').innerHTML = r.heard ? `«${h(r.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не успел</span>'; }
+        if (typeof alts === 'string') $('#cHd').innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`; else if (alts) { const r = compare(en, alts); good = r.score >= PASS; const rec = recordAnswer(en, good); $('#cHd').innerHTML = (r.heard ? `«${h(r.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не успел</span>') + answerBadge(rec); }
       } else await sleep(3000, ctx);
       $('#cEn').textContent = en;
       if (good !== null) { CS.marks[v.verb + i] = good; const t = $(`[data-c="${i}"]`); t.classList.remove('ok', 'no'); t.classList.add(good ? 'ok' : 'no'); if (good) ok++; }
@@ -788,7 +834,7 @@ async function coreDrill(v) {
 const TS = { open: null };
 function phraseList(arr, cls = '') {
   const s = srs();
-  return `<div class="list">${arr.map(([en, ru]) => `<div class="ph ${cls}" data-say="${h(en)}"><button class="play" aria-label="Озвучить">${ICON_PLAY}</button><div class="tx"><div class="en">${h(en)}</div><div class="ru">${h(ru)}</div></div>${s[en] && s[en].known ? '<span class="pill done" title="Фраза известна">✓</span>' : ''}</div>`).join('')}</div>`;
+  return `<div class="list">${arr.map(([en, ru]) => `<div class="ph ${cls}" data-say="${h(en)}"><button class="play" aria-label="Озвучить">${ICON_PLAY}</button><div class="tx"><div class="en">${h(en)}</div><div class="ru">${h(ru)}</div></div>${s[en] && s[en].known ? '<span class="pill done" title="Фраза выучена">✓</span>' : s[en] && s[en].weak ? `<span class="pill warn" title="Была ошибка — на доп. повторении">повтор ${(s[en].fixDays || []).length}/${FIX_DAYS}</span>` : ''}</div>`).join('')}</div>`;
 }
 function viewTopics() {
   const s = srs();

@@ -3,7 +3,7 @@
 :root{
   --bg:#F4F4EF; --surface:#FFFFFF; --sunk:#ECECE5; --ink:#16181F; --muted:#626877; --line:#DEDFD6;
   --accent:#FFC42E; --accent-ink:#16181F; --me:#2F5BD3; --me-soft:#E6ECFB;
-  --ok:#1E8A4C; --ok-soft:#DFF3E6; --bad:#C8372D; --bad-soft:#FBE3E0;
+  --ok:#1E8A4C; --ok-soft:#DFF3E6; --bad:#C8372D; --bad-soft:#FBE3E0; --warn:#9A5B00; --warn-soft:#FFF0CC;
   --display:"Unbounded", "Manrope", system-ui, sans-serif;
   --body:"Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --r:14px; --tabh:64px;
@@ -13,7 +13,7 @@
   :root{
     --bg:#101217; --surface:#1A1D24; --sunk:#14161C; --ink:#ECEDEF; --muted:#9AA0AD; --line:#2A2E37;
     --accent:#FFC93D; --accent-ink:#16181F; --me:#8DA8FF; --me-soft:#1E2742;
-    --ok:#4CC47F; --ok-soft:#163323; --bad:#FF6B5E; --bad-soft:#3A1A18;
+    --ok:#4CC47F; --ok-soft:#163323; --bad:#FF6B5E; --bad-soft:#3A1A18; --warn:#FFC93D; --warn-soft:#3A2E10;
     color-scheme:dark;
   }
 }
@@ -103,6 +103,7 @@ h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
 .verdict{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:800}
 .verdict.ok{background:var(--ok-soft);color:var(--ok)}
 .verdict.no{background:var(--bad-soft);color:var(--bad)}
+.verdict.warn,.pill.warn{background:var(--warn-soft);color:var(--warn)}
 
 /* phrase lists */
 .list{display:flex;flex-direction:column}
