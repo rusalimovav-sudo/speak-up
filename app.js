@@ -178,12 +178,18 @@ function srsUpdate(results) { // results: Map key -> {ok: true|false|null}
   for (const [key, r] of results) {
     const e = s[key] || { box: -1, ok: 0, bad: 0 };
     if (r.ok === false) { e.box = 0; e.bad++; e.due = addDays(1); }
-    else { e.box = Math.min(e.box + 1, SRS_DAYS.length - 1); e.ok++; e.due = addDays(SRS_DAYS[e.box]); }
+    else { e.box = Math.min(e.box + 1, SRS_DAYS.length - 1); e.ok++; e.due = addDays(SRS_DAYS[e.box]); if (r.ok) e.known = true; }
     e.last = t; s[key] = e;
   }
   store.set('srs', s);
 }
-const isDue = e => e && e.due <= today();
+const isDue = e => e && e.due && e.due <= today();
+// сразу сохранить «фраза известна»; true — если отмечена впервые
+function markKnown(key) {
+  const s = srs(); const e = s[key] || { box: -1, ok: 0, bad: 0 };
+  const first = !e.known; e.known = true; e.knownAt = e.knownAt || today(); s[key] = e; store.set('srs', s);
+  return first;
+}
 
 // ---------- прогресс ----------
 const prog = () => store.get('progress', { lesson: 0, days: [], history: [] });
@@ -274,11 +280,7 @@ function buildLesson(idx) {
       }
       if (ni < newItems.length) {
         const it = newItems[ni++];
-        steps.push({ t: 'intro', item: it });
-        const ch = chunksFromEnd(it.en);
-        if (ch.length) { steps.push({ t: 'narr', ru: 'Повторяй за мной по частям.' }); ch.forEach(c => steps.push({ t: 'rep', en: c })); steps.push({ t: 'rep', en: spoken(it.en) }); }
-        else steps.push({ t: 'rep', en: spoken(it.en) });
-        steps.push(P(it, 'first')); k++;
+        used.add(it.en); steps.push({ t: 'intro', item: it }); k++;
         pending.push({ item: it, due: k + gaps[0], stage: 0 });
         continue;
       }
@@ -309,7 +311,7 @@ function estimateMin(lesson) {
     const w = st.item ? words(st.item.en) : st.en ? words(st.en) : 0;
     if (st.t === 'narr') sec += st.ru.length / 13;
     else if (st.t === 'prompt' || st.t === 'role') sec += 2.5 + pauseFor(st.item ? st.item.en : st.en) / 1000 + w * 0.42;
-    else if (st.t === 'intro') sec += 3 + w * 0.42 * 2.3;
+    else if (st.t === 'intro') { const ch = chunksFromEnd(st.item.en); sec += 6 + w * 0.42 * 3.3 + pauseFor(st.item.en) / 1000 + ch.reduce((a, c) => a + words(c) * 0.42 + pauseFor(c) / 1000, 0); }
     else if (st.t === 'rep') sec += w * 0.42 + pauseFor(st.en) / 1000;
     else if (st.t === 'line') sec += w * 0.42 + 0.5;
   }
@@ -352,13 +354,14 @@ function playerHTML(lesson) {
   <h3>${h(lesson.title)} · ${lesson.L.type === 'topic' ? 'тема' : lesson.L.type === 'trip' ? 'поездка' : 'повторение'}</h3>`;
 }
 function setState(kind, tx) { const el = $('#pState'); if (!el) return; el.className = 'state ' + kind; $('#pStateTx').textContent = tx; }
-function showEn(en, marks) {
+function showEn(en, marks, force) {
   const el = $('#pEn'); if (!el) return;
-  if (!S.text) { el.textContent = ''; return; }
+  if (!S.text && !force) { el.textContent = ''; return; }
   const w = en.split(/\s+/);
   el.innerHTML = marks ? w.map((x, i) => `<span class="w ${marks[i] ? 'ok' : 'no'}">${h(x)}</span>`).join('') : h(en);
 }
 
+const isCheck = st => st.t === 'prompt' || st.t === 'role' || st.t === 'intro';
 async function startLesson(idx) {
   stopAll();
   const lesson = buildLesson(idx);
@@ -370,21 +373,21 @@ async function startLesson(idx) {
     if (run.paused) { run.repeat = true; killCtx(run.ctx, 'skip'); setState('', 'Пауза'); }
   };
   $('#pSkip').onclick = () => { run.repeat = false; killCtx(run.ctx, 'skip'); };
-  $('#pStop').onclick = () => { stopAll(); render('lesson'); };
+  $('#pStop').onclick = () => { srsUpdate(run.results); stopAll(); render('lesson'); };
 
   const steps = lesson.steps;
-  const total = steps.filter(s => s.t === 'prompt' || s.t === 'role').length; let done = 0;
+  const total = steps.filter(isCheck).length; let done = 0;
   while (run.i < steps.length && !run.stopped) {
     while (run.paused && !run.stopped) await new Promise(r => setTimeout(r, 150));
     if (run.stopped) return;
     const st = steps[run.i]; const ctx = run.ctx = mkCtx(); run.repeat = false;
     try {
       await runStep(st, ctx, run);
-      if (st.t === 'prompt' || st.t === 'role') done++;
+      if (isCheck(st)) done++;
       run.i++;
     } catch (e) {
       if (e === 'stop' || run.stopped) return;
-      if (e === 'skip' && !run.repeat) { if (st.t === 'prompt' || st.t === 'role') done++; run.i++; }
+      if (e === 'skip' && !run.repeat) { if (isCheck(st)) done++; run.i++; }
       else if (e !== 'skip') { console.error(e); run.i++; }
     }
     const bar = $('#pBar'); if (bar) bar.style.width = (100 * run.i / steps.length) + '%';
@@ -392,6 +395,41 @@ async function startLesson(idx) {
   }
   if (run.stopped) return;
   finishLesson(run);
+}
+
+// ждём речь, проверяем; если сказано верно — сразу записываем фразу как известную
+async function checkAnswer(en, item, mode, run, ctx, isNew) {
+  const heard = $('#pHeard');
+  let res = null;
+  if (S.mic && RecAPI) {
+    setState('mic', 'Говори!');
+    const alts = await listen(pauseFor(en) + 2500, ctx);
+    if (alts === 'denied') { S.mic = false; saveSettings(); heard.textContent = 'Нет доступа к микрофону — урок продолжится без проверки.'; }
+    else if (alts) res = compare(en, alts);
+  } else { setState('you', 'Скажи вслух'); await sleep(pauseFor(en), ctx); }
+  if (res) {
+    const ok = res.score >= PASS;
+    const fresh = ok && item && markKnown(en);
+    heard.innerHTML = res.heard
+      ? `Ты сказал: «${h(res.heard)}» <span class="verdict ${ok ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>${fresh ? ' <span class="verdict ok">✓ запомнил</span>' : ''}`
+      : '<span class="verdict no">Не расслышал</span>';
+    showEn(en, res.marks, isNew);
+    run.checked++; if (ok) run.ok++;
+    if (item) {
+      const prev = run.results.get(en);
+      const val = (mode === 'final' || mode === 'review') ? ok : (prev && prev.ok === false ? false : ok);
+      run.results.set(en, { ok: val });
+    }
+    setState('speak', ok ? 'Верно' : 'Послушай правильно');
+    await speak(spoken(en), {}, ctx);
+    if (!ok) { setState('you', 'Повтори'); await sleep(pauseFor(en), ctx); }
+  } else {
+    showEn(en, null, isNew); setState('speak', 'Правильно так');
+    if (item && !run.results.has(en)) run.results.set(en, { ok: null });
+    await speak(spoken(en), {}, ctx);
+  }
+  await sleep(350, ctx);
+  return res ? res.score >= PASS : null;
 }
 
 async function runStep(st, ctx, run) {
@@ -402,11 +440,22 @@ async function runStep(st, ctx, run) {
       ru.textContent = st.ru; showEn(''); heard.textContent = ''; setState('speak', 'Слушай');
       await speak(st.ru, { lang: 'ru' }, ctx); return;
     case 'intro': {
-      const it = st.item;
-      ru.textContent = it.ru; showEn(it.en); heard.textContent = ''; setState('speak', 'Новая фраза');
+      // «Как сказать: …» → подсказка (английский + русский на экране) → по частям для длинных → ты говоришь → проверка
+      const it = st.item, en = it.en;
+      ru.textContent = it.ru; showEn(''); heard.textContent = ''; setState('speak', 'Новая фраза');
       await speak('Как сказать: ' + spoken(it.ru), { lang: 'ru', cue: true }, ctx);
-      await speak(spoken(it.en), {}, ctx); await sleep(500, ctx);
-      await speak(spoken(it.en), { rate: S.rate * 0.75 }, ctx);
+      setState('speak', 'Подсказка'); showEn(en, null, true);
+      await speak(spoken(en), {}, ctx); await sleep(400, ctx);
+      await speak(spoken(en), { rate: S.rate * 0.75 }, ctx);
+      const ch = chunksFromEnd(en);
+      for (const c of ch) {
+        setState('speak', 'По частям'); showEn(c, null, true);
+        await speak(c, { rate: S.rate * 0.9 }, ctx);
+        setState('you', 'Повтори'); await sleep(pauseFor(c), ctx);
+      }
+      showEn(en, null, true);
+      await speak('Теперь скажи сам.', { lang: 'ru', cue: true }, ctx);
+      await checkAnswer(en, it, 'first', run, ctx, true);
       return;
     }
     case 'rep':
@@ -421,28 +470,8 @@ async function runStep(st, ctx, run) {
       const label = st.t === 'role' ? 'Твоя реплика' : st.item.kind === 'core' ? `Ядро · ${st.item.verb}` : { review: 'Повторение', first: 'Новая фраза', recall: 'Вспомни', filler: 'Вспомни', final: 'Сборка' }[st.mode];
       ru.textContent = ruTx; showEn(''); heard.textContent = ''; setState('speak', label);
       await speak(`${promptWord(en)}: ${spoken(ruTx)}`, { lang: 'ru', cue: true }, ctx);
-      let res = null;
-      if (S.mic && RecAPI) {
-        setState('mic', 'Говори!');
-        const alts = await listen(pauseFor(en) + 2500, ctx);
-        if (alts === 'denied') { S.mic = false; saveSettings(); heard.textContent = 'Нет доступа к микрофону — урок продолжится без проверки.'; }
-        else if (alts) { res = compare(en, alts); }
-      } else { setState('you', 'Скажи вслух'); await sleep(pauseFor(en), ctx); }
-      if (res) {
-        const ok = res.score >= PASS;
-        heard.innerHTML = res.heard ? `Ты сказал: «${h(res.heard)}» <span class="verdict ${ok ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>` : '<span class="verdict no">Не расслышал</span>';
-        showEn(en, res.marks);
-        run.checked++; if (ok) run.ok++;
-        if (st.item) { const prev = run.results.get(en); run.results.set(en, { ok: prev && prev.ok === false && st.mode !== 'final' ? false : ok }); if (st.mode === 'final' || st.mode === 'review') run.results.set(en, { ok }); }
-        setState('speak', ok ? 'Верно' : 'Послушай правильно');
-        await speak(spoken(en), {}, ctx);
-        if (!ok) { setState('you', 'Повтори'); await sleep(pauseFor(en), ctx); }
-      } else {
-        showEn(en); setState('speak', 'Правильно так');
-        if (st.item && !run.results.has(en)) run.results.set(en, { ok: null });
-        await speak(spoken(en), {}, ctx);
-      }
-      await sleep(350, ctx); return;
+      await checkAnswer(en, st.item, st.mode, run, ctx, false);
+      return;
     }
   }
 }
@@ -475,7 +504,7 @@ function lessonStatus(i, p) { return i < p.lesson ? 'done' : i === p.lesson ? 'n
 function viewLesson() {
   const p = prog(), N = DATA.lessons.length, idx = Math.min(p.lesson, N - 1);
   const L = DATA.lessons[idx], lesson = buildLesson(idx), s = srs();
-  const learned = Object.values(s).filter(e => e.box >= 2).length;
+  const learned = Object.values(s).filter(e => e.known).length;
   const dueN = Object.values(s).filter(isDue).length;
   const goal = L.type === 'topic' ? DATA.topic(L.topic).goal : L.type === 'trip' ? 'Сквозная поездка: все фразы этих тем вперемешку и разговоры за тебя.' : 'Повторяем фразы недели, добираем пропущенные и играем диалоги.';
   const last = p.history[p.history.length - 1];
@@ -494,7 +523,7 @@ function viewLesson() {
     </div>
     <div class="stats">
       <div class="stat"><b>${streak()}</b><span>дней подряд</span></div>
-      <div class="stat"><b>${learned}</b><span>фраз выучено</span></div>
+      <div class="stat"><b>${learned}</b><span>фраз известно</span></div>
       <div class="stat"><b>${dueN}</b><span>к повтору сегодня</span></div>
     </div>
     <div class="card">
@@ -728,13 +757,14 @@ async function coreDrill(v) {
 // ---------- экран «Темы» ----------
 const TS = { open: null };
 function phraseList(arr, cls = '') {
-  return `<div class="list">${arr.map(([en, ru]) => `<div class="ph ${cls}" data-say="${h(en)}"><button class="play" aria-label="Озвучить">${ICON_PLAY}</button><div class="tx"><div class="en">${h(en)}</div><div class="ru">${h(ru)}</div></div></div>`).join('')}</div>`;
+  const s = srs();
+  return `<div class="list">${arr.map(([en, ru]) => `<div class="ph ${cls}" data-say="${h(en)}"><button class="play" aria-label="Озвучить">${ICON_PLAY}</button><div class="tx"><div class="en">${h(en)}</div><div class="ru">${h(ru)}</div></div>${s[en] && s[en].known ? '<span class="pill done" title="Фраза известна">✓</span>' : ''}</div>`).join('')}</div>`;
 }
 function viewTopics() {
   const s = srs();
   if (!TS.open) {
     const group = (cat, name) => `<div class="card"><h3>${name}</h3><div class="list">${DATA.topics.filter(t => t.cat === cat).map(t => {
-      const known = t.say.filter(([en]) => s[en] && s[en].box >= 2).length, seen = t.say.filter(([en]) => s[en]).length;
+      const known = t.say.filter(([en]) => s[en] && s[en].known).length, seen = t.say.filter(([en]) => s[en]).length;
       return `<div class="topic-row" data-tp="${t.id}"><div><b>${h(t.title)}</b><div class="muted small">${t.say.length} фраз · ${t.hear.length} на слух · ${t.dialogs.length} диал.</div></div>
         <span class="pill ${known === t.say.length ? 'done' : seen ? 'now' : ''}">${known}/${t.say.length}</span></div>`;
     }).join('')}</div></div>`;
