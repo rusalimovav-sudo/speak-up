@@ -1,5 +1,5 @@
 // Офлайн-кэш: отдаём из кэша сразу, в фоне обновляем. Меняй VERSION при выпуске новой версии.
-const VERSION = 'su-v1';
+const VERSION = 'su-v2';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest',
   'data/core.json', 'data/travel.json', 'data/social.json', 'data/lessons.json',
   'icons/icon-192.png', 'icons/icon-512.png'];

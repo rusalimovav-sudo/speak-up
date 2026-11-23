@@ -30,6 +30,14 @@ button{font:inherit;color:inherit}
 .logo{font:700 17px/1 var(--display);letter-spacing:.02em}
 .logo::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--accent);margin-right:8px;vertical-align:1px}
 .streak{font-weight:700;font-size:13px;color:var(--accent)}
+.gear{border:0;background:none;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;margin-right:-8px;border-radius:10px}
+.gear svg{width:22px;height:22px;fill:#fff}
+.gear.on svg{fill:var(--accent)}
+select{font:inherit;color:var(--ink);background:var(--sunk);border:1px solid var(--line);border-radius:10px;padding:10px;min-height:44px;width:100%;min-width:0}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:700;font-size:14px}
+.field .row{flex-wrap:nowrap}
+.btn.danger{background:var(--bad-soft);color:var(--bad)}
 
 .view{padding:16px max(16px,env(safe-area-inset-right,0px)) calc(var(--tabh) + 24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
   max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:16px}

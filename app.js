@@ -17,7 +17,7 @@ const store = {
   get(k, def) { try { const v = localStorage.getItem('su_' + k); return v ? JSON.parse(v) : def; } catch { return def; } },
   set(k, v) { try { localStorage.setItem('su_' + k, JSON.stringify(v)); } catch { /* хранилище недоступно */ } },
 };
-const S = Object.assign({ mic: true, text: true, rate: 0.95 }, store.get('settings', {}));
+const S = Object.assign({ mic: true, text: true, rate: 0.95, ruVoice: true, voiceRu: '', voiceA: '', voiceB: '' }, store.get('settings', {}));
 const saveSettings = () => store.set('settings', S);
 
 // ---------- данные ----------
@@ -42,10 +42,26 @@ function loadVoices() {
   const en = us.length ? us : all.filter(v => /^en/i.test(v.lang));
   const rank = v => (/google/i.test(v.name) ? 0 : 2) + (/natural|neural|online/i.test(v.name) ? -1 : 0) + (v.localService ? 0 : 0);
   en.sort((a, b) => rank(a) - rank(b));
-  TTS.en = en; TTS.A = en[0] || null; TTS.B = en.find(v => v !== TTS.A) || TTS.A;
-  TTS.ru = all.find(v => /^ru/i.test(v.lang)) || null;
+  const ru = all.filter(v => /^ru/i.test(v.lang)).sort((a, b) => rank(a) - rank(b));
+  const byName = (list, name) => name && list.find(v => v.name === name);
+  TTS.en = en; TTS.ruList = ru; TTS.all = all;
+  TTS.A = byName(all, S.voiceA) || en[0] || null;
+  TTS.B = byName(all, S.voiceB) || en.find(v => v !== TTS.A) || TTS.A;
+  TTS.ru = byName(ru, S.voiceRu) || ru[0] || null;
 }
-if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = () => { loadVoices(); if (TAB === 'settings') viewSettings(); }; }
+
+// короткий сигнал вместо русской подсказки голосом
+let AC = null;
+function beep() {
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.frequency.value = 880; g.gain.setValueAtTime(0.0001, AC.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.25, AC.currentTime + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, AC.currentTime + 0.18);
+    o.connect(g).connect(AC.destination); o.start(); o.stop(AC.currentTime + 0.2);
+  } catch { /* звук недоступен */ }
+}
 
 function mkCtx() { const c = { dead: false, reason: null, check() { if (c.dead) throw c.reason; } }; return c; }
 function killCtx(c, reason = 'stop') { if (!c || c.dead) return; c.dead = true; c.reason = reason; try { speechSynthesis.cancel(); } catch { } stopRec(); }
@@ -58,7 +74,11 @@ function sleep(ms, ctx) {
 // lang: 'en' | 'ru'; voice: 'A' | 'B'
 function speak(text, o = {}, ctx) {
   const lang = o.lang || 'en';
-  if (!('speechSynthesis' in window) || (lang === 'ru' && !TTS.ru)) return sleep(lang === 'ru' ? 900 : 1500, ctx);
+  if (lang === 'ru' && (!S.ruVoice || !TTS.ru)) {   // подсказка только текстом на экране
+    if (o.cue) beep();
+    return sleep(Math.max(o.cue ? 1200 : 1500, text.length * (o.cue ? 40 : 55)), ctx);
+  }
+  if (!('speechSynthesis' in window)) return sleep(1500, ctx);
   return new Promise(res => {
     const u = new SpeechSynthesisUtterance(text);
     if (lang === 'ru') { u.voice = TTS.ru; u.lang = 'ru-RU'; u.rate = 1.05; }
@@ -384,7 +404,7 @@ async function runStep(st, ctx, run) {
     case 'intro': {
       const it = st.item;
       ru.textContent = it.ru; showEn(it.en); heard.textContent = ''; setState('speak', 'Новая фраза');
-      await speak('Как сказать: ' + spoken(it.ru), { lang: 'ru' }, ctx);
+      await speak('Как сказать: ' + spoken(it.ru), { lang: 'ru', cue: true }, ctx);
       await speak(spoken(it.en), {}, ctx); await sleep(500, ctx);
       await speak(spoken(it.en), { rate: S.rate * 0.75 }, ctx);
       return;
@@ -400,7 +420,7 @@ async function runStep(st, ctx, run) {
       const en = st.item ? st.item.en : st.en, ruTx = st.item ? st.item.ru : st.ru;
       const label = st.t === 'role' ? 'Твоя реплика' : st.item.kind === 'core' ? `Ядро · ${st.item.verb}` : { review: 'Повторение', first: 'Новая фраза', recall: 'Вспомни', filler: 'Вспомни', final: 'Сборка' }[st.mode];
       ru.textContent = ruTx; showEn(''); heard.textContent = ''; setState('speak', label);
-      await speak(`${promptWord(en)}: ${spoken(ruTx)}`, { lang: 'ru' }, ctx);
+      await speak(`${promptWord(en)}: ${spoken(ruTx)}`, { lang: 'ru', cue: true }, ctx);
       let res = null;
       if (S.mic && RecAPI) {
         setState('mic', 'Говори!');
@@ -482,13 +502,60 @@ function viewLesson() {
       <div class="list">${DATA.lessons.map((x, i) => `<div class="topic-row" data-l="${i}">
         <div><b>${i + 1}. ${h(lessonTitle(x))}</b><div class="muted small">Неделя ${x.week} · глагол ${h(x.verb)}</div></div>
         <span class="pill ${lessonStatus(i, p)}">${{ done: 'пройден', now: 'сейчас', '': x.type === 'review' ? 'повтор' : x.type === 'trip' ? 'поездка' : 'тема' }[lessonStatus(i, p)]}</span></div>`).join('')}</div>
-    </div>
-    <div class="row"><span class="muted small">Скорость диктора</span>${[0.8, 0.95, 1.1].map(r => `<button class="chip ${S.rate === r ? 'on' : ''}" data-rate="${r}">${r === 0.8 ? 'медленно' : r === 0.95 ? 'обычно' : 'быстро'}</button>`).join('')}</div>`;
+    </div>`;
   $('#startBtn').onclick = () => startLesson(idx);
   $('#optMic').onchange = e => { S.mic = e.target.checked; saveSettings(); };
   $('#optText').onchange = e => { S.text = e.target.checked; saveSettings(); };
   $$('[data-l]').forEach(el => el.onclick = () => startLesson(+el.dataset.l));
-  $$('[data-rate]').forEach(el => el.onclick = () => { S.rate = +el.dataset.rate; saveSettings(); viewLesson(); });
+}
+
+// ---------- экран «Настройки» ----------
+let resetAsk = false;
+function voiceOptions(list, cur) {
+  if (!list.length) return '<option value="">Голосов не найдено</option>';
+  return list.map(v => `<option value="${h(v.name)}" ${cur && v.name === cur.name ? 'selected' : ''}>${h(v.name)}${v.localService ? '' : ' · онлайн'}</option>`).join('');
+}
+function viewSettings() {
+  const enList = TTS.en || [], ruList = TTS.ruList || [];
+  $('#view').innerHTML = `<div><h1>Настройки</h1><div class="muted">Сохраняются на этом телефоне.</div></div>
+    <div class="card">
+      <h3>Голоса</h3>
+      <div class="field"><label for="vRu">Русские подсказки</label>
+        <div class="row"><select id="vRu">${voiceOptions(ruList, TTS.ru)}</select><button class="btn sm" data-test="ru">Слушать</button></div></div>
+      <label class="toggle"><input type="checkbox" id="sRuVoice" ${S.ruVoice ? 'checked' : ''}> Русские подсказки голосом</label>
+      <div class="muted small">Если выключить: подсказка показывается на экране, звучит короткий сигнал, а по-английски по-прежнему говорит диктор.</div>
+      <div class="field"><label for="vA">Английский диктор (ты)</label>
+        <div class="row"><select id="vA">${voiceOptions(enList, TTS.A)}</select><button class="btn sm" data-test="A">Слушать</button></div></div>
+      <div class="field"><label for="vB">Английский собеседник</label>
+        <div class="row"><select id="vB">${voiceOptions(enList, TTS.B)}</select><button class="btn sm" data-test="B">Слушать</button></div></div>
+      <div class="note">Голосов мало или звучат плохо? В Android: Настройки → Синтез речи → «Синтезатор речи Google» → ⚙ → Установка голосовых данных. Скачай «Русский» и «Английский (США)», потом перезапусти приложение. Голоса с пометкой «онлайн» обычно звучат лучше, но нужен интернет.</div>
+    </div>
+    <div class="card">
+      <h3>Урок</h3>
+      <div class="row"><span class="muted small">Скорость диктора</span>${[0.8, 0.95, 1.1].map(r => `<button class="chip ${S.rate === r ? 'on' : ''}" data-rate="${r}">${r === 0.8 ? 'медленно' : r === 0.95 ? 'обычно' : 'быстро'}</button>`).join('')}</div>
+      <label class="toggle"><input type="checkbox" id="sMic" ${S.mic && RecAPI ? 'checked' : ''} ${RecAPI ? '' : 'disabled'}> Проверять ответы микрофоном</label>
+      <label class="toggle"><input type="checkbox" id="sText" ${S.text ? 'checked' : ''}> Показывать английский текст</label>
+    </div>
+    <div class="card">
+      <h3>Прогресс</h3>
+      ${resetAsk ? `<div>Удалить весь прогресс и повторения? Это нельзя отменить.</div>
+        <div class="row"><button class="btn danger" id="resetYes">Да, удалить</button><button class="btn" id="resetNo">Отмена</button></div>`
+      : '<button class="btn danger" id="reset">Сбросить прогресс</button>'}
+    </div>`;
+  const pick = (sel, key) => { $(sel).onchange = e => { S[key] = e.target.value; saveSettings(); loadVoices(); }; };
+  pick('#vRu', 'voiceRu'); pick('#vA', 'voiceA'); pick('#vB', 'voiceB');
+  $$('[data-test]').forEach(b => b.onclick = () => {
+    stopAll(); AUX = mkCtx(); const w = b.dataset.test;
+    (w === 'ru' ? speak('Скажи: где здесь туалет?', { lang: 'ru', cue: true }, AUX) : speak(w === 'A' ? 'Hi! Can I get a coffee, please?' : 'Sure. What size?', { voice: w }, AUX)).catch(() => { });
+  });
+  $('#sRuVoice').onchange = e => { S.ruVoice = e.target.checked; saveSettings(); };
+  $('#sMic').onchange = e => { S.mic = e.target.checked; saveSettings(); };
+  $('#sText').onchange = e => { S.text = e.target.checked; saveSettings(); };
+  $$('[data-rate]').forEach(el => el.onclick = () => { S.rate = +el.dataset.rate; saveSettings(); viewSettings(); });
+  if (resetAsk) {
+    $('#resetYes').onclick = () => { store.set('srs', {}); store.set('progress', { lesson: 0, days: [], history: [] }); resetAsk = false; updateStreak(); viewSettings(); };
+    $('#resetNo').onclick = () => { resetAsk = false; viewSettings(); };
+  } else $('#reset').onclick = () => { resetAsk = true; viewSettings(); };
 }
 
 // ---------- экран «Слух» ----------
@@ -638,7 +705,7 @@ async function coreDrill(v) {
     for (const i of order) {
       const [en, ru] = v.cells[i];
       $('#cRu').textContent = ru; $('#cEn').textContent = ''; $('#cHd').textContent = '';
-      await speak(ru, { lang: 'ru' }, ctx);
+      await speak(ru, { lang: 'ru', cue: true }, ctx);
       let good = null;
       if (S.mic && RecAPI) {
         $('#cHd').innerHTML = '<span class="verdict no">● говори</span>';
@@ -688,14 +755,16 @@ function viewTopics() {
 }
 
 // ---------- навигация ----------
-const VIEWS = { lesson: viewLesson, listen: viewListen, dialogs: viewDialogs, core: viewCore, topics: viewTopics };
+const VIEWS = { lesson: viewLesson, listen: viewListen, dialogs: viewDialogs, core: viewCore, topics: viewTopics, settings: viewSettings };
 let TAB = 'lesson';
 function render(tab) {
-  stopAll(); TAB = tab;
+  stopAll(); TAB = tab; resetAsk = false;
   $$('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  $('#gear').classList.toggle('on', tab === 'settings');
   VIEWS[tab](); window.scrollTo(0, 0);
 }
 $$('#tabs button').forEach(b => b.onclick = () => render(b.dataset.tab));
+$('#gear').onclick = () => render(TAB === 'settings' ? 'lesson' : 'settings');
 
 (async function init() {
   try { await loadData(); }
