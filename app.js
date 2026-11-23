@@ -330,7 +330,7 @@ async function keepAwake(on) {
 document.addEventListener('visibilitychange', () => { if (RUN && document.visibilityState === 'visible') keepAwake(true); });
 
 function stopAll() {
-  if (RUN) { RUN.stopped = true; killCtx(RUN.ctx, 'stop'); RUN = null; keepAwake(false); }
+  if (RUN) { saveRun(RUN); RUN.stopped = true; killCtx(RUN.ctx, 'stop'); RUN = null; keepAwake(false); }
   if (AUX) { killCtx(AUX, 'stop'); AUX = null; }
 }
 let AUX = null; // контекст для разделов вне урока
@@ -362,21 +362,40 @@ function showEn(en, marks, force) {
 }
 
 const isCheck = st => st.t === 'prompt' || st.t === 'role' || st.t === 'intro';
-async function startLesson(idx) {
+// незаконченный урок хранится в телефоне: шаги, позиция и результаты — можно продолжить с того же места
+function saveRun(run) {
+  if (!run || run.finished) return;
+  const { lesson } = run;
+  store.set('run', { idx: lesson.idx, title: lesson.title, steps: lesson.steps, i: run.i, results: [...run.results], checked: run.checked, ok: run.ok, date: today() });
+}
+const savedRun = () => { const r = store.get('run', null); return r && r.steps && r.i < r.steps.length ? r : null; };
+const clearRun = () => store.set('run', null);
+window.addEventListener('pagehide', () => saveRun(RUN));
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveRun(RUN); });
+
+async function startLesson(idx, resume) {
   stopAll();
-  const lesson = buildLesson(idx);
+  const saved = resume ? savedRun() : null;
+  const lesson = saved ? { idx: saved.idx, L: DATA.lessons[saved.idx], title: saved.title, steps: saved.steps } : buildLesson(idx);
   $('#view').innerHTML = playerHTML(lesson);
-  const run = RUN = { ctx: null, paused: false, lesson, i: 0, results: new Map(), checked: 0, ok: 0, stopped: false };
+  const run = RUN = { ctx: null, paused: false, lesson, i: saved ? saved.i : 0, results: new Map(saved ? saved.results : []),
+    checked: saved ? saved.checked : 0, ok: saved ? saved.ok : 0, stopped: false };
+  saveRun(run);
   keepAwake(true);
   $('#pPause').onclick = () => {
     run.paused = !run.paused; $('#pPause').textContent = run.paused ? 'Продолжить' : 'Пауза';
-    if (run.paused) { run.repeat = true; killCtx(run.ctx, 'skip'); setState('', 'Пауза'); }
+    if (run.paused) { run.repeat = true; killCtx(run.ctx, 'skip'); setState('', 'Пауза'); saveRun(run); }
   };
   $('#pSkip').onclick = () => { run.repeat = false; killCtx(run.ctx, 'skip'); };
-  $('#pStop').onclick = () => { srsUpdate(run.results); stopAll(); render('lesson'); };
+  $('#pStop').onclick = () => { saveRun(run); stopAll(); render('lesson'); };
 
   const steps = lesson.steps;
-  const total = steps.filter(isCheck).length; let done = 0;
+  const total = steps.filter(isCheck).length; let done = steps.slice(0, run.i).filter(isCheck).length;
+  if (run.i > 0) { // восстановить название части урока
+    const ph = steps.slice(0, run.i).reverse().find(s => s.t === 'phase'); if (ph) $('#pPhase').textContent = ph.name;
+    $('#pBar').style.width = (100 * run.i / steps.length) + '%'; $('#pCount').textContent = `${done} / ${total}`;
+    $('#pRu').textContent = 'Продолжаем с того же места.';
+  }
   while (run.i < steps.length && !run.stopped) {
     while (run.paused && !run.stopped) await new Promise(r => setTimeout(r, 150));
     if (run.stopped) return;
@@ -390,10 +409,12 @@ async function startLesson(idx) {
       if (e === 'skip' && !run.repeat) { if (isCheck(st)) done++; run.i++; }
       else if (e !== 'skip') { console.error(e); run.i++; }
     }
+    if (!run.stopped) saveRun(run);
     const bar = $('#pBar'); if (bar) bar.style.width = (100 * run.i / steps.length) + '%';
     const cnt = $('#pCount'); if (cnt) cnt.textContent = `${done} / ${total}`;
   }
   if (run.stopped) return;
+  run.finished = true; clearRun();
   finishLesson(run);
 }
 
@@ -503,7 +524,7 @@ function finishLesson(run) {
 function lessonStatus(i, p) { return i < p.lesson ? 'done' : i === p.lesson ? 'now' : ''; }
 function viewLesson() {
   const p = prog(), N = DATA.lessons.length, idx = Math.min(p.lesson, N - 1);
-  const L = DATA.lessons[idx], lesson = buildLesson(idx), s = srs();
+  const L = DATA.lessons[idx], lesson = buildLesson(idx), s = srs(), sr = savedRun();
   const learned = Object.values(s).filter(e => e.known).length;
   const dueN = Object.values(s).filter(isDue).length;
   const goal = L.type === 'topic' ? DATA.topic(L.topic).goal : L.type === 'trip' ? 'Сквозная поездка: все фразы этих тем вперемешку и разговоры за тебя.' : 'Повторяем фразы недели, добираем пропущенные и играем диалоги.';
@@ -516,7 +537,9 @@ function viewLesson() {
       <div class="muted">${h(goal)}</div>
       ${repeat ? `<div class="muted small">Прошлый раз ${last.score}% — повторяем этот урок.</div>` : ''}
       <div class="bar"><i style="width:${100 * Math.min(p.lesson, N) / N}%"></i></div>
-      <button class="btn primary big" id="startBtn">${ICON_PLAY.replace('<svg', '<svg width="20" height="20" fill="currentColor"')} Начать урок · ~${estimateMin(lesson)} мин</button>
+      ${sr ? `<button class="btn primary big" id="resumeBtn">${ICON_PLAY.replace('<svg', '<svg width="20" height="20" fill="currentColor"')} Продолжить урок ${sr.idx + 1} · ${Math.round(100 * sr.i / sr.steps.length)}%</button>
+        <button class="btn ghost" id="startBtn">${sr.idx === idx ? 'Начать этот урок заново' : `Начать урок ${idx + 1} · ~${estimateMin(lesson)} мин`}</button>`
+      : `<button class="btn primary big" id="startBtn">${ICON_PLAY.replace('<svg', '<svg width="20" height="20" fill="currentColor"')} Начать урок · ~${estimateMin(lesson)} мин</button>`}
       <label class="toggle"><input type="checkbox" id="optMic" ${S.mic && RecAPI ? 'checked' : ''} ${RecAPI ? '' : 'disabled'}> Проверять ответы микрофоном</label>
       <label class="toggle"><input type="checkbox" id="optText" ${S.text ? 'checked' : ''}> Показывать английский текст</label>
       ${RecAPI ? '' : '<div class="muted small">В этом браузере нет распознавания речи. На Android открой в Chrome.</div>'}
@@ -533,6 +556,7 @@ function viewLesson() {
         <span class="pill ${lessonStatus(i, p)}">${{ done: 'пройден', now: 'сейчас', '': x.type === 'review' ? 'повтор' : x.type === 'trip' ? 'поездка' : 'тема' }[lessonStatus(i, p)]}</span></div>`).join('')}</div>
     </div>`;
   $('#startBtn').onclick = () => startLesson(idx);
+  if (sr) $('#resumeBtn').onclick = () => startLesson(sr.idx, true);
   $('#optMic').onchange = e => { S.mic = e.target.checked; saveSettings(); };
   $('#optText').onchange = e => { S.text = e.target.checked; saveSettings(); };
   $$('[data-l]').forEach(el => el.onclick = () => startLesson(+el.dataset.l));
