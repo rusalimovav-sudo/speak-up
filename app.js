@@ -19,6 +19,7 @@ const store = {
 };
 const S = Object.assign({ mic: true, text: true, rate: 0.95, ruVoice: true, voiceRu: '', voiceA: '', voiceB: '' }, store.get('settings', {}));
 const saveSettings = () => store.set('settings', S);
+if (!S.micFix) { S.mic = true; S.micFix = 1; saveSettings(); }
 
 // ---------- данные ----------
 let DATA = null;           // {core, topics, lessons}
@@ -108,7 +109,7 @@ function listen(maxMs, ctx) {
     r.lang = 'en-US'; r.interimResults = false; r.maxAlternatives = 5; r.continuous = false;
     let done = false; const fin = v => { if (done) return; done = true; clearTimeout(t); try { r.abort(); } catch { } if (REC === r) REC = null; res(v); };
     r.onresult = e => fin([...e.results[0]].map(a => a.transcript));
-    r.onerror = e => fin(e.error === 'not-allowed' || e.error === 'service-not-allowed' ? 'denied' : []);
+    r.onerror = e => fin({ 'not-allowed': 'denied', 'service-not-allowed': 'denied', network: 'network', 'audio-capture': 'busy' }[e.error] || []);
     r.onend = () => fin([]);
     const t = setTimeout(() => fin([]), maxMs);
     try { r.start(); } catch { fin([]); }
@@ -169,6 +170,11 @@ function compare(expected, heardAlts) {
   return best;
 }
 const PASS = 0.8;
+const MICERR = {
+  denied: 'Нет доступа к микрофону. Разреши его для Chrome: Настройки телефона → Приложения → Chrome → Разрешения → Микрофон.',
+  network: 'Нет интернета — проверка речи сейчас не работает. Урок продолжается.',
+  busy: 'Микрофон занят другим приложением.',
+};
 
 // ---------- интервальное повторение (по дням) ----------
 const SRS_DAYS = [1, 3, 7, 16, 35, 90];
@@ -425,7 +431,7 @@ async function checkAnswer(en, item, mode, run, ctx, isNew) {
   if (S.mic && RecAPI) {
     setState('mic', 'Говори!');
     const alts = await listen(pauseFor(en) + 2500, ctx);
-    if (alts === 'denied') { S.mic = false; saveSettings(); heard.textContent = 'Нет доступа к микрофону — урок продолжится без проверки.'; }
+    if (typeof alts === 'string') heard.innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`;
     else if (alts) res = compare(en, alts);
   } else { setState('you', 'Скажи вслух'); await sleep(pauseFor(en), ctx); }
   if (res) {
@@ -709,14 +715,14 @@ async function runDialog(d, role) {
         row.querySelector('.en').style.visibility = 'hidden';
         if (DS.hide) row.querySelector('.ru').style.filter = 'none';
         let res = null;
-        if (S.mic && RecAPI) { hd.innerHTML = '<span class="verdict no">● говори</span>'; const alts = await listen(pauseFor(en) + 3000, ctx); if (alts && alts !== 'denied') res = compare(en, alts); }
+        if (S.mic && RecAPI) { hd.innerHTML = '<span class="verdict no">● говори</span>'; const alts = await listen(pauseFor(en) + 3000, ctx); if (typeof alts === 'string') hd.innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`; else if (alts) res = compare(en, alts); }
         else { hd.textContent = 'Скажи вслух…'; await sleep(pauseFor(en), ctx); }
         row.querySelector('.en').style.visibility = ''; row.classList.add('revealed');
         if (res) {
           const good = res.score >= PASS; if (good) ok++;
           row.querySelector('.en').innerHTML = spoken(en).split(/\s+/).map((w, k) => `<span class="w" style="color:var(${res.marks[k] ? '--ok' : '--bad'})">${h(w)}</span>`).join(' ');
           hd.innerHTML = res.heard ? `«${h(res.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(res.score * 100)}%</span>` : '<span class="verdict no">не расслышал</span>';
-        } else hd.textContent = '';
+        } else if (!hd.querySelector('.verdict') || hd.textContent.includes('говори')) hd.textContent = '';
         await speak(spoken(en), { rate: DS.speed, voice: 'A' }, ctx);
       } else {
         await speak(spoken(en), { rate: DS.speed, voice: who === 'me' ? 'A' : 'B' }, ctx);
@@ -763,7 +769,7 @@ async function coreDrill(v) {
       if (S.mic && RecAPI) {
         $('#cHd').innerHTML = '<span class="verdict no">● говори</span>';
         const alts = await listen(3000 + words(en) * 400, ctx);
-        if (alts && alts !== 'denied') { const r = compare(en, alts); good = r.score >= PASS; $('#cHd').innerHTML = r.heard ? `«${h(r.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не успел</span>'; }
+        if (typeof alts === 'string') $('#cHd').innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`; else if (alts) { const r = compare(en, alts); good = r.score >= PASS; $('#cHd').innerHTML = r.heard ? `«${h(r.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не успел</span>'; }
       } else await sleep(3000, ctx);
       $('#cEn').textContent = en;
       if (good !== null) { CS.marks[v.verb + i] = good; const t = $(`[data-c="${i}"]`); t.classList.remove('ok', 'no'); t.classList.add(good ? 'ok' : 'no'); if (good) ok++; }
