@@ -1,0 +1,2585 @@
+[
+ {
+  "id": "survival",
+  "cat": "travel",
+  "title": "Выживание: не понял, повторите",
+  "goal": "Не теряться, когда не понимаешь: переспросить, попросить медленнее, уточнить слово",
+  "words": [
+   [
+    "repeat",
+    "повторить"
+   ],
+   [
+    "slowly",
+    "медленно"
+   ],
+   [
+    "understand",
+    "понимать"
+   ],
+   [
+    "mean",
+    "значить, иметь в виду"
+   ],
+   [
+    "spell",
+    "произнести по буквам"
+   ],
+   [
+    "word",
+    "слово"
+   ],
+   [
+    "again",
+    "снова, ещё раз"
+   ],
+   [
+    "sure",
+    "уверенный; конечно"
+   ],
+   [
+    "sorry",
+    "извините; простите?"
+   ],
+   [
+    "excuse me",
+    "простите (привлечь внимание)"
+   ],
+   [
+    "help",
+    "помощь, помогать"
+   ],
+   [
+    "English",
+    "английский"
+   ]
+  ],
+  "say": [
+   [
+    "Sorry?",
+    "Простите? (не расслышал)"
+   ],
+   [
+    "Could you say that again, please?",
+    "Можете повторить, пожалуйста?"
+   ],
+   [
+    "Could you speak more slowly, please?",
+    "Можете говорить медленнее?"
+   ],
+   [
+    "Sorry, I don't understand.",
+    "Извините, я не понимаю."
+   ],
+   [
+    "What does that mean?",
+    "Что это значит?"
+   ],
+   [
+    "What's the word for this in English?",
+    "Как это по-английски?"
+   ],
+   [
+    "Can you write it down, please?",
+    "Можете написать?"
+   ],
+   [
+    "Can you show me?",
+    "Можете показать?"
+   ],
+   [
+    "My English isn't very good.",
+    "Мой английский не очень хорош."
+   ],
+   [
+    "Do you mean…?",
+    "Вы имеете в виду…?"
+   ],
+   [
+    "Just a second, please.",
+    "Секунду, пожалуйста."
+   ],
+   [
+    "Got it, thanks.",
+    "Понял, спасибо."
+   ]
+  ],
+  "hear": [
+   [
+    "Sorry, what was that?",
+    "Простите, что вы сказали?"
+   ],
+   [
+    "Do you speak English?",
+    "Вы говорите по-английски?"
+   ],
+   [
+    "Where are you from?",
+    "Откуда вы?"
+   ],
+   [
+    "No worries.",
+    "Ничего страшного."
+   ],
+   [
+    "Take your time.",
+    "Не спешите."
+   ],
+   [
+    "Does that make sense?",
+    "Понятно?"
+   ],
+   [
+    "Like this?",
+    "Вот так?"
+   ],
+   [
+    "You got it.",
+    "Точно, правильно."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Не расслышал",
+    "lines": [
+     [
+      "A",
+      "Hi, are you in line for the bus?",
+      "Привет, вы в очереди на автобус?"
+     ],
+     [
+      "me",
+      "Sorry?",
+      "Простите?"
+     ],
+     [
+      "A",
+      "Are you waiting for the bus?",
+      "Вы ждёте автобус?"
+     ],
+     [
+      "me",
+      "Sorry, could you speak more slowly, please?",
+      "Извините, можете говорить медленнее?"
+     ],
+     [
+      "A",
+      "Sure. Are… you… waiting… for the bus?",
+      "Конечно. Вы… ждёте… автобус?"
+     ],
+     [
+      "me",
+      "Oh, yes. Got it, thanks.",
+      "А, да. Понял, спасибо."
+     ],
+     [
+      "A",
+      "No worries.",
+      "Без проблем."
+     ]
+    ]
+   },
+   {
+    "title": "Незнакомое слово",
+    "lines": [
+     [
+      "A",
+      "You'll need a receipt for that.",
+      "Вам нужен будет чек для этого."
+     ],
+     [
+      "me",
+      "What does \"receipt\" mean?",
+      "Что значит «receipt»?"
+     ],
+     [
+      "A",
+      "It's the paper you get after you pay. Like this.",
+      "Это бумажка, которую дают после оплаты. Вот такая."
+     ],
+     [
+      "me",
+      "Oh, I see. Thank you!",
+      "А, понятно. Спасибо!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "airport",
+  "cat": "travel",
+  "title": "Аэропорт: регистрация и досмотр",
+  "goal": "Пройти регистрацию, сдать багаж, пройти досмотр, найти выход",
+  "words": [
+   [
+    "flight",
+    "рейс"
+   ],
+   [
+    "check-in",
+    "регистрация"
+   ],
+   [
+    "boarding pass",
+    "посадочный талон"
+   ],
+   [
+    "gate",
+    "выход на посадку"
+   ],
+   [
+    "bag / suitcase",
+    "сумка / чемодан"
+   ],
+   [
+    "carry-on",
+    "ручная кладь"
+   ],
+   [
+    "checked bag",
+    "багаж (сдаваемый)"
+   ],
+   [
+    "security",
+    "досмотр"
+   ],
+   [
+    "delayed",
+    "задержан"
+   ],
+   [
+    "canceled",
+    "отменён"
+   ],
+   [
+    "window seat",
+    "место у окна"
+   ],
+   [
+    "aisle seat",
+    "место у прохода"
+   ],
+   [
+    "departures",
+    "вылет"
+   ],
+   [
+    "arrivals",
+    "прилёт"
+   ]
+  ],
+  "say": [
+   [
+    "I'd like to check in, please.",
+    "Я бы хотел зарегистрироваться."
+   ],
+   [
+    "Here's my passport.",
+    "Вот мой паспорт."
+   ],
+   [
+    "Can I have a window seat?",
+    "Можно место у окна?"
+   ],
+   [
+    "I have one bag to check.",
+    "У меня одна сумка в багаж."
+   ],
+   [
+    "Is this a carry-on?",
+    "Это проходит как ручная кладь?"
+   ],
+   [
+    "Where is gate twelve?",
+    "Где выход двенадцать?"
+   ],
+   [
+    "What time does boarding start?",
+    "Во сколько начинается посадка?"
+   ],
+   [
+    "Is the flight on time?",
+    "Рейс по расписанию?"
+   ],
+   [
+    "Do I need to take this out?",
+    "Мне это нужно доставать?"
+   ]
+  ],
+  "hear": [
+   [
+    "Can I see your passport, please?",
+    "Можно ваш паспорт?"
+   ],
+   [
+    "Are you checking any bags?",
+    "Будете сдавать багаж?"
+   ],
+   [
+    "Did you pack your bags yourself?",
+    "Вы сами собирали вещи?"
+   ],
+   [
+    "Please put your bag on the scale.",
+    "Поставьте сумку на весы."
+   ],
+   [
+    "Your bag is overweight.",
+    "Ваша сумка с перевесом."
+   ],
+   [
+    "Boarding starts at 10:40, gate 12.",
+    "Посадка в 10:40, выход 12."
+   ],
+   [
+    "Laptops and liquids out, please.",
+    "Ноутбуки и жидкости достаньте."
+   ],
+   [
+    "Take off your shoes and belt.",
+    "Снимите обувь и ремень."
+   ],
+   [
+    "Step through, please.",
+    "Проходите (через рамку)."
+   ],
+   [
+    "Your flight has been delayed.",
+    "Ваш рейс задержан."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Стойка регистрации",
+    "lines": [
+     [
+      "A",
+      "Hi there. Where are you flying today?",
+      "Здравствуйте. Куда летите сегодня?"
+     ],
+     [
+      "me",
+      "To New York.",
+      "В Нью-Йорк."
+     ],
+     [
+      "A",
+      "Can I see your passport, please?",
+      "Можно паспорт?"
+     ],
+     [
+      "me",
+      "Here you go.",
+      "Пожалуйста."
+     ],
+     [
+      "A",
+      "Are you checking any bags?",
+      "Будете сдавать багаж?"
+     ],
+     [
+      "me",
+      "Yes, one bag.",
+      "Да, одну сумку."
+     ],
+     [
+      "A",
+      "Okay, put it on the scale for me. Window or aisle?",
+      "Хорошо, поставьте на весы. Окно или проход?"
+     ],
+     [
+      "me",
+      "Window, please.",
+      "У окна, пожалуйста."
+     ],
+     [
+      "A",
+      "Here's your boarding pass. Gate 12, boarding starts at 10:40.",
+      "Вот посадочный. Выход 12, посадка в 10:40."
+     ],
+     [
+      "me",
+      "Thank you!",
+      "Спасибо!"
+     ]
+    ]
+   },
+   {
+    "title": "Досмотр",
+    "lines": [
+     [
+      "A",
+      "Laptops and liquids out, in a separate bin.",
+      "Ноутбуки и жидкости — в отдельный лоток."
+     ],
+     [
+      "me",
+      "Do I need to take off my shoes?",
+      "Обувь снимать?"
+     ],
+     [
+      "A",
+      "Yes, shoes and belt, please.",
+      "Да, обувь и ремень."
+     ],
+     [
+      "A",
+      "Okay, step through. Arms up.",
+      "Хорошо, проходите. Руки вверх."
+     ],
+     [
+      "A",
+      "You're good to go.",
+      "Можете идти."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "plane",
+  "cat": "travel",
+  "title": "В самолёте",
+  "goal": "Понимать стюардов, попросить что-то, поговорить с соседом",
+  "words": [
+   [
+    "seat",
+    "место, кресло"
+   ],
+   [
+    "seatbelt",
+    "ремень безопасности"
+   ],
+   [
+    "blanket",
+    "плед"
+   ],
+   [
+    "water",
+    "вода"
+   ],
+   [
+    "meal",
+    "еда (порция)"
+   ],
+   [
+    "chicken / pasta",
+    "курица / паста"
+   ],
+   [
+    "overhead bin",
+    "верхняя полка"
+   ],
+   [
+    "restroom",
+    "туалет"
+   ],
+   [
+    "landing",
+    "посадка (самолёта)"
+   ],
+   [
+    "takeoff",
+    "взлёт"
+   ]
+  ],
+  "say": [
+   [
+    "Excuse me, I think that's my seat.",
+    "Простите, кажется, это моё место."
+   ],
+   [
+    "Can I get some water, please?",
+    "Можно воды?"
+   ],
+   [
+    "Chicken, please.",
+    "Курицу, пожалуйста."
+   ],
+   [
+    "Could I have a blanket?",
+    "Можно плед?"
+   ],
+   [
+    "Excuse me, can I get out?",
+    "Простите, можно пройти?"
+   ],
+   [
+    "Is it okay if I put my seat back?",
+    "Ничего, если я откину кресло?"
+   ],
+   [
+    "How long is the flight?",
+    "Сколько лететь?"
+   ]
+  ],
+  "hear": [
+   [
+    "Can I get you anything to drink?",
+    "Что-нибудь выпить?"
+   ],
+   [
+    "Chicken or pasta?",
+    "Курица или паста?"
+   ],
+   [
+    "Please fasten your seatbelt.",
+    "Пристегните ремень."
+   ],
+   [
+    "Please put your seat up.",
+    "Верните кресло в вертикальное положение."
+   ],
+   [
+    "We're about to land.",
+    "Мы скоро садимся."
+   ],
+   [
+    "Do you mind switching seats?",
+    "Не против поменяться местами?"
+   ],
+   [
+    "Is this your first time in the States?",
+    "Вы впервые в США?"
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Напитки и еда",
+    "lines": [
+     [
+      "A",
+      "Hi, can I get you anything to drink?",
+      "Привет, что-нибудь выпить?"
+     ],
+     [
+      "me",
+      "Water, please. No ice.",
+      "Воду, пожалуйста. Без льда."
+     ],
+     [
+      "A",
+      "Sure. And for dinner, chicken or pasta?",
+      "Конечно. На ужин курица или паста?"
+     ],
+     [
+      "me",
+      "Chicken, please.",
+      "Курицу, пожалуйста."
+     ],
+     [
+      "A",
+      "Here you go. Enjoy.",
+      "Пожалуйста. Приятного аппетита."
+     ],
+     [
+      "me",
+      "Thanks. Could I also have a blanket?",
+      "Спасибо. Можно ещё плед?"
+     ],
+     [
+      "A",
+      "Of course, I'll bring one in a minute.",
+      "Конечно, принесу через минуту."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "passport",
+  "cat": "travel",
+  "title": "Паспортный контроль и таможня",
+  "goal": "Спокойно ответить на вопросы пограничника",
+  "words": [
+   [
+    "passport",
+    "паспорт"
+   ],
+   [
+    "visa",
+    "виза"
+   ],
+   [
+    "purpose",
+    "цель"
+   ],
+   [
+    "trip",
+    "поездка"
+   ],
+   [
+    "vacation",
+    "отпуск"
+   ],
+   [
+    "business",
+    "бизнес, работа"
+   ],
+   [
+    "stay",
+    "пребывать, остановиться"
+   ],
+   [
+    "week",
+    "неделя"
+   ],
+   [
+    "return ticket",
+    "обратный билет"
+   ],
+   [
+    "declare",
+    "декларировать"
+   ],
+   [
+    "customs",
+    "таможня"
+   ]
+  ],
+  "say": [
+   [
+    "I'm here on vacation.",
+    "Я здесь в отпуске."
+   ],
+   [
+    "I'm here for business.",
+    "Я здесь по работе."
+   ],
+   [
+    "For two weeks.",
+    "На две недели."
+   ],
+   [
+    "I'm staying at a hotel downtown.",
+    "Я остановлюсь в отеле в центре."
+   ],
+   [
+    "I'm staying with a friend.",
+    "Я остановлюсь у друга."
+   ],
+   [
+    "Yes, here's my return ticket.",
+    "Да, вот обратный билет."
+   ],
+   [
+    "No, nothing to declare.",
+    "Нет, нечего декларировать."
+   ],
+   [
+    "It's my first time here.",
+    "Я здесь впервые."
+   ]
+  ],
+  "hear": [
+   [
+    "What's the purpose of your visit?",
+    "Цель визита?"
+   ],
+   [
+    "How long are you staying?",
+    "Как долго пробудете?"
+   ],
+   [
+    "Where are you staying?",
+    "Где остановитесь?"
+   ],
+   [
+    "Is this your first time here?",
+    "Впервые здесь?"
+   ],
+   [
+    "What do you do for work?",
+    "Кем работаете?"
+   ],
+   [
+    "Do you have a return ticket?",
+    "Есть обратный билет?"
+   ],
+   [
+    "Anything to declare?",
+    "Что-нибудь декларировать?"
+   ],
+   [
+    "Look at the camera, please.",
+    "Посмотрите в камеру."
+   ],
+   [
+    "Fingers on the scanner.",
+    "Пальцы на сканер."
+   ],
+   [
+    "Welcome to the United States.",
+    "Добро пожаловать в США."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Пограничник",
+    "lines": [
+     [
+      "A",
+      "Next. Passport, please.",
+      "Следующий. Паспорт, пожалуйста."
+     ],
+     [
+      "me",
+      "Here you go.",
+      "Пожалуйста."
+     ],
+     [
+      "A",
+      "What's the purpose of your visit?",
+      "Цель визита?"
+     ],
+     [
+      "me",
+      "Vacation.",
+      "Отпуск."
+     ],
+     [
+      "A",
+      "How long are you staying?",
+      "Как долго пробудете?"
+     ],
+     [
+      "me",
+      "Ten days.",
+      "Десять дней."
+     ],
+     [
+      "A",
+      "Where are you staying?",
+      "Где остановитесь?"
+     ],
+     [
+      "me",
+      "At a hotel in Manhattan.",
+      "В отеле на Манхэттене."
+     ],
+     [
+      "A",
+      "Okay. Look at the camera. Fingers on the scanner.",
+      "Хорошо. В камеру. Пальцы на сканер."
+     ],
+     [
+      "A",
+      "You're all set. Enjoy your stay.",
+      "Всё готово. Хорошего пребывания."
+     ],
+     [
+      "me",
+      "Thank you!",
+      "Спасибо!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "taxi",
+  "cat": "travel",
+  "title": "Такси и Uber",
+  "goal": "Назвать адрес, понять водителя, оплатить и попросить остановить",
+  "words": [
+   [
+    "ride",
+    "поездка"
+   ],
+   [
+    "driver",
+    "водитель"
+   ],
+   [
+    "address",
+    "адрес"
+   ],
+   [
+    "airport",
+    "аэропорт"
+   ],
+   [
+    "downtown",
+    "центр города"
+   ],
+   [
+    "traffic",
+    "пробки, движение"
+   ],
+   [
+    "trunk",
+    "багажник"
+   ],
+   [
+    "right / left",
+    "направо / налево"
+   ],
+   [
+    "corner",
+    "угол"
+   ],
+   [
+    "receipt",
+    "чек"
+   ],
+   [
+    "tip",
+    "чаевые"
+   ]
+  ],
+  "say": [
+   [
+    "Hi, are you Mike? For Alex?",
+    "Привет, вы Майк? Заказ на Алекса?"
+   ],
+   [
+    "Can you take me to this address?",
+    "Отвезёте по этому адресу?"
+   ],
+   [
+    "To the airport, please.",
+    "В аэропорт, пожалуйста."
+   ],
+   [
+    "How long will it take?",
+    "Сколько ехать?"
+   ],
+   [
+    "How much is it to downtown?",
+    "Сколько до центра?"
+   ],
+   [
+    "Can you open the trunk?",
+    "Откроете багажник?"
+   ],
+   [
+    "You can stop here, please.",
+    "Можете остановить здесь."
+   ],
+   [
+    "Can I pay by card?",
+    "Можно картой?"
+   ],
+   [
+    "Keep the change.",
+    "Сдачи не надо."
+   ],
+   [
+    "Could you drop me off here?",
+    "Высадите меня здесь?"
+   ],
+   [
+    "How long does it take?",
+    "Сколько времени это занимает?"
+   ]
+  ],
+  "hear": [
+   [
+    "Where to?",
+    "Куда едем?"
+   ],
+   [
+    "Are you Alex?",
+    "Вы Алекс?"
+   ],
+   [
+    "Need help with your bags?",
+    "Помочь с сумками?"
+   ],
+   [
+    "Traffic's pretty bad today.",
+    "Сегодня сильные пробки."
+   ],
+   [
+    "It's about twenty minutes.",
+    "Минут двадцать."
+   ],
+   [
+    "Here or at the corner?",
+    "Здесь или на углу?"
+   ],
+   [
+    "Cash or card?",
+    "Наличные или карта?"
+   ],
+   [
+    "Have a good one!",
+    "Хорошего дня!"
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Поездка в отель",
+    "lines": [
+     [
+      "A",
+      "Hey, are you Alex?",
+      "Привет, вы Алекс?"
+     ],
+     [
+      "me",
+      "Yes, hi!",
+      "Да, привет!"
+     ],
+     [
+      "A",
+      "Need help with your bags?",
+      "Помочь с сумками?"
+     ],
+     [
+      "me",
+      "Yes, please. Can you open the trunk?",
+      "Да, пожалуйста. Откроете багажник?"
+     ],
+     [
+      "A",
+      "Sure. Hilton on 5th Avenue, right?",
+      "Конечно. Хилтон на 5-й авеню, да?"
+     ],
+     [
+      "me",
+      "Yes. How long will it take?",
+      "Да. Сколько ехать?"
+     ],
+     [
+      "A",
+      "Traffic's pretty bad, so maybe thirty minutes.",
+      "Пробки сильные, минут тридцать."
+     ],
+     [
+      "me",
+      "Okay, no problem.",
+      "Хорошо, без проблем."
+     ],
+     [
+      "A",
+      "Here we are. Here or at the corner?",
+      "Приехали. Здесь или на углу?"
+     ],
+     [
+      "me",
+      "Here is fine. Thank you!",
+      "Здесь нормально. Спасибо!"
+     ],
+     [
+      "A",
+      "Have a good one!",
+      "Всего хорошего!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "transport",
+  "cat": "travel",
+  "title": "Метро, автобус, поезд",
+  "goal": "Купить билет, спросить маршрут, понять объявления",
+  "words": [
+   [
+    "subway",
+    "метро (США)"
+   ],
+   [
+    "bus stop",
+    "остановка"
+   ],
+   [
+    "station",
+    "станция"
+   ],
+   [
+    "train",
+    "поезд"
+   ],
+   [
+    "ticket",
+    "билет"
+   ],
+   [
+    "one-way",
+    "в одну сторону"
+   ],
+   [
+    "round trip",
+    "туда-обратно"
+   ],
+   [
+    "platform",
+    "платформа"
+   ],
+   [
+    "line",
+    "линия; очередь"
+   ],
+   [
+    "transfer",
+    "пересадка"
+   ],
+   [
+    "next stop",
+    "следующая остановка"
+   ],
+   [
+    "schedule",
+    "расписание"
+   ]
+  ],
+  "say": [
+   [
+    "Where can I buy a ticket?",
+    "Где купить билет?"
+   ],
+   [
+    "One ticket to Boston, please.",
+    "Один билет до Бостона."
+   ],
+   [
+    "Round trip, please.",
+    "Туда-обратно, пожалуйста."
+   ],
+   [
+    "Does this train go to Brooklyn?",
+    "Этот поезд идёт до Бруклина?"
+   ],
+   [
+    "Which line goes downtown?",
+    "Какая линия идёт в центр?"
+   ],
+   [
+    "Where do I transfer?",
+    "Где пересадка?"
+   ],
+   [
+    "Is this the right platform?",
+    "Это та платформа?"
+   ],
+   [
+    "How many stops is it?",
+    "Сколько остановок?"
+   ],
+   [
+    "Is this seat taken?",
+    "Это место занято?"
+   ],
+   [
+    "I missed my stop.",
+    "Я проехал свою остановку."
+   ]
+  ],
+  "hear": [
+   [
+    "Where are you headed?",
+    "Куда направляетесь?"
+   ],
+   [
+    "Take the A train uptown.",
+    "Садитесь на поезд A в сторону центра (на север)."
+   ],
+   [
+    "Transfer at 42nd Street.",
+    "Пересадка на 42-й улице."
+   ],
+   [
+    "It's three stops from here.",
+    "Три остановки отсюда."
+   ],
+   [
+    "Stand clear of the closing doors.",
+    "Отойдите от закрывающихся дверей."
+   ],
+   [
+    "This is the last stop.",
+    "Это конечная."
+   ],
+   [
+    "You need to tap your card here.",
+    "Приложите карту здесь."
+   ],
+   [
+    "The train is running late.",
+    "Поезд опаздывает."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Как доехать",
+    "lines": [
+     [
+      "me",
+      "Excuse me, does this train go to Times Square?",
+      "Простите, этот поезд идёт до Таймс-сквер?"
+     ],
+     [
+      "A",
+      "No, you need the uptown train. Other side.",
+      "Нет, вам в сторону uptown. Другая сторона."
+     ],
+     [
+      "me",
+      "Sorry, the other platform?",
+      "Простите, другая платформа?"
+     ],
+     [
+      "A",
+      "Yeah, just go upstairs and cross over.",
+      "Да, поднимитесь и перейдите."
+     ],
+     [
+      "me",
+      "How many stops is it?",
+      "Сколько остановок?"
+     ],
+     [
+      "A",
+      "About four.",
+      "Примерно четыре."
+     ],
+     [
+      "me",
+      "Great, thank you so much.",
+      "Отлично, большое спасибо."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "hotel",
+  "cat": "travel",
+  "title": "Отель",
+  "goal": "Заселиться, спросить про завтрак и Wi-Fi, решить проблему в номере",
+  "words": [
+   [
+    "reservation",
+    "бронь"
+   ],
+   [
+    "room",
+    "номер, комната"
+   ],
+   [
+    "key card",
+    "ключ-карта"
+   ],
+   [
+    "floor",
+    "этаж"
+   ],
+   [
+    "elevator",
+    "лифт"
+   ],
+   [
+    "breakfast",
+    "завтрак"
+   ],
+   [
+    "towel",
+    "полотенце"
+   ],
+   [
+    "air conditioning",
+    "кондиционер"
+   ],
+   [
+    "checkout",
+    "выезд"
+   ],
+   [
+    "front desk",
+    "ресепшен"
+   ],
+   [
+    "broken",
+    "сломан"
+   ],
+   [
+    "noisy",
+    "шумный"
+   ]
+  ],
+  "say": [
+   [
+    "Hi, I have a reservation under Ivanov.",
+    "Здравствуйте, у меня бронь на Иванова."
+   ],
+   [
+    "I'd like to check in.",
+    "Я хочу заселиться."
+   ],
+   [
+    "What time is breakfast?",
+    "Во сколько завтрак?"
+   ],
+   [
+    "What's the Wi-Fi password?",
+    "Какой пароль от Wi-Fi?"
+   ],
+   [
+    "What time is checkout?",
+    "Во сколько выезд?"
+   ],
+   [
+    "Can I leave my bags here?",
+    "Можно оставить сумки здесь?"
+   ],
+   [
+    "The air conditioning doesn't work.",
+    "Кондиционер не работает."
+   ],
+   [
+    "Could I get some more towels?",
+    "Можно ещё полотенец?"
+   ],
+   [
+    "My room is very noisy. Can I change rooms?",
+    "В номере очень шумно. Можно поменять?"
+   ],
+   [
+    "Can I have a late checkout?",
+    "Можно поздний выезд?"
+   ]
+  ],
+  "hear": [
+   [
+    "Can I get your last name?",
+    "Ваша фамилия?"
+   ],
+   [
+    "I'll need a credit card for incidentals.",
+    "Нужна карта для депозита."
+   ],
+   [
+    "You're in room 512, on the fifth floor.",
+    "Номер 512, пятый этаж."
+   ],
+   [
+    "The elevators are on your left.",
+    "Лифты слева."
+   ],
+   [
+    "Breakfast is from seven to ten.",
+    "Завтрак с семи до десяти."
+   ],
+   [
+    "Checkout is at eleven.",
+    "Выезд в одиннадцать."
+   ],
+   [
+    "I'll send someone up right away.",
+    "Сейчас пришлю кого-нибудь."
+   ],
+   [
+    "Is there anything else I can help you with?",
+    "Чем-то ещё помочь?"
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Заселение",
+    "lines": [
+     [
+      "A",
+      "Hi, welcome! Checking in?",
+      "Здравствуйте! Заселяетесь?"
+     ],
+     [
+      "me",
+      "Yes, I have a reservation under Ivanov.",
+      "Да, бронь на Иванова."
+     ],
+     [
+      "A",
+      "Great. Can I see your ID and a credit card?",
+      "Отлично. Документ и карту, пожалуйста."
+     ],
+     [
+      "me",
+      "Here you go.",
+      "Пожалуйста."
+     ],
+     [
+      "A",
+      "You're in room 512. Breakfast is from seven to ten.",
+      "Номер 512. Завтрак с семи до десяти."
+     ],
+     [
+      "me",
+      "What's the Wi-Fi password?",
+      "Какой пароль от Wi-Fi?"
+     ],
+     [
+      "A",
+      "It's on your key card envelope.",
+      "Он на конверте с ключом."
+     ],
+     [
+      "me",
+      "Thanks. What time is checkout?",
+      "Спасибо. Во сколько выезд?"
+     ],
+     [
+      "A",
+      "Eleven a.m. Enjoy your stay!",
+      "В 11 утра. Хорошего отдыха!"
+     ]
+    ]
+   },
+   {
+    "title": "Проблема в номере",
+    "lines": [
+     [
+      "A",
+      "Front desk, how can I help you?",
+      "Ресепшен, чем помочь?"
+     ],
+     [
+      "me",
+      "Hi, this is room 512. The air conditioning doesn't work.",
+      "Здравствуйте, номер 512. Не работает кондиционер."
+     ],
+     [
+      "A",
+      "Oh, I'm sorry about that. I'll send someone up right away.",
+      "Ой, извините. Сейчас пришлю кого-нибудь."
+     ],
+     [
+      "me",
+      "Thank you. Could I also get some more towels?",
+      "Спасибо. И можно ещё полотенец?"
+     ],
+     [
+      "A",
+      "Of course. Anything else?",
+      "Конечно. Что-то ещё?"
+     ],
+     [
+      "me",
+      "No, that's all. Thanks.",
+      "Нет, всё. Спасибо."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "cafe",
+  "cat": "travel",
+  "title": "Кофейня",
+  "goal": "Заказать кофе и еду, понять вопросы бариста",
+  "words": [
+   [
+    "coffee",
+    "кофе"
+   ],
+   [
+    "latte",
+    "латте"
+   ],
+   [
+    "tea",
+    "чай"
+   ],
+   [
+    "small / medium / large",
+    "маленький / средний / большой"
+   ],
+   [
+    "milk",
+    "молоко"
+   ],
+   [
+    "oat milk",
+    "овсяное молоко"
+   ],
+   [
+    "sugar",
+    "сахар"
+   ],
+   [
+    "sandwich",
+    "сэндвич"
+   ],
+   [
+    "muffin",
+    "маффин"
+   ],
+   [
+    "to go",
+    "с собой"
+   ],
+   [
+    "for here",
+    "здесь"
+   ],
+   [
+    "napkin",
+    "салфетка"
+   ]
+  ],
+  "say": [
+   [
+    "Can I get a medium latte, please?",
+    "Можно средний латте?"
+   ],
+   [
+    "Can I get that with oat milk?",
+    "Можно на овсяном молоке?"
+   ],
+   [
+    "For here, please.",
+    "Здесь, пожалуйста."
+   ],
+   [
+    "To go, please.",
+    "С собой."
+   ],
+   [
+    "That's it, thanks.",
+    "Это всё, спасибо."
+   ],
+   [
+    "What do you recommend?",
+    "Что посоветуете?"
+   ],
+   [
+    "Can I have a glass of water?",
+    "Можно стакан воды?"
+   ],
+   [
+    "Where's the restroom?",
+    "Где туалет?"
+   ],
+   [
+    "Can I get a coffee, please?",
+    "Можно мне кофе?"
+   ],
+   [
+    "I'll have the same.",
+    "Мне то же самое."
+   ],
+   [
+    "What's in it?",
+    "Что входит в состав?"
+   ]
+  ],
+  "hear": [
+   [
+    "What can I get for you?",
+    "Что вам?"
+   ],
+   [
+    "What size?",
+    "Какой размер?"
+   ],
+   [
+    "Hot or iced?",
+    "Горячий или холодный?"
+   ],
+   [
+    "Any milk?",
+    "Какое молоко?"
+   ],
+   [
+    "For here or to go?",
+    "Здесь или с собой?"
+   ],
+   [
+    "Can I get a name for the order?",
+    "Имя для заказа?"
+   ],
+   [
+    "Anything else?",
+    "Что-то ещё?"
+   ],
+   [
+    "Do you want it warmed up?",
+    "Подогреть?"
+   ],
+   [
+    "That'll be six fifty.",
+    "С вас 6,50."
+   ],
+   [
+    "We'll call your name.",
+    "Мы позовём вас по имени."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Заказ кофе",
+    "lines": [
+     [
+      "A",
+      "Hi! What can I get for you?",
+      "Привет! Что вам?"
+     ],
+     [
+      "me",
+      "Can I get a latte, please?",
+      "Можно латте?"
+     ],
+     [
+      "A",
+      "Sure. What size?",
+      "Конечно. Какой размер?"
+     ],
+     [
+      "me",
+      "Medium.",
+      "Средний."
+     ],
+     [
+      "A",
+      "Hot or iced?",
+      "Горячий или холодный?"
+     ],
+     [
+      "me",
+      "Hot, with oat milk, please.",
+      "Горячий, на овсяном молоке."
+     ],
+     [
+      "A",
+      "Anything else?",
+      "Что-то ещё?"
+     ],
+     [
+      "me",
+      "And a muffin.",
+      "И маффин."
+     ],
+     [
+      "A",
+      "Do you want it warmed up?",
+      "Подогреть?"
+     ],
+     [
+      "me",
+      "Yes, please.",
+      "Да, пожалуйста."
+     ],
+     [
+      "A",
+      "For here or to go?",
+      "Здесь или с собой?"
+     ],
+     [
+      "me",
+      "To go.",
+      "С собой."
+     ],
+     [
+      "A",
+      "Can I get a name for the order?",
+      "Имя для заказа?"
+     ],
+     [
+      "me",
+      "Alex.",
+      "Алекс."
+     ],
+     [
+      "A",
+      "That'll be eight twenty-five.",
+      "С вас 8,25."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "restaurant",
+  "cat": "travel",
+  "title": "Ресторан",
+  "goal": "Сесть за стол, заказать, попросить счёт, оставить чаевые",
+  "words": [
+   [
+    "table",
+    "стол"
+   ],
+   [
+    "menu",
+    "меню"
+   ],
+   [
+    "waiter / server",
+    "официант"
+   ],
+   [
+    "appetizer",
+    "закуска"
+   ],
+   [
+    "main course / entrée",
+    "основное блюдо"
+   ],
+   [
+    "dessert",
+    "десерт"
+   ],
+   [
+    "steak",
+    "стейк"
+   ],
+   [
+    "medium rare",
+    "средней прожарки (с кровью)"
+   ],
+   [
+    "spicy",
+    "острый"
+   ],
+   [
+    "check",
+    "счёт (США)"
+   ],
+   [
+    "tip",
+    "чаевые"
+   ],
+   [
+    "allergic",
+    "аллергия (есть аллергия)"
+   ]
+  ],
+  "say": [
+   [
+    "A table for two, please.",
+    "Столик на двоих."
+   ],
+   [
+    "Can we sit outside?",
+    "Можно сесть на улице?"
+   ],
+   [
+    "Can we see the menu, please?",
+    "Можно меню?"
+   ],
+   [
+    "I'll have the steak, medium rare.",
+    "Мне стейк средней прожарки."
+   ],
+   [
+    "What's this dish?",
+    "Что это за блюдо?"
+   ],
+   [
+    "Is it spicy?",
+    "Это острое?"
+   ],
+   [
+    "I'm allergic to nuts.",
+    "У меня аллергия на орехи."
+   ],
+   [
+    "Can we get the check, please?",
+    "Можно счёт?"
+   ],
+   [
+    "Can we split the check?",
+    "Можно раздельный счёт?"
+   ],
+   [
+    "Everything was great, thank you.",
+    "Всё было отлично, спасибо."
+   ],
+   [
+    "Could I have this without onions?",
+    "Можно это без лука?"
+   ],
+   [
+    "Keep the change.",
+    "Сдачи не надо."
+   ],
+   [
+    "That was delicious!",
+    "Было очень вкусно!"
+   ]
+  ],
+  "hear": [
+   [
+    "How many?",
+    "Сколько вас?"
+   ],
+   [
+    "Do you have a reservation?",
+    "У вас бронь?"
+   ],
+   [
+    "It'll be about a fifteen-minute wait.",
+    "Ждать примерно 15 минут."
+   ],
+   [
+    "Can I start you off with some drinks?",
+    "Начнём с напитков?"
+   ],
+   [
+    "Are you ready to order?",
+    "Готовы заказать?"
+   ],
+   [
+    "How would you like your steak?",
+    "Какой прожарки стейк?"
+   ],
+   [
+    "It comes with fries or a salad.",
+    "Подаётся с картошкой фри или салатом."
+   ],
+   [
+    "How is everything?",
+    "Как вам всё?"
+   ],
+   [
+    "Can I get you anything else?",
+    "Что-нибудь ещё?"
+   ],
+   [
+    "I'll be right back with your check.",
+    "Сейчас принесу счёт."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Ужин",
+    "lines": [
+     [
+      "A",
+      "Hi, how many?",
+      "Здравствуйте, сколько вас?"
+     ],
+     [
+      "me",
+      "Two, please.",
+      "Двое."
+     ],
+     [
+      "A",
+      "Right this way. Can I start you off with some drinks?",
+      "Сюда, пожалуйста. Начнём с напитков?"
+     ],
+     [
+      "me",
+      "Two waters, please.",
+      "Две воды, пожалуйста."
+     ],
+     [
+      "A",
+      "Are you ready to order?",
+      "Готовы заказать?"
+     ],
+     [
+      "me",
+      "Yes. I'll have the steak.",
+      "Да. Мне стейк."
+     ],
+     [
+      "A",
+      "How would you like it cooked?",
+      "Какой прожарки?"
+     ],
+     [
+      "me",
+      "Medium rare, please.",
+      "Средней, пожалуйста."
+     ],
+     [
+      "A",
+      "It comes with fries or a salad.",
+      "Подаётся с фри или салатом."
+     ],
+     [
+      "me",
+      "Salad, please.",
+      "Салат."
+     ],
+     [
+      "A",
+      "How is everything?",
+      "Как вам?"
+     ],
+     [
+      "me",
+      "Great, thanks. Can we get the check, please?",
+      "Отлично, спасибо. Можно счёт?"
+     ],
+     [
+      "A",
+      "Sure, I'll be right back.",
+      "Конечно, сейчас вернусь."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "shopping",
+  "cat": "travel",
+  "title": "Магазин и покупки",
+  "goal": "Спросить размер и цену, примерить, оплатить, вернуть",
+  "words": [
+   [
+    "price",
+    "цена"
+   ],
+   [
+    "size",
+    "размер"
+   ],
+   [
+    "small / large",
+    "маленький / большой"
+   ],
+   [
+    "fitting room",
+    "примерочная"
+   ],
+   [
+    "try on",
+    "примерить"
+   ],
+   [
+    "cheaper",
+    "дешевле"
+   ],
+   [
+    "sale",
+    "распродажа"
+   ],
+   [
+    "cash",
+    "наличные"
+   ],
+   [
+    "card",
+    "карта"
+   ],
+   [
+    "bag",
+    "пакет"
+   ],
+   [
+    "return",
+    "вернуть (товар)"
+   ],
+   [
+    "exchange",
+    "обменять"
+   ]
+  ],
+  "say": [
+   [
+    "I'm just looking, thanks.",
+    "Я просто смотрю, спасибо."
+   ],
+   [
+    "How much is this?",
+    "Сколько это стоит?"
+   ],
+   [
+    "Do you have this in a medium?",
+    "Есть такое в размере M?"
+   ],
+   [
+    "Do you have it in black?",
+    "Есть в чёрном?"
+   ],
+   [
+    "Can I try this on?",
+    "Можно примерить?"
+   ],
+   [
+    "It's too big.",
+    "Слишком большое."
+   ],
+   [
+    "I'll take it.",
+    "Беру."
+   ],
+   [
+    "Can I pay by card?",
+    "Можно картой?"
+   ],
+   [
+    "I'd like to return this.",
+    "Я хочу это вернуть."
+   ],
+   [
+    "No bag, thanks.",
+    "Пакет не нужен."
+   ],
+   [
+    "Do you have this in a different size?",
+    "Есть это другого размера?"
+   ],
+   [
+    "Do you have this in another color?",
+    "Есть другой цвет?"
+   ],
+   [
+    "Is this on sale?",
+    "Это со скидкой?"
+   ],
+   [
+    "That's a bit pricey.",
+    "Дороговато."
+   ],
+   [
+    "I'll think about it.",
+    "Я подумаю."
+   ],
+   [
+    "Do you take cards?",
+    "Вы принимаете карты?"
+   ]
+  ],
+  "hear": [
+   [
+    "Can I help you find anything?",
+    "Помочь что-то найти?"
+   ],
+   [
+    "Let me know if you need anything.",
+    "Если что-то нужно — скажите."
+   ],
+   [
+    "The fitting rooms are in the back.",
+    "Примерочные в глубине."
+   ],
+   [
+    "How did it fit?",
+    "Подошло?"
+   ],
+   [
+    "Did you find everything okay?",
+    "Всё нашли?"
+   ],
+   [
+    "Do you need a bag?",
+    "Пакет нужен?"
+   ],
+   [
+    "Would you like your receipt?",
+    "Чек нужен?"
+   ],
+   [
+    "Just tap or insert your card.",
+    "Приложите или вставьте карту."
+   ],
+   [
+    "It's buy one, get one free.",
+    "Второй в подарок."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Магазин одежды",
+    "lines": [
+     [
+      "A",
+      "Hi, can I help you find anything?",
+      "Привет, помочь что-то найти?"
+     ],
+     [
+      "me",
+      "Yes. Do you have this jacket in a medium?",
+      "Да. Есть эта куртка в размере M?"
+     ],
+     [
+      "A",
+      "Let me check. Here you go.",
+      "Сейчас посмотрю. Вот."
+     ],
+     [
+      "me",
+      "Can I try it on?",
+      "Можно примерить?"
+     ],
+     [
+      "A",
+      "Sure, the fitting rooms are in the back.",
+      "Конечно, примерочные в глубине."
+     ],
+     [
+      "A",
+      "How did it fit?",
+      "Как сидит?"
+     ],
+     [
+      "me",
+      "Good. How much is it?",
+      "Хорошо. Сколько стоит?"
+     ],
+     [
+      "A",
+      "It's on sale, so forty-nine ninety-nine.",
+      "Она по скидке, 49,99."
+     ],
+     [
+      "me",
+      "Great, I'll take it.",
+      "Отлично, беру."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "health",
+  "cat": "travel",
+  "title": "Аптека и здоровье",
+  "goal": "Объяснить симптомы, купить лекарство, понять дозировку",
+  "words": [
+   [
+    "pharmacy / drugstore",
+    "аптека"
+   ],
+   [
+    "medicine",
+    "лекарство"
+   ],
+   [
+    "headache",
+    "головная боль"
+   ],
+   [
+    "cold",
+    "простуда"
+   ],
+   [
+    "fever",
+    "температура"
+   ],
+   [
+    "cough",
+    "кашель"
+   ],
+   [
+    "sore throat",
+    "боль в горле"
+   ],
+   [
+    "stomachache",
+    "боль в животе"
+   ],
+   [
+    "pill",
+    "таблетка"
+   ],
+   [
+    "prescription",
+    "рецепт"
+   ],
+   [
+    "doctor",
+    "врач"
+   ],
+   [
+    "hurt",
+    "болеть (о части тела)"
+   ]
+  ],
+  "say": [
+   [
+    "I have a headache.",
+    "У меня болит голова."
+   ],
+   [
+    "I have a cold and a sore throat.",
+    "У меня простуда и болит горло."
+   ],
+   [
+    "I think I have a fever.",
+    "Кажется, у меня температура."
+   ],
+   [
+    "My stomach hurts.",
+    "У меня болит живот."
+   ],
+   [
+    "Do you have something for a cough?",
+    "Есть что-нибудь от кашля?"
+   ],
+   [
+    "How often should I take it?",
+    "Как часто принимать?"
+   ],
+   [
+    "Do I need a prescription?",
+    "Нужен рецепт?"
+   ],
+   [
+    "I need to see a doctor.",
+    "Мне нужно к врачу."
+   ],
+   [
+    "I'm allergic to penicillin.",
+    "У меня аллергия на пенициллин."
+   ]
+  ],
+  "hear": [
+   [
+    "What are your symptoms?",
+    "Какие симптомы?"
+   ],
+   [
+    "How long have you had it?",
+    "Как давно это у вас?"
+   ],
+   [
+    "Are you allergic to anything?",
+    "Есть аллергии?"
+   ],
+   [
+    "Take two pills every six hours.",
+    "По две таблетки каждые шесть часов."
+   ],
+   [
+    "Take it with food.",
+    "Принимать с едой."
+   ],
+   [
+    "You'll need a prescription for that.",
+    "Для этого нужен рецепт."
+   ],
+   [
+    "Aisle five, on the left.",
+    "Пятый ряд, слева."
+   ],
+   [
+    "If it gets worse, see a doctor.",
+    "Если станет хуже, идите к врачу."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "В аптеке",
+    "lines": [
+     [
+      "A",
+      "Hi, how can I help?",
+      "Здравствуйте, чем помочь?"
+     ],
+     [
+      "me",
+      "I have a cold and a sore throat. Do you have something for that?",
+      "У меня простуда и болит горло. Есть что-нибудь?"
+     ],
+     [
+      "A",
+      "Sure. How long have you had it?",
+      "Конечно. Как давно?"
+     ],
+     [
+      "me",
+      "Two days.",
+      "Два дня."
+     ],
+     [
+      "A",
+      "Do you have a fever?",
+      "Температура есть?"
+     ],
+     [
+      "me",
+      "No, I don't think so.",
+      "Нет, вроде нет."
+     ],
+     [
+      "A",
+      "Try this. Take two pills every six hours, with food.",
+      "Попробуйте это. По две таблетки каждые шесть часов, с едой."
+     ],
+     [
+      "me",
+      "Every six hours. Got it, thanks.",
+      "Каждые шесть часов. Понял, спасибо."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "directions",
+  "cat": "travel",
+  "title": "Как пройти",
+  "goal": "Спросить дорогу и понять ответ",
+  "words": [
+   [
+    "street",
+    "улица"
+   ],
+   [
+    "block",
+    "квартал"
+   ],
+   [
+    "corner",
+    "угол"
+   ],
+   [
+    "traffic light",
+    "светофор"
+   ],
+   [
+    "straight",
+    "прямо"
+   ],
+   [
+    "turn",
+    "повернуть"
+   ],
+   [
+    "near / far",
+    "близко / далеко"
+   ],
+   [
+    "across from",
+    "напротив"
+   ],
+   [
+    "next to",
+    "рядом с"
+   ],
+   [
+    "walk",
+    "идти пешком"
+   ],
+   [
+    "map",
+    "карта"
+   ]
+  ],
+  "say": [
+   [
+    "Excuse me, how do I get to the museum?",
+    "Простите, как пройти к музею?"
+   ],
+   [
+    "Is it far from here?",
+    "Это далеко отсюда?"
+   ],
+   [
+    "Can I walk there?",
+    "Можно дойти пешком?"
+   ],
+   [
+    "Is there a pharmacy near here?",
+    "Здесь рядом есть аптека?"
+   ],
+   [
+    "Can you show me on the map?",
+    "Покажете на карте?"
+   ],
+   [
+    "So, left at the light?",
+    "То есть налево на светофоре?"
+   ],
+   [
+    "I'm lost.",
+    "Я заблудился."
+   ],
+   [
+    "How do I get there?",
+    "Как туда добраться?"
+   ],
+   [
+    "Is this the right way?",
+    "Я правильно иду?"
+   ],
+   [
+    "Which way is downtown?",
+    "В какой стороне центр?"
+   ]
+  ],
+  "hear": [
+   [
+    "Go straight for two blocks.",
+    "Идите прямо два квартала."
+   ],
+   [
+    "Turn left at the light.",
+    "Поверните налево на светофоре."
+   ],
+   [
+    "It's on your right.",
+    "Это будет справа."
+   ],
+   [
+    "It's across from the bank.",
+    "Это напротив банка."
+   ],
+   [
+    "It's about a ten-minute walk.",
+    "Минут десять пешком."
+   ],
+   [
+    "You can't miss it.",
+    "Не пропустите."
+   ],
+   [
+    "You're going the wrong way.",
+    "Вы идёте не туда."
+   ],
+   [
+    "Sorry, I'm not from around here.",
+    "Извините, я не местный."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Дорога к музею",
+    "lines": [
+     [
+      "me",
+      "Excuse me, how do I get to the museum?",
+      "Простите, как пройти к музею?"
+     ],
+     [
+      "A",
+      "Oh, it's close. Go straight for two blocks, then turn left at the light.",
+      "О, это близко. Прямо два квартала, потом налево на светофоре."
+     ],
+     [
+      "me",
+      "Sorry, two blocks and then left?",
+      "Простите, два квартала и налево?"
+     ],
+     [
+      "A",
+      "Yep, at the light. It's on your right, across from the park.",
+      "Да, на светофоре. Справа, напротив парка."
+     ],
+     [
+      "me",
+      "Is it far?",
+      "Далеко?"
+     ],
+     [
+      "A",
+      "Nah, about a ten-minute walk. You can't miss it.",
+      "Не, минут десять пешком. Не пропустите."
+     ],
+     [
+      "me",
+      "Thank you so much!",
+      "Большое спасибо!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "problems",
+  "cat": "travel",
+  "title": "Проблемы и экстренные случаи",
+  "goal": "Попросить помощь, сообщить о потере, вызвать помощь",
+  "words": [
+   [
+    "lost",
+    "потерянный; заблудился"
+   ],
+   [
+    "wallet",
+    "кошелёк"
+   ],
+   [
+    "phone",
+    "телефон"
+   ],
+   [
+    "stolen",
+    "украден"
+   ],
+   [
+    "police",
+    "полиция"
+   ],
+   [
+    "emergency",
+    "экстренный случай"
+   ],
+   [
+    "ambulance",
+    "скорая"
+   ],
+   [
+    "embassy",
+    "посольство"
+   ],
+   [
+    "charger",
+    "зарядка"
+   ],
+   [
+    "battery",
+    "батарея"
+   ],
+   [
+    "missed",
+    "опоздал (на рейс/поезд)"
+   ]
+  ],
+  "say": [
+   [
+    "Can you help me, please?",
+    "Помогите, пожалуйста."
+   ],
+   [
+    "I lost my wallet.",
+    "Я потерял кошелёк."
+   ],
+   [
+    "My phone was stolen.",
+    "У меня украли телефон."
+   ],
+   [
+    "I missed my flight.",
+    "Я опоздал на рейс."
+   ],
+   [
+    "Where is the nearest police station?",
+    "Где ближайший полицейский участок?"
+   ],
+   [
+    "Please call an ambulance.",
+    "Вызовите скорую."
+   ],
+   [
+    "Can I use your phone?",
+    "Можно позвонить с вашего телефона?"
+   ],
+   [
+    "Do you have a phone charger?",
+    "У вас есть зарядка?"
+   ],
+   [
+    "My bag didn't arrive.",
+    "Мой багаж не прилетел."
+   ],
+   [
+    "Something went wrong.",
+    "Что-то пошло не так."
+   ],
+   [
+    "It's not working.",
+    "Это не работает."
+   ],
+   [
+    "I have no idea.",
+    "Понятия не имею."
+   ],
+   [
+    "I completely forgot.",
+    "Я совсем забыл."
+   ],
+   [
+    "My bad.",
+    "Моя вина."
+   ],
+   [
+    "It was an accident.",
+    "Это вышло случайно."
+   ]
+  ],
+  "hear": [
+   [
+    "What happened?",
+    "Что случилось?"
+   ],
+   [
+    "Are you okay?",
+    "Вы в порядке?"
+   ],
+   [
+    "When did you last see it?",
+    "Когда вы видели его последний раз?"
+   ],
+   [
+    "Can you describe it?",
+    "Можете описать?"
+   ],
+   [
+    "Fill out this form.",
+    "Заполните этот бланк."
+   ],
+   [
+    "We'll call you if we find it.",
+    "Мы позвоним, если найдём."
+   ],
+   [
+    "Call 911.",
+    "Звоните 911."
+   ],
+   [
+    "We can put you on the next flight.",
+    "Можем посадить на следующий рейс."
+   ],
+   [
+    "Don't take it personally.",
+    "Не принимай на свой счёт."
+   ],
+   [
+    "It happens.",
+    "Бывает."
+   ],
+   [
+    "Never mind.",
+    "Неважно. / Ничего."
+   ],
+   [
+    "Forget it.",
+    "Забудь."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Багаж не прилетел",
+    "lines": [
+     [
+      "me",
+      "Hi, my bag didn't arrive.",
+      "Здравствуйте, мой багаж не прилетел."
+     ],
+     [
+      "A",
+      "I'm sorry. Can I see your boarding pass and baggage tag?",
+      "Сожалею. Посадочный и багажную бирку, пожалуйста."
+     ],
+     [
+      "me",
+      "Here you go.",
+      "Вот."
+     ],
+     [
+      "A",
+      "Can you describe the bag?",
+      "Опишите сумку."
+     ],
+     [
+      "me",
+      "It's a large black suitcase.",
+      "Большой чёрный чемодан."
+     ],
+     [
+      "A",
+      "Okay. Fill out this form, and we'll call you when we find it.",
+      "Хорошо. Заполните бланк, мы позвоним, когда найдём."
+     ],
+     [
+      "me",
+      "Can you send it to my hotel?",
+      "Можете доставить в отель?"
+     ],
+     [
+      "A",
+      "Yes, we'll deliver it to your hotel.",
+      "Да, доставим в отель."
+     ]
+    ]
+   }
+  ]
+ }
+]

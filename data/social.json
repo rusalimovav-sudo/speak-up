@@ -1,0 +1,1572 @@
+[
+ {
+  "id": "greetings",
+  "cat": "social",
+  "title": "Приветствие и знакомство",
+  "goal": "Поздороваться, представиться, попрощаться естественно",
+  "words": [
+   [
+    "hi / hey",
+    "привет"
+   ],
+   [
+    "name",
+    "имя"
+   ],
+   [
+    "nice to meet you",
+    "приятно познакомиться"
+   ],
+   [
+    "friend",
+    "друг"
+   ],
+   [
+    "see you",
+    "увидимся"
+   ],
+   [
+    "later",
+    "позже"
+   ],
+   [
+    "morning / evening",
+    "утро / вечер"
+   ],
+   [
+    "how's it going",
+    "как дела"
+   ],
+   [
+    "good / great / fine",
+    "хорошо / отлично / нормально"
+   ],
+   [
+    "bye",
+    "пока"
+   ]
+  ],
+  "say": [
+   [
+    "Hi, I'm Alex.",
+    "Привет, я Алекс."
+   ],
+   [
+    "Nice to meet you.",
+    "Приятно познакомиться."
+   ],
+   [
+    "How are you?",
+    "Как дела?"
+   ],
+   [
+    "I'm good, thanks. And you?",
+    "Хорошо, спасибо. А у тебя?"
+   ],
+   [
+    "Sorry, what's your name again?",
+    "Прости, как тебя зовут ещё раз?"
+   ],
+   [
+    "How do you know Sarah?",
+    "Откуда ты знаешь Сару?"
+   ],
+   [
+    "It was nice talking to you.",
+    "Было приятно поговорить."
+   ],
+   [
+    "See you later!",
+    "Увидимся!"
+   ],
+   [
+    "Have a good day!",
+    "Хорошего дня!"
+   ],
+   [
+    "How's it going?",
+    "Как дела?"
+   ],
+   [
+    "I'm doing well, thanks.",
+    "У меня всё хорошо, спасибо."
+   ],
+   [
+    "Can't complain.",
+    "Не жалуюсь."
+   ],
+   [
+    "Pretty good, actually.",
+    "Вообще-то довольно хорошо."
+   ],
+   [
+    "Same as usual.",
+    "Всё как обычно."
+   ]
+  ],
+  "hear": [
+   [
+    "Hey, how's it going?",
+    "Привет, как оно?"
+   ],
+   [
+    "What's up?",
+    "Как жизнь? / Что нового?"
+   ],
+   [
+    "How are you doing?",
+    "Как поживаешь?"
+   ],
+   [
+    "Not bad, you?",
+    "Неплохо, а ты?"
+   ],
+   [
+    "I'm Jessica, but everyone calls me Jess.",
+    "Я Джессика, но все зовут меня Джесс."
+   ],
+   [
+    "Nice to meet you too.",
+    "Мне тоже приятно."
+   ],
+   [
+    "Good to see you again!",
+    "Рад снова видеть!"
+   ],
+   [
+    "Take care!",
+    "Береги себя! / Пока!"
+   ],
+   [
+    "Catch you later.",
+    "Увидимся."
+   ],
+   [
+    "Long time no see!",
+    "Давно не виделись!"
+   ],
+   [
+    "How have you been?",
+    "Как поживал?"
+   ],
+   [
+    "What have you been up to?",
+    "Чем занимался последнее время?"
+   ],
+   [
+    "Good to see you!",
+    "Рад тебя видеть!"
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "На вечеринке",
+    "lines": [
+     [
+      "A",
+      "Hey, I'm Jess. I don't think we've met.",
+      "Привет, я Джесс. Кажется, мы не знакомы."
+     ],
+     [
+      "me",
+      "Hi, I'm Alex. Nice to meet you.",
+      "Привет, я Алекс. Приятно познакомиться."
+     ],
+     [
+      "A",
+      "Nice to meet you too. How do you know Mark?",
+      "Взаимно. Откуда знаешь Марка?"
+     ],
+     [
+      "me",
+      "We work together. And you?",
+      "Мы вместе работаем. А ты?"
+     ],
+     [
+      "A",
+      "We went to college together.",
+      "Мы вместе учились в колледже."
+     ],
+     [
+      "me",
+      "Oh, cool!",
+      "О, классно!"
+     ]
+    ]
+   },
+   {
+    "title": "Прощание",
+    "lines": [
+     [
+      "me",
+      "Well, I should go. It was nice talking to you.",
+      "Ну, мне пора. Было приятно поговорить."
+     ],
+     [
+      "A",
+      "You too! Are you on Instagram?",
+      "Мне тоже! Ты есть в Инстаграме?"
+     ],
+     [
+      "me",
+      "Yes, let me show you.",
+      "Да, сейчас покажу."
+     ],
+     [
+      "A",
+      "Awesome. Take care!",
+      "Супер. Пока!"
+     ],
+     [
+      "me",
+      "See you!",
+      "Увидимся!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "aboutme",
+  "cat": "social",
+  "title": "Рассказать о себе",
+  "goal": "Сказать, откуда ты, чем занимаешься, о семье и интересах",
+  "words": [
+   [
+    "from",
+    "из"
+   ],
+   [
+    "live",
+    "жить"
+   ],
+   [
+    "work",
+    "работать, работа"
+   ],
+   [
+    "job",
+    "работа (должность)"
+   ],
+   [
+    "own a business",
+    "владеть бизнесом"
+   ],
+   [
+    "married",
+    "женат / замужем"
+   ],
+   [
+    "kids",
+    "дети"
+   ],
+   [
+    "hobby",
+    "хобби"
+   ],
+   [
+    "city",
+    "город"
+   ],
+   [
+    "learn",
+    "учить, изучать"
+   ],
+   [
+    "travel",
+    "путешествовать"
+   ],
+   [
+    "sell online",
+    "продавать онлайн"
+   ]
+  ],
+  "say": [
+   [
+    "I'm from Russia.",
+    "Я из России."
+   ],
+   [
+    "I live in Moscow.",
+    "Я живу в Москве."
+   ],
+   [
+    "I have my own business.",
+    "У меня свой бизнес."
+   ],
+   [
+    "I sell things online.",
+    "Я продаю товары онлайн."
+   ],
+   [
+    "I'm married and I have two kids.",
+    "Я женат, у меня двое детей."
+   ],
+   [
+    "I like traveling and watching movies.",
+    "Я люблю путешествовать и смотреть фильмы."
+   ],
+   [
+    "I'm learning English.",
+    "Я учу английский."
+   ],
+   [
+    "This is my first time in the US.",
+    "Я впервые в США."
+   ],
+   [
+    "What about you?",
+    "А ты?"
+   ]
+  ],
+  "hear": [
+   [
+    "Where are you from?",
+    "Откуда ты?"
+   ],
+   [
+    "What do you do?",
+    "Чем занимаешься? (кем работаешь)"
+   ],
+   [
+    "How long have you been here?",
+    "Как долго ты здесь?"
+   ],
+   [
+    "What brings you here?",
+    "Что тебя сюда привело?"
+   ],
+   [
+    "Do you have any kids?",
+    "У тебя есть дети?"
+   ],
+   [
+    "What do you do for fun?",
+    "Чем любишь заниматься?"
+   ],
+   [
+    "Your English is really good!",
+    "У тебя хороший английский!"
+   ],
+   [
+    "Oh, I've always wanted to go there.",
+    "О, всегда хотел туда съездить."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Откуда ты",
+    "lines": [
+     [
+      "A",
+      "So where are you from?",
+      "Так откуда ты?"
+     ],
+     [
+      "me",
+      "I'm from Russia, from Moscow.",
+      "Из России, из Москвы."
+     ],
+     [
+      "A",
+      "Oh, nice! What brings you here?",
+      "О, здорово! Что тебя сюда привело?"
+     ],
+     [
+      "me",
+      "I'm on vacation with my family.",
+      "Я в отпуске с семьёй."
+     ],
+     [
+      "A",
+      "Cool. What do you do?",
+      "Классно. Чем занимаешься?"
+     ],
+     [
+      "me",
+      "I have my own business. I sell things online.",
+      "У меня свой бизнес. Продаю товары онлайн."
+     ],
+     [
+      "A",
+      "That's awesome. Your English is really good!",
+      "Круто. У тебя отличный английский!"
+     ],
+     [
+      "me",
+      "Thanks! I'm still learning.",
+      "Спасибо! Я ещё учусь."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "smalltalk",
+  "cat": "social",
+  "title": "Small talk",
+  "goal": "Поддержать лёгкий разговор: погода, выходные, еда, город",
+  "words": [
+   [
+    "weather",
+    "погода"
+   ],
+   [
+    "hot / cold",
+    "жарко / холодно"
+   ],
+   [
+    "rain",
+    "дождь"
+   ],
+   [
+    "weekend",
+    "выходные"
+   ],
+   [
+    "busy",
+    "занятой"
+   ],
+   [
+    "fun",
+    "весело"
+   ],
+   [
+    "food",
+    "еда"
+   ],
+   [
+    "place",
+    "место"
+   ],
+   [
+    "beautiful",
+    "красивый"
+   ],
+   [
+    "crowded",
+    "людно"
+   ],
+   [
+    "recommend",
+    "рекомендовать"
+   ]
+  ],
+  "say": [
+   [
+    "Beautiful day, isn't it?",
+    "Прекрасный день, правда?"
+   ],
+   [
+    "It's so hot today.",
+    "Сегодня так жарко."
+   ],
+   [
+    "How was your weekend?",
+    "Как прошли выходные?"
+   ],
+   [
+    "Any plans for the weekend?",
+    "Есть планы на выходные?"
+   ],
+   [
+    "Do you live around here?",
+    "Ты живёшь где-то рядом?"
+   ],
+   [
+    "Can you recommend a good place to eat?",
+    "Посоветуешь, где хорошо поесть?"
+   ],
+   [
+    "I love this city.",
+    "Мне очень нравится этот город."
+   ],
+   [
+    "It's really crowded here.",
+    "Тут очень людно."
+   ]
+  ],
+  "hear": [
+   [
+    "Crazy weather, huh?",
+    "Безумная погода, да?"
+   ],
+   [
+    "It's supposed to rain later.",
+    "Обещают дождь попозже."
+   ],
+   [
+    "How do you like it here so far?",
+    "Как тебе тут пока?"
+   ],
+   [
+    "Have you tried the food here?",
+    "Пробовал здешнюю еду?"
+   ],
+   [
+    "You should check out the park.",
+    "Сходи в парк обязательно."
+   ],
+   [
+    "It gets super busy on weekends.",
+    "На выходных тут очень многолюдно."
+   ],
+   [
+    "Not much, just chilling.",
+    "Ничего особенного, отдыхаю."
+   ],
+   [
+    "Same old, same old.",
+    "Всё по-старому."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "В очереди",
+    "lines": [
+     [
+      "A",
+      "Crazy weather today, huh?",
+      "Безумная погода сегодня, да?"
+     ],
+     [
+      "me",
+      "Yes, it's so hot!",
+      "Да, так жарко!"
+     ],
+     [
+      "A",
+      "Are you visiting?",
+      "Вы приезжий?"
+     ],
+     [
+      "me",
+      "Yes, I'm here on vacation.",
+      "Да, я в отпуске."
+     ],
+     [
+      "A",
+      "How do you like it so far?",
+      "Как вам пока?"
+     ],
+     [
+      "me",
+      "I love it. Can you recommend a good place to eat?",
+      "Очень нравится. Посоветуете, где поесть?"
+     ],
+     [
+      "A",
+      "Oh, you should check out Joe's Pizza. It's right around the corner.",
+      "О, сходите в Joe's Pizza. Прямо за углом."
+     ],
+     [
+      "me",
+      "Thanks, I'll try it!",
+      "Спасибо, попробую!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "plans",
+  "cat": "social",
+  "title": "Договориться о встрече",
+  "goal": "Пригласить, согласиться/отказаться, договориться о времени и месте",
+  "words": [
+   [
+    "meet",
+    "встретиться"
+   ],
+   [
+    "free",
+    "свободен"
+   ],
+   [
+    "tonight",
+    "сегодня вечером"
+   ],
+   [
+    "tomorrow",
+    "завтра"
+   ],
+   [
+    "later",
+    "позже"
+   ],
+   [
+    "invite",
+    "пригласить"
+   ],
+   [
+    "join",
+    "присоединиться"
+   ],
+   [
+    "sounds good",
+    "звучит хорошо"
+   ],
+   [
+    "maybe",
+    "может быть"
+   ],
+   [
+    "text",
+    "написать сообщение"
+   ],
+   [
+    "number",
+    "номер"
+   ]
+  ],
+  "say": [
+   [
+    "Are you free tonight?",
+    "Ты свободен сегодня вечером?"
+   ],
+   [
+    "Do you want to grab a coffee?",
+    "Хочешь выпить кофе?"
+   ],
+   [
+    "What time works for you?",
+    "Какое время тебе удобно?"
+   ],
+   [
+    "How about seven?",
+    "Как насчёт семи?"
+   ],
+   [
+    "Where should we meet?",
+    "Где встретимся?"
+   ],
+   [
+    "Sounds good!",
+    "Звучит отлично!"
+   ],
+   [
+    "Sorry, I can't tonight. Maybe tomorrow?",
+    "Извини, сегодня не могу. Может, завтра?"
+   ],
+   [
+    "Can I get your number?",
+    "Дашь свой номер?"
+   ],
+   [
+    "I'll text you.",
+    "Я напишу."
+   ],
+   [
+    "I'm running a little late.",
+    "Я немного опаздываю."
+   ],
+   [
+    "I'm up for it.",
+    "Я за."
+   ],
+   [
+    "I'm not really up for it.",
+    "Мне не очень хочется."
+   ],
+   [
+    "Sounds good to me.",
+    "Мне подходит."
+   ],
+   [
+    "I'll let you know.",
+    "Я дам тебе знать."
+   ],
+   [
+    "I'll get back to you.",
+    "Я свяжусь с тобой позже."
+   ],
+   [
+    "Something came up.",
+    "Кое-что случилось (не смогу)."
+   ],
+   [
+    "I'll be there in a minute.",
+    "Буду через минуту."
+   ]
+  ],
+  "hear": [
+   [
+    "Wanna hang out later?",
+    "Хочешь потусить позже?"
+   ],
+   [
+    "We're getting drinks tonight, wanna come?",
+    "Мы идём выпить вечером, пойдёшь?"
+   ],
+   [
+    "Does seven work for you?",
+    "Семь тебе подходит?"
+   ],
+   [
+    "Let's meet in front of the hotel.",
+    "Встретимся перед отелем."
+   ],
+   [
+    "Text me when you're here.",
+    "Напиши, когда будешь на месте."
+   ],
+   [
+    "Sorry, something came up.",
+    "Извини, кое-что случилось (не смогу)."
+   ],
+   [
+    "Rain check?",
+    "Перенесём?"
+   ],
+   [
+    "I'm on my way.",
+    "Я уже в пути."
+   ],
+   [
+    "What are you up to tonight?",
+    "Что делаешь сегодня вечером?"
+   ],
+   [
+    "Are you free this weekend?",
+    "Ты свободен на выходных?"
+   ],
+   [
+    "Do you wanna go out?",
+    "Хочешь куда-нибудь сходить?"
+   ],
+   [
+    "Let's play it by ear.",
+    "Решим по ситуации."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Приглашение",
+    "lines": [
+     [
+      "A",
+      "Hey, we're getting dinner tonight. Wanna come?",
+      "Слушай, мы идём ужинать вечером. Пойдёшь?"
+     ],
+     [
+      "me",
+      "Sure, sounds good! What time?",
+      "Конечно, отлично! Во сколько?"
+     ],
+     [
+      "A",
+      "Does seven work for you?",
+      "Семь подходит?"
+     ],
+     [
+      "me",
+      "Seven is perfect. Where should we meet?",
+      "Семь идеально. Где встретимся?"
+     ],
+     [
+      "A",
+      "Let's meet in front of your hotel.",
+      "Давай перед твоим отелем."
+     ],
+     [
+      "me",
+      "Okay. Can I get your number?",
+      "Хорошо. Дашь номер?"
+     ],
+     [
+      "A",
+      "Sure, it's 646-555-0187.",
+      "Конечно, 646-555-0187."
+     ],
+     [
+      "me",
+      "Great, I'll text you.",
+      "Отлично, напишу."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "requests",
+  "cat": "social",
+  "title": "Просьбы и помощь",
+  "goal": "Попросить о помощи, поблагодарить, ответить на благодарность",
+  "words": [
+   [
+    "help",
+    "помощь, помогать"
+   ],
+   [
+    "favor",
+    "одолжение"
+   ],
+   [
+    "hand",
+    "рука; помощь"
+   ],
+   [
+    "appreciate",
+    "ценить, быть благодарным"
+   ],
+   [
+    "photo",
+    "фото"
+   ],
+   [
+    "mind",
+    "возражать (would you mind)"
+   ]
+  ],
+  "say": [
+   [
+    "Could you help me out?",
+    "Не могли бы вы мне помочь?"
+   ],
+   [
+    "Can you give me a hand?",
+    "Можешь мне помочь?"
+   ],
+   [
+    "Could you do me a favor?",
+    "Можете оказать мне услугу?"
+   ],
+   [
+    "I'd appreciate it.",
+    "Буду очень благодарен."
+   ],
+   [
+    "Thanks, I really appreciate it.",
+    "Спасибо, очень ценю."
+   ]
+  ],
+  "hear": [
+   [
+    "Would you mind helping me?",
+    "Не поможете мне?"
+   ],
+   [
+    "No worries.",
+    "Без проблем."
+   ],
+   [
+    "Don't worry about it.",
+    "Не беспокойся об этом."
+   ],
+   [
+    "Anytime!",
+    "Обращайся!"
+   ],
+   [
+    "It's no big deal.",
+    "Ничего страшного."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Попросить сфотографировать",
+    "lines": [
+     [
+      "me",
+      "Excuse me, could you do me a favor?",
+      "Простите, можете оказать услугу?"
+     ],
+     [
+      "A",
+      "Sure, what's up?",
+      "Конечно, что такое?"
+     ],
+     [
+      "me",
+      "Could you take a photo of us?",
+      "Можете нас сфотографировать?"
+     ],
+     [
+      "A",
+      "Of course. Ready? One, two, three!",
+      "Конечно. Готовы? Раз, два, три!"
+     ],
+     [
+      "me",
+      "Thanks, I really appreciate it.",
+      "Спасибо, очень ценю."
+     ],
+     [
+      "A",
+      "No worries. Anytime!",
+      "Без проблем. Обращайтесь!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "work",
+  "cat": "social",
+  "title": "Дела и договорённости",
+  "goal": "Короткие фразы, чтобы договариваться о делах и держать в курсе",
+  "words": [
+   [
+    "look into",
+    "разобраться"
+   ],
+   [
+    "take care of",
+    "позаботиться, заняться"
+   ],
+   [
+    "keep posted",
+    "держать в курсе"
+   ],
+   [
+    "get back to",
+    "вернуться к, ответить позже"
+   ],
+   [
+    "clarify",
+    "уточнить"
+   ]
+  ],
+  "say": [
+   [
+    "I'll look into it.",
+    "Я разберусь."
+   ],
+   [
+    "I'll take care of it.",
+    "Я этим займусь."
+   ],
+   [
+    "Let's get started.",
+    "Давайте начнём."
+   ],
+   [
+    "I'll keep you posted.",
+    "Буду держать в курсе."
+   ],
+   [
+    "Just to clarify…",
+    "Просто уточню…"
+   ],
+   [
+    "As far as I know…",
+    "Насколько я знаю…"
+   ],
+   [
+    "Let's get back to that later.",
+    "Вернёмся к этому позже."
+   ],
+   [
+    "I'll get back to you shortly.",
+    "Скоро свяжусь с вами."
+   ],
+   [
+    "That works for me.",
+    "Мне подходит."
+   ],
+   [
+    "I'm afraid I can't make it.",
+    "Боюсь, я не смогу прийти."
+   ]
+  ],
+  "hear": [],
+  "dialogs": [
+   {
+    "title": "Договорились",
+    "lines": [
+     [
+      "A",
+      "The supplier says the order is late again.",
+      "Поставщик говорит, заказ снова задерживается."
+     ],
+     [
+      "me",
+      "I'll look into it.",
+      "Я разберусь."
+     ],
+     [
+      "A",
+      "Can we talk tomorrow at ten?",
+      "Можем поговорить завтра в десять?"
+     ],
+     [
+      "me",
+      "That works for me.",
+      "Мне подходит."
+     ],
+     [
+      "A",
+      "Great. Let me know what they say.",
+      "Отлично. Дай знать, что они скажут."
+     ],
+     [
+      "me",
+      "Sure, I'll keep you posted.",
+      "Конечно, буду держать в курсе."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "keeptalking",
+  "cat": "social",
+  "title": "Поддержать разговор",
+  "goal": "Реагировать, задавать встречные вопросы, выиграть время подумать",
+  "words": [
+   [
+    "really",
+    "правда, действительно"
+   ],
+   [
+    "cool",
+    "круто"
+   ],
+   [
+    "interesting",
+    "интересно"
+   ],
+   [
+    "agree",
+    "соглашаться"
+   ],
+   [
+    "exactly",
+    "именно"
+   ],
+   [
+    "actually",
+    "на самом деле"
+   ],
+   [
+    "anyway",
+    "в общем, так вот"
+   ],
+   [
+    "kind of",
+    "вроде, отчасти"
+   ],
+   [
+    "by the way",
+    "кстати"
+   ]
+  ],
+  "say": [
+   [
+    "Really?",
+    "Правда?"
+   ],
+   [
+    "Oh, that's cool!",
+    "О, это круто!"
+   ],
+   [
+    "That sounds fun.",
+    "Звучит весело."
+   ],
+   [
+    "Oh no, I'm sorry to hear that.",
+    "Ох, жаль это слышать."
+   ],
+   [
+    "Me too!",
+    "Я тоже!"
+   ],
+   [
+    "Let me think…",
+    "Дай подумать…"
+   ],
+   [
+    "How do I say it…",
+    "Как же сказать…"
+   ],
+   [
+    "What do you mean?",
+    "Что ты имеешь в виду?"
+   ],
+   [
+    "And then what happened?",
+    "И что было дальше?"
+   ],
+   [
+    "By the way, …",
+    "Кстати, …"
+   ],
+   [
+    "I know, right?",
+    "Вот-вот! / Согласен!"
+   ],
+   [
+    "That makes sense.",
+    "Логично. / Понятно."
+   ],
+   [
+    "Exactly!",
+    "Именно!"
+   ],
+   [
+    "I totally agree.",
+    "Полностью согласен."
+   ],
+   [
+    "I'm not sure about that.",
+    "Я не уверен насчёт этого."
+   ],
+   [
+    "That's a good point.",
+    "Хороший аргумент."
+   ],
+   [
+    "I see what you mean.",
+    "Понимаю, что ты имеешь в виду."
+   ]
+  ],
+  "hear": [
+   [
+    "No way!",
+    "Да ладно!"
+   ],
+   [
+    "Seriously?",
+    "Серьёзно?"
+   ],
+   [
+    "That's awesome!",
+    "Это потрясающе!"
+   ],
+   [
+    "Oh, nice.",
+    "О, неплохо."
+   ],
+   [
+    "Tell me about it.",
+    "И не говори."
+   ],
+   [
+    "You know what I mean?",
+    "Понимаешь, о чём я?"
+   ],
+   [
+    "Anyway…",
+    "В общем…"
+   ],
+   [
+    "I'm kidding.",
+    "Шучу."
+   ],
+   [
+    "Fair enough.",
+    "Справедливо."
+   ],
+   [
+    "You're kidding!",
+    "Ты шутишь!"
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Реакции",
+    "lines": [
+     [
+      "A",
+      "I just got back from Mexico.",
+      "Я только вернулся из Мексики."
+     ],
+     [
+      "me",
+      "Really? How was it?",
+      "Правда? Как было?"
+     ],
+     [
+      "A",
+      "Amazing, but I lost my phone on the first day.",
+      "Потрясающе, но я потерял телефон в первый же день."
+     ],
+     [
+      "me",
+      "Oh no! And then what happened?",
+      "Ох! И что было дальше?"
+     ],
+     [
+      "A",
+      "A guy found it and brought it to the hotel.",
+      "Какой-то парень нашёл и принёс в отель."
+     ],
+     [
+      "me",
+      "No way! That's so lucky.",
+      "Да ладно! Вот повезло."
+     ],
+     [
+      "A",
+      "I know, right?",
+      "Вот-вот!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "feelings",
+  "cat": "social",
+  "title": "Мнения и чувства",
+  "goal": "Сказать, что нравится, что думаешь, как себя чувствуешь",
+  "words": [
+   [
+    "like / love / hate",
+    "нравится / обожаю / ненавижу"
+   ],
+   [
+    "think",
+    "думать, считать"
+   ],
+   [
+    "favorite",
+    "любимый"
+   ],
+   [
+    "tired",
+    "уставший"
+   ],
+   [
+    "happy",
+    "счастливый, довольный"
+   ],
+   [
+    "excited",
+    "в предвкушении, взволнован"
+   ],
+   [
+    "worried",
+    "беспокоюсь"
+   ],
+   [
+    "boring",
+    "скучный"
+   ],
+   [
+    "delicious",
+    "вкусный"
+   ],
+   [
+    "expensive / cheap",
+    "дорогой / дешёвый"
+   ]
+  ],
+  "say": [
+   [
+    "I really like it.",
+    "Мне очень нравится."
+   ],
+   [
+    "I don't really like it.",
+    "Мне не особо нравится."
+   ],
+   [
+    "I think it's a good idea.",
+    "Думаю, это хорошая идея."
+   ],
+   [
+    "I'm not sure.",
+    "Я не уверен."
+   ],
+   [
+    "It was delicious!",
+    "Было очень вкусно!"
+   ],
+   [
+    "It's a bit expensive.",
+    "Немного дороговато."
+   ],
+   [
+    "I'm so tired today.",
+    "Я так устал сегодня."
+   ],
+   [
+    "I'm really excited about the trip.",
+    "Очень жду поездку."
+   ],
+   [
+    "What do you think?",
+    "Что думаешь?"
+   ],
+   [
+    "My favorite is…",
+    "Мой любимый — …"
+   ],
+   [
+    "I'm really into it.",
+    "Мне это очень нравится."
+   ],
+   [
+    "I'm not a big fan of it.",
+    "Я не большой фанат этого."
+   ],
+   [
+    "It's up to you.",
+    "Решать тебе."
+   ],
+   [
+    "I don't mind.",
+    "Я не против."
+   ],
+   [
+    "It depends.",
+    "Зависит от ситуации."
+   ],
+   [
+    "I'm fed up with it.",
+    "Мне это надоело."
+   ],
+   [
+    "I can't stand it.",
+    "Терпеть этого не могу."
+   ],
+   [
+    "I'm looking forward to it.",
+    "Жду с нетерпением."
+   ],
+   [
+    "It's totally worth it.",
+    "Это того стоит."
+   ],
+   [
+    "You never know!",
+    "Кто знает!"
+   ]
+  ],
+  "hear": [
+   [
+    "What did you think?",
+    "Как тебе?"
+   ],
+   [
+    "Did you like it?",
+    "Тебе понравилось?"
+   ],
+   [
+    "It's not my thing.",
+    "Это не моё."
+   ],
+   [
+    "It was okay, I guess.",
+    "Нормально, наверное."
+   ],
+   [
+    "I'm so into it.",
+    "Я прямо фанат."
+   ],
+   [
+    "You look tired.",
+    "Выглядишь уставшим."
+   ],
+   [
+    "I'm totally down.",
+    "Я только за."
+   ],
+   [
+    "It's worth it.",
+    "Оно того стоит."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "После музея",
+    "lines": [
+     [
+      "A",
+      "So what did you think of the museum?",
+      "Ну как тебе музей?"
+     ],
+     [
+      "me",
+      "I really liked it. What about you?",
+      "Мне очень понравилось. А тебе?"
+     ],
+     [
+      "A",
+      "Honestly, it's not my thing. Kind of boring.",
+      "Честно, не моё. Скучновато."
+     ],
+     [
+      "me",
+      "Really? I think the art was amazing.",
+      "Правда? По-моему, картины потрясающие."
+     ],
+     [
+      "A",
+      "Fair enough. Wanna get food? I'm starving.",
+      "Справедливо. Пойдём поедим? Я умираю с голоду."
+     ],
+     [
+      "me",
+      "Yes, I'm totally down.",
+      "Да, я только за."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "realspeech",
+  "cat": "social",
+  "title": "Живая речь: как говорят на самом деле",
+  "goal": "Узнавать на слух сокращения и слитные формы быстрой речи (сам говорить так не обязательно)",
+  "words": [
+   [
+    "gonna = going to",
+    "собираюсь"
+   ],
+   [
+    "wanna = want to",
+    "хочу"
+   ],
+   [
+    "gotta = got to",
+    "надо"
+   ],
+   [
+    "lemme = let me",
+    "дай мне"
+   ],
+   [
+    "gimme = give me",
+    "дай мне"
+   ],
+   [
+    "kinda = kind of",
+    "вроде, типа"
+   ],
+   [
+    "dunno = don't know",
+    "не знаю"
+   ],
+   [
+    "y'all = you all",
+    "вы все (юг США)"
+   ],
+   [
+    "ya = you",
+    "ты"
+   ],
+   [
+    "'cause = because",
+    "потому что"
+   ]
+  ],
+  "say": [
+   [
+    "I'm going to try it.",
+    "Я попробую."
+   ],
+   [
+    "I want to go.",
+    "Я хочу пойти."
+   ],
+   [
+    "I have to go.",
+    "Мне надо идти."
+   ],
+   [
+    "Let me check.",
+    "Дай проверю."
+   ],
+   [
+    "I don't know.",
+    "Не знаю."
+   ]
+  ],
+  "hear": [
+   [
+    "Whaddya want? (What do you want?)",
+    "Что хочешь?"
+   ],
+   [
+    "Whatcha doin'? (What are you doing?)",
+    "Что делаешь?"
+   ],
+   [
+    "D'ya wanna come? (Do you want to come?)",
+    "Хочешь пойти?"
+   ],
+   [
+    "I'm gonna grab a coffee.",
+    "Я возьму кофе."
+   ],
+   [
+    "I gotta go.",
+    "Мне пора."
+   ],
+   [
+    "Lemme see.",
+    "Дай посмотреть."
+   ],
+   [
+    "Gimme a sec.",
+    "Секунду."
+   ],
+   [
+    "I dunno, kinda tired.",
+    "Не знаю, устал как-то."
+   ],
+   [
+    "Didja see that? (Did you see that?)",
+    "Ты видел?"
+   ],
+   [
+    "Howya doin'? (How are you doing?)",
+    "Как дела?"
+   ],
+   [
+    "Wassup? (What's up?)",
+    "Как жизнь?"
+   ],
+   [
+    "Y'know what I mean?",
+    "Понимаешь, о чём я?"
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Быстро и неформально",
+    "lines": [
+     [
+      "A",
+      "Hey, whatcha doin' tonight?",
+      "Эй, что делаешь вечером?"
+     ],
+     [
+      "me",
+      "Nothing. Why?",
+      "Ничего. А что?"
+     ],
+     [
+      "A",
+      "We're gonna get pizza. D'ya wanna come?",
+      "Мы идём за пиццей. Пойдёшь?"
+     ],
+     [
+      "me",
+      "Sure! What time?",
+      "Конечно! Во сколько?"
+     ],
+     [
+      "A",
+      "Lemme check… eight-ish?",
+      "Сейчас гляну… около восьми?"
+     ],
+     [
+      "me",
+      "Sounds good.",
+      "Отлично."
+     ],
+     [
+      "A",
+      "Cool, I gotta go. See ya!",
+      "Супер, мне пора. Пока!"
+     ]
+    ]
+   }
+  ]
+ }
+]

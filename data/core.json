@@ -1,0 +1,70 @@
+{
+"about":"Ядро: доведение базовых конструкций до автоматизма. Метод как в плейлисте «Английский с нуля до автоматизма» и видео из папки «данные»: видишь русскую фразу → сразу говоришь по-английски → слышишь правильный ответ. Каждый глагол — 9 фраз: настоящее / прошедшее / будущее × утверждение / вопрос / отрицание.",
+"grid":["Настоящее +","Настоящее ?","Настоящее −","Прошедшее +","Прошедшее ?","Прошедшее −","Будущее +","Будущее ?","Будущее −"],
+"verbs":[
+{"verb":"be","forms":"am/is/are – was/were – will be","ru":"быть, находиться","cells":[
+["I'm tired.","Я устал."],["Are you okay?","Ты в порядке?"],["It isn't far.","Это недалеко."],
+["I was at the hotel.","Я был в отеле."],["Was it expensive?","Это было дорого?"],["We weren't late.","Мы не опоздали."],
+["I'll be there at six.","Я буду там в шесть."],["Will you be at home?","Ты будешь дома?"],["It won't be cold.","Холодно не будет."]]},
+{"verb":"have","forms":"have/has – had – will have","ru":"иметь","cells":[
+["I have a reservation.","У меня есть бронь."],["Do you have Wi-Fi?","У вас есть Wi-Fi?"],["I don't have cash.","У меня нет наличных."],
+["We had a great time.","Мы отлично провели время."],["Did you have breakfast?","Ты позавтракал?"],["I didn't have time.","У меня не было времени."],
+["I'll have the steak.","Я возьму стейк."],["Will you have time tomorrow?","У тебя будет время завтра?"],["We won't have a car.","У нас не будет машины."]]},
+{"verb":"go","forms":"go – went – will go","ru":"идти, ехать","cells":[
+["I go to the gym every day.","Я хожу в зал каждый день."],["Does this bus go downtown?","Этот автобус идёт в центр?"],["I don't go out much.","Я редко куда-то хожу."],
+["We went to the beach.","Мы ходили на пляж."],["Where did you go?","Куда ты ходил?"],["I didn't go there.","Я туда не ходил."],
+["I'll go with you.","Я пойду с тобой."],["Will you go to the party?","Ты пойдёшь на вечеринку?"],["I won't go alone.","Я не пойду один."]]},
+{"verb":"want","forms":"want – wanted – will want","ru":"хотеть","cells":[
+["I want a coffee.","Я хочу кофе."],["Do you want to come?","Хочешь пойти?"],["I don't want to be late.","Я не хочу опоздать."],
+["She wanted to see the city.","Она хотела посмотреть город."],["Did you want something?","Ты что-то хотел?"],["I didn't want to wait.","Я не хотел ждать."],
+["You'll want a jacket.","Тебе понадобится куртка."],["Will they want dinner?","Они захотят ужинать?"],["He won't want to leave.","Он не захочет уходить."]]},
+{"verb":"need","forms":"need – needed – will need","ru":"нуждаться, нужно","cells":[
+["I need help.","Мне нужна помощь."],["Do I need a ticket?","Мне нужен билет?"],["You don't need to pay.","Платить не нужно."],
+["I needed a taxi.","Мне нужно было такси."],["Did you need anything?","Тебе что-нибудь было нужно?"],["We didn't need a map.","Нам не понадобилась карта."],
+["You'll need your passport.","Тебе понадобится паспорт."],["Will I need a visa?","Мне понадобится виза?"],["We won't need a car.","Машина нам не понадобится."]]},
+{"verb":"can","forms":"can – could – will be able to","ru":"мочь","cells":[
+["I can help you.","Я могу тебе помочь."],["Can I pay by card?","Можно картой?"],["I can't find my phone.","Не могу найти телефон."],
+["I could see the ocean.","Мне был виден океан."],["Could you hear me?","Ты меня слышал?"],["We couldn't find the hotel.","Мы не смогли найти отель."],
+["You'll be able to rest.","Ты сможешь отдохнуть."],["Will you be able to come?","Ты сможешь прийти?"],["I won't be able to call.","Я не смогу позвонить."]]},
+{"verb":"know","forms":"know – knew – will know","ru":"знать","cells":[
+["I know this place.","Я знаю это место."],["Do you know where it is?","Знаешь, где это?"],["I don't know.","Я не знаю."],
+["I knew it!","Я так и знал!"],["Did you know that?","Ты это знал?"],["I didn't know that.","Я этого не знал."],
+["I'll know tomorrow.","Я буду знать завтра."],["Will you know the price?","Ты будешь знать цену?"],["They won't know.","Они не узнают."]]},
+{"verb":"like","forms":"like – liked – will like","ru":"нравиться","cells":[
+["I like this city.","Мне нравится этот город."],["Do you like spicy food?","Ты любишь острое?"],["I don't like crowds.","Не люблю толпы."],
+["We liked the hotel.","Нам понравился отель."],["Did you like the movie?","Тебе понравился фильм?"],["She didn't like it.","Ей не понравилось."],
+["You'll like it.","Тебе понравится."],["Will he like the gift?","Ему понравится подарок?"],["You won't like the weather.","Погода тебе не понравится."]]},
+{"verb":"see","forms":"see – saw – will see","ru":"видеть","cells":[
+["I see the sign.","Я вижу указатель."],["Do you see that building?","Видишь то здание?"],["I don't see it.","Я этого не вижу."],
+["I saw your message.","Я видел твоё сообщение."],["Did you see that?","Ты это видел?"],["We didn't see the museum.","Мы не видели музей."],
+["I'll see you tomorrow.","Увидимся завтра."],["Will we see the ocean?","Мы увидим океан?"],["You won't see it from here.","Отсюда этого не видно будет."]]},
+{"verb":"take","forms":"take – took – will take","ru":"брать, занимать (время), ехать на","cells":[
+["I take the subway to work.","Я езжу на работу на метро."],["Does it take long?","Это долго?"],["They don't take cash.","Они не берут наличные."],
+["We took a taxi.","Мы взяли такси."],["Did you take my key?","Ты взял мой ключ?"],["I didn't take a photo.","Я не сфотографировал."],
+["I'll take it.","Я возьму это."],["Will it take an hour?","Это займёт час?"],["It won't take long.","Это не займёт много времени."]]},
+{"verb":"get","forms":"get – got – will get","ru":"получать, брать, добираться","cells":[
+["Can I get a water?","Можно мне воды?"],["How do I get to the station?","Как добраться до вокзала?"],["I don't get it.","Я не понимаю."],
+["We got there at noon.","Мы добрались туда в полдень."],["Did you get my message?","Ты получил моё сообщение?"],["I didn't get a receipt.","Я не получил чек."],
+["I'll get the check.","Я заплачу (возьму счёт)."],["Will we get there on time?","Мы доберёмся вовремя?"],["You won't get lost.","Ты не заблудишься."]]},
+{"verb":"buy","forms":"buy – bought – will buy","ru":"покупать","cells":[
+["I buy coffee every morning.","Я покупаю кофе каждое утро."],["Where do I buy tickets?","Где купить билеты?"],["I don't buy souvenirs.","Я не покупаю сувениры."],
+["I bought a new phone.","Я купил новый телефон."],["Did you buy water?","Ты купил воды?"],["We didn't buy anything.","Мы ничего не купили."],
+["I'll buy the tickets.","Я куплю билеты."],["Will you buy it?","Ты это купишь?"],["I won't buy it here.","Здесь я это не куплю."]]},
+{"verb":"eat","forms":"eat – ate – will eat","ru":"есть","cells":[
+["We eat late.","Мы едим поздно."],["Do you eat fish?","Ты ешь рыбу?"],["I don't eat meat.","Я не ем мясо."],
+["We ate at a great place.","Мы поели в отличном месте."],["Did you eat?","Ты поел?"],["I didn't eat breakfast.","Я не завтракал."],
+["We'll eat at the hotel.","Мы поедим в отеле."],["Where will we eat?","Где мы будем есть?"],["I won't eat that.","Я это есть не буду."]]},
+{"verb":"come","forms":"come – came – will come","ru":"приходить, приезжать","cells":[
+["I come here every summer.","Я приезжаю сюда каждое лето."],["Do you want to come?","Хочешь прийти?"],["The bus doesn't come often.","Автобус ходит нечасто."],
+["They came yesterday.","Они приехали вчера."],["When did you come?","Когда ты приехал?"],["My bag didn't come.","Мой багаж не прибыл."],
+["I'll come back later.","Я вернусь позже."],["Will you come with us?","Пойдёшь с нами?"],["He won't come today.","Он сегодня не придёт."]]},
+{"verb":"say","forms":"say – said – will say","ru":"сказать, говорить","cells":[
+["What does it say?","Что там написано?"],["How do you say it in English?","Как это сказать по-английски?"],["I don't say that.","Я так не говорю."],
+["She said yes.","Она сказала «да»."],["What did you say?","Что ты сказал?"],["He didn't say anything.","Он ничего не сказал."],
+["I'll say it again.","Я скажу ещё раз."],["What will you say?","Что ты скажешь?"],["I won't say a word.","Я ни слова не скажу."]]},
+{"verb":"ask","forms":"ask – asked – will ask","ru":"спрашивать, просить","cells":[
+["Can I ask you something?","Можно тебя кое-что спросить?"],["Why do you ask?","Почему ты спрашиваешь?"],["I don't ask for much.","Я многого не прошу."],
+["I asked for the check.","Я попросил счёт."],["Did you ask him?","Ты его спрашивал?"],["We didn't ask the price.","Мы не спросили цену."],
+["I'll ask the driver.","Я спрошу водителя."],["Will you ask her?","Ты её спросишь?"],["I won't ask again.","Больше не буду спрашивать."]]}
+]
+}
