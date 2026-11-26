@@ -242,12 +242,20 @@ function streak() {
   while (days.has(today(d))) { n++; d.setDate(d.getDate() - 1); }
   return n;
 }
-const INSERTED_IDS = ['topic-money', 'topic-connect', 'topic-apartment', 'topic-sightseeing'];
+// порядок уроков до перехода на id (прогресс тогда хранился номером урока)
+const LEGACY_ORDER = ['topic-survival', 'topic-greetings', 'topic-aboutme', 'topic-aboutme-2', 'topic-cafe', 'review-survival+greetings+aboutme+cafe',
+  'topic-taxi', 'topic-directions', 'topic-transport', 'topic-restaurant', 'topic-restaurant-2', 'review-taxi+directions+transport+restaurant',
+  'topic-airport', 'topic-passport', 'topic-plane', 'topic-hotel', 'topic-hotel-2', 'review-airport+passport+plane+hotel',
+  'topic-shopping', 'topic-health', 'topic-problems', 'topic-requests', 'topic-keeptalking', 'review-shopping+health+problems+requests+keeptalking',
+  'topic-smalltalk', 'topic-plans', 'topic-plans-2', 'topic-feelings', 'topic-work', 'review-smalltalk+plans+feelings+work+greetings',
+  'topic-realspeech', 'trip-Поездка: прилёт', 'trip-Поездка: заселение', 'trip-Поездка: город', 'trip-Поездка: вечер', 'review-Итоговый урок',
+  'topic-myday', 'topic-myday-2', 'topic-friends', 'topic-friends-2', 'topic-keeptalking-2', 'topic-survival-2',
+  'topic-requests-2', 'topic-plans-3', 'topic-work-2', 'topic-feelings-2', 'review-Повторение: новые фразы'].map(id => ({ id }));
 function curIndex(p) { const i = DATA.lessons.findIndex(l => !p.done.includes(l.id)); return i < 0 ? DATA.lessons.length : i; }
 function migrateProgress() {
   const p = prog();
   if (!p.done) {
-    const old = DATA.lessons.filter(l => !INSERTED_IDS.includes(l.id));
+    const old = LEGACY_ORDER;
     p.done = old.slice(0, p.lesson).map(l => l.id);
     const sr = store.get('run', null);
     if (sr && !sr.lessonId && old[sr.idx]) { sr.lessonId = old[sr.idx].id; store.set('run', sr); }

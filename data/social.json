@@ -48,16 +48,44 @@
   ],
   "say": [
    [
+    "Can't complain.",
+    "Не жалуюсь."
+   ],
+   [
     "Hi, I'm Alex.",
     "Привет, я Алекс."
+   ],
+   [
+    "How are you?",
+    "Как дела?"
+   ],
+   [
+    "See you later!",
+    "Увидимся!"
+   ],
+   [
+    "How's it going?",
+    "Как дела?"
+   ],
+   [
+    "Pretty good, actually.",
+    "Вообще-то довольно хорошо."
+   ],
+   [
+    "Same as usual.",
+    "Всё как обычно."
    ],
    [
     "Nice to meet you.",
     "Приятно познакомиться."
    ],
    [
-    "How are you?",
-    "Как дела?"
+    "Have a good day!",
+    "Хорошего дня!"
+   ],
+   [
+    "I'm doing well, thanks.",
+    "У меня всё хорошо, спасибо."
    ],
    [
     "I'm good, thanks. And you?",
@@ -74,34 +102,6 @@
    [
     "It was nice talking to you.",
     "Было приятно поговорить."
-   ],
-   [
-    "See you later!",
-    "Увидимся!"
-   ],
-   [
-    "Have a good day!",
-    "Хорошего дня!"
-   ],
-   [
-    "How's it going?",
-    "Как дела?"
-   ],
-   [
-    "I'm doing well, thanks.",
-    "У меня всё хорошо, спасибо."
-   ],
-   [
-    "Can't complain.",
-    "Не жалуюсь."
-   ],
-   [
-    "Pretty good, actually.",
-    "Вообще-то довольно хорошо."
-   ],
-   [
-    "Same as usual.",
-    "Всё как обычно."
    ]
   ],
   "hear": [
@@ -295,36 +295,36 @@
     "Я из России."
    ],
    [
-    "I live in Moscow.",
-    "Я живу в Москве."
+    "I'm learning English.",
+    "Я учу английский."
    ],
    [
-    "I have my own business.",
-    "У меня свой бизнес."
+    "What about you?",
+    "А ты?"
+   ],
+   [
+    "I live in Moscow.",
+    "Я живу в Москве."
    ],
    [
     "I sell things online.",
     "Я продаю товары онлайн."
    ],
    [
-    "I'm married and I have two kids.",
-    "Я женат, у меня двое детей."
+    "I have my own business.",
+    "У меня свой бизнес."
    ],
    [
     "I like traveling and watching movies.",
     "Я люблю путешествовать и смотреть фильмы."
    ],
    [
-    "I'm learning English.",
-    "Я учу английский."
+    "I'm married and I have two kids.",
+    "Я женат, у меня двое детей."
    ],
    [
     "This is my first time in the US.",
     "Я впервые в США."
-   ],
-   [
-    "What about you?",
-    "А ты?"
    ]
   ],
   "hear": [
@@ -486,6 +486,14 @@
     "Как прошли выходные?"
    ],
    [
+    "I love this city.",
+    "Мне очень нравится этот город."
+   ],
+   [
+    "It's really crowded here.",
+    "Тут очень людно."
+   ],
+   [
     "Any plans for the weekend?",
     "Есть планы на выходные?"
    ],
@@ -496,14 +504,6 @@
    [
     "Can you recommend a good place to eat?",
     "Посоветуешь, где хорошо поесть?"
-   ],
-   [
-    "I love this city.",
-    "Мне очень нравится этот город."
-   ],
-   [
-    "It's really crowded here.",
-    "Тут очень людно."
    ]
   ],
   "hear": [
@@ -645,52 +645,40 @@
   ],
   "say": [
    [
-    "Are you free tonight?",
-    "Ты свободен сегодня вечером?"
-   ],
-   [
-    "Do you want to grab a coffee?",
-    "Хочешь выпить кофе?"
-   ],
-   [
-    "What time works for you?",
-    "Какое время тебе удобно?"
+    "Sounds good!",
+    "Звучит отлично!"
    ],
    [
     "How about seven?",
     "Как насчёт семи?"
    ],
    [
-    "Where should we meet?",
-    "Где встретимся?"
-   ],
-   [
-    "Sounds good!",
-    "Звучит отлично!"
-   ],
-   [
-    "Sorry, I can't tonight. Maybe tomorrow?",
-    "Извини, сегодня не могу. Может, завтра?"
-   ],
-   [
-    "Can I get your number?",
-    "Дашь свой номер?"
-   ],
-   [
     "I'll text you.",
     "Я напишу."
    ],
    [
-    "I'm running a little late.",
-    "Я немного опаздываю."
+    "Something came up.",
+    "Кое-что случилось (не смогу)."
+   ],
+   [
+    "Count me in.",
+    "Я в деле. Я с вами."
+   ],
+   [
+    "See you then!",
+    "Тогда до встречи!"
+   ],
+   [
+    "Are you free tonight?",
+    "Ты свободен сегодня вечером?"
+   ],
+   [
+    "Where should we meet?",
+    "Где встретимся?"
    ],
    [
     "I'm up for it.",
     "Я за."
-   ],
-   [
-    "I'm not really up for it.",
-    "Мне не очень хочется."
    ],
    [
     "Sounds good to me.",
@@ -701,26 +689,6 @@
     "Я дам тебе знать."
    ],
    [
-    "I'll get back to you.",
-    "Я свяжусь с тобой позже."
-   ],
-   [
-    "Something came up.",
-    "Кое-что случилось (не смогу)."
-   ],
-   [
-    "I'll be there in a minute.",
-    "Буду через минуту."
-   ],
-   [
-    "Count me in.",
-    "Я в деле. Я с вами."
-   ],
-   [
-    "Does Friday work for you?",
-    "Пятница тебе подходит?"
-   ],
-   [
     "I'll meet you there.",
     "Встретимся на месте."
    ],
@@ -729,12 +697,44 @@
     "Я за тобой заеду."
    ],
    [
+    "What time works for you?",
+    "Какое время тебе удобно?"
+   ],
+   [
+    "Can I get your number?",
+    "Дашь свой номер?"
+   ],
+   [
+    "I'm running a little late.",
+    "Я немного опаздываю."
+   ],
+   [
+    "I'll get back to you.",
+    "Я свяжусь с тобой позже."
+   ],
+   [
+    "Does Friday work for you?",
+    "Пятница тебе подходит?"
+   ],
+   [
+    "Sorry, I can't tonight. Maybe tomorrow?",
+    "Извини, сегодня не могу. Может, завтра?"
+   ],
+   [
+    "I'm not really up for it.",
+    "Мне не очень хочется."
+   ],
+   [
+    "I'll be there in a minute.",
+    "Буду через минуту."
+   ],
+   [
     "Can we move it to six?",
     "Можем перенести на шесть?"
    ],
    [
-    "See you then!",
-    "Тогда до встречи!"
+    "Do you want to grab a coffee?",
+    "Хочешь выпить кофе?"
    ]
   ],
   "hear": [
@@ -882,24 +882,8 @@
   ],
   "say": [
    [
-    "Could you help me out?",
-    "Не могли бы вы мне помочь?"
-   ],
-   [
-    "Can you give me a hand?",
-    "Можешь мне помочь?"
-   ],
-   [
-    "Could you do me a favor?",
-    "Можете оказать мне услугу?"
-   ],
-   [
     "I'd appreciate it.",
     "Буду очень благодарен."
-   ],
-   [
-    "Thanks, I really appreciate it.",
-    "Спасибо, очень ценю."
    ],
    [
     "Could you hold this?",
@@ -910,16 +894,20 @@
     "Можно это одолжить?"
    ],
    [
+    "I owe you one.",
+    "Я твой должник."
+   ],
+   [
+    "Could you help me out?",
+    "Не могли бы вы мне помочь?"
+   ],
+   [
+    "Thanks, I really appreciate it.",
+    "Спасибо, очень ценю."
+   ],
+   [
     "Can you show me how?",
     "Покажете, как?"
-   ],
-   [
-    "Can you keep an eye on my bag?",
-    "Присмотрите за моей сумкой?"
-   ],
-   [
-    "Is it OK if I sit here?",
-    "Ничего, если я тут сяду?"
    ],
    [
     "Could you let me through?",
@@ -930,12 +918,24 @@
     "Очень мило с вашей стороны."
    ],
    [
-    "I owe you one.",
-    "Я твой должник."
+    "Can you give me a hand?",
+    "Можешь мне помочь?"
+   ],
+   [
+    "Could you do me a favor?",
+    "Можете оказать мне услугу?"
    ],
    [
     "Could you check that for me?",
     "Можете это проверить?"
+   ],
+   [
+    "Is it OK if I sit here?",
+    "Ничего, если я тут сяду?"
+   ],
+   [
+    "Can you keep an eye on my bag?",
+    "Присмотрите за моей сумкой?"
    ]
   ],
   "hear": [
@@ -1039,28 +1039,52 @@
   ],
   "say": [
    [
-    "I'll look into it.",
-    "Я разберусь."
-   ],
-   [
-    "I'll take care of it.",
-    "Я этим займусь."
-   ],
-   [
     "Let's get started.",
     "Давайте начнём."
-   ],
-   [
-    "I'll keep you posted.",
-    "Буду держать в курсе."
    ],
    [
     "Just to clarify…",
     "Просто уточню…"
    ],
    [
+    "I'll pass, thanks.",
+    "Я пас, спасибо."
+   ],
+   [
+    "I'll look into it.",
+    "Я разберусь."
+   ],
+   [
+    "I'll keep you posted.",
+    "Буду держать в курсе."
+   ],
+   [
+    "That works for me.",
+    "Мне подходит."
+   ],
+   [
+    "Whatever works for you.",
+    "Как тебе удобно."
+   ],
+   [
+    "Maybe some other time.",
+    "Может, в другой раз."
+   ],
+   [
+    "I'll take care of it.",
+    "Я этим займусь."
+   ],
+   [
     "As far as I know…",
     "Насколько я знаю…"
+   ],
+   [
+    "Let's give it a try.",
+    "Давай попробуем."
+   ],
+   [
+    "We'll see how it goes.",
+    "Посмотрим, как пойдёт."
    ],
    [
     "Let's get back to that later.",
@@ -1071,32 +1095,8 @@
     "Скоро свяжусь с вами."
    ],
    [
-    "That works for me.",
-    "Мне подходит."
-   ],
-   [
     "I'm afraid I can't make it.",
     "Боюсь, я не смогу прийти."
-   ],
-   [
-    "Whatever works for you.",
-    "Как тебе удобно."
-   ],
-   [
-    "I'll pass, thanks.",
-    "Я пас, спасибо."
-   ],
-   [
-    "Let's give it a try.",
-    "Давай попробуем."
-   ],
-   [
-    "Maybe some other time.",
-    "Может, в другой раз."
-   ],
-   [
-    "We'll see how it goes.",
-    "Посмотрим, как пойдёт."
    ]
   ],
   "hear": [],
@@ -1187,6 +1187,26 @@
     "Правда?"
    ],
    [
+    "Exactly!",
+    "Именно!"
+   ],
+   [
+    "Me too!",
+    "Я тоже!"
+   ],
+   [
+    "Lucky you!",
+    "Везёт тебе!"
+   ],
+   [
+    "How come?",
+    "Как так? Почему?"
+   ],
+   [
+    "Not really.",
+    "Не особо."
+   ],
+   [
     "Oh, that's cool!",
     "О, это круто!"
    ],
@@ -1195,32 +1215,8 @@
     "Звучит весело."
    ],
    [
-    "Oh no, I'm sorry to hear that.",
-    "Ох, жаль это слышать."
-   ],
-   [
-    "Me too!",
-    "Я тоже!"
-   ],
-   [
     "Let me think…",
     "Дай подумать…"
-   ],
-   [
-    "How do I say it…",
-    "Как же сказать…"
-   ],
-   [
-    "What do you mean?",
-    "Что ты имеешь в виду?"
-   ],
-   [
-    "And then what happened?",
-    "И что было дальше?"
-   ],
-   [
-    "By the way, …",
-    "Кстати, …"
    ],
    [
     "I know, right?",
@@ -1231,32 +1227,12 @@
     "Логично. / Понятно."
    ],
    [
-    "Exactly!",
-    "Именно!"
-   ],
-   [
     "I totally agree.",
     "Полностью согласен."
    ],
    [
-    "I'm not sure about that.",
-    "Я не уверен насчёт этого."
-   ],
-   [
-    "That's a good point.",
-    "Хороший аргумент."
-   ],
-   [
-    "I see what you mean.",
-    "Понимаю, что ты имеешь в виду."
-   ],
-   [
     "I knew it!",
     "Я так и знал!"
-   ],
-   [
-    "Lucky you!",
-    "Везёт тебе!"
    ],
    [
     "What a shame.",
@@ -1271,36 +1247,60 @@
     "Представляю."
    ],
    [
-    "How come?",
-    "Как так? Почему?"
-   ],
-   [
-    "I see your point.",
-    "Понимаю твою мысль."
-   ],
-   [
     "I guess so.",
     "Наверное, да."
-   ],
-   [
-    "Not really.",
-    "Не особо."
    ],
    [
     "To be honest…",
     "Если честно…"
    ],
    [
+    "What do you mean?",
+    "Что ты имеешь в виду?"
+   ],
+   [
+    "And then what happened?",
+    "И что было дальше?"
+   ],
+   [
+    "By the way, …",
+    "Кстати, …"
+   ],
+   [
+    "That's a good point.",
+    "Хороший аргумент."
+   ],
+   [
+    "I see your point.",
+    "Понимаю твою мысль."
+   ],
+   [
     "If you ask me…",
     "По-моему…"
+   ],
+   [
+    "You might be right.",
+    "Может, ты и прав."
+   ],
+   [
+    "How do I say it…",
+    "Как же сказать…"
+   ],
+   [
+    "I'm not sure about that.",
+    "Я не уверен насчёт этого."
+   ],
+   [
+    "I see what you mean.",
+    "Понимаю, что ты имеешь в виду."
    ],
    [
     "I feel the same way.",
     "Я думаю так же."
    ],
    [
-    "You might be right.",
-    "Может, ты и прав."
+    "Oh no, I'm sorry to hear that.",
+    "Ох, жаль это слышать."
    ]
   ],
   "hear": [
@@ -1441,96 +1441,8 @@
   ],
   "say": [
    [
-    "I really like it.",
-    "Мне очень нравится."
-   ],
-   [
-    "I don't really like it.",
-    "Мне не особо нравится."
-   ],
-   [
-    "I think it's a good idea.",
-    "Думаю, это хорошая идея."
-   ],
-   [
-    "I'm not sure.",
-    "Я не уверен."
-   ],
-   [
-    "It was delicious!",
-    "Было очень вкусно!"
-   ],
-   [
-    "It's a bit expensive.",
-    "Немного дороговато."
-   ],
-   [
-    "I'm so tired today.",
-    "Я так устал сегодня."
-   ],
-   [
-    "I'm really excited about the trip.",
-    "Очень жду поездку."
-   ],
-   [
-    "What do you think?",
-    "Что думаешь?"
-   ],
-   [
-    "My favorite is…",
-    "Мой любимый — …"
-   ],
-   [
-    "I'm really into it.",
-    "Мне это очень нравится."
-   ],
-   [
-    "I'm not a big fan of it.",
-    "Я не большой фанат этого."
-   ],
-   [
-    "It's up to you.",
-    "Решать тебе."
-   ],
-   [
-    "I don't mind.",
-    "Я не против."
-   ],
-   [
     "It depends.",
     "Зависит от ситуации."
-   ],
-   [
-    "I'm fed up with it.",
-    "Мне это надоело."
-   ],
-   [
-    "I can't stand it.",
-    "Терпеть этого не могу."
-   ],
-   [
-    "I'm looking forward to it.",
-    "Жду с нетерпением."
-   ],
-   [
-    "It's totally worth it.",
-    "Это того стоит."
-   ],
-   [
-    "You never know!",
-    "Кто знает!"
-   ],
-   [
-    "I'm worn out.",
-    "Я без сил."
-   ],
-   [
-    "I didn't sleep well.",
-    "Я плохо спал."
-   ],
-   [
-    "I need some fresh air.",
-    "Мне нужен свежий воздух."
    ],
    [
     "I'm starving.",
@@ -1545,6 +1457,86 @@
     "Я замёрз."
    ],
    [
+    "I'm not sure.",
+    "Я не уверен."
+   ],
+   [
+    "It was delicious!",
+    "Было очень вкусно!"
+   ],
+   [
+    "My favorite is…",
+    "Мой любимый — …"
+   ],
+   [
+    "I don't mind.",
+    "Я не против."
+   ],
+   [
+    "You never know!",
+    "Кто знает!"
+   ],
+   [
+    "I'm worn out.",
+    "Я без сил."
+   ],
+   [
+    "I can't wait!",
+    "Не могу дождаться!"
+   ],
+   [
+    "I really like it.",
+    "Мне очень нравится."
+   ],
+   [
+    "It's a bit expensive.",
+    "Немного дороговато."
+   ],
+   [
+    "I'm so tired today.",
+    "Я так устал сегодня."
+   ],
+   [
+    "What do you think?",
+    "Что думаешь?"
+   ],
+   [
+    "I'm really into it.",
+    "Мне это очень нравится."
+   ],
+   [
+    "It's up to you.",
+    "Решать тебе."
+   ],
+   [
+    "I can't stand it.",
+    "Терпеть этого не могу."
+   ],
+   [
+    "It's totally worth it.",
+    "Это того стоит."
+   ],
+   [
+    "I didn't sleep well.",
+    "Я плохо спал."
+   ],
+   [
+    "I don't really like it.",
+    "Мне не особо нравится."
+   ],
+   [
+    "I'm fed up with it.",
+    "Мне это надоело."
+   ],
+   [
+    "I'm looking forward to it.",
+    "Жду с нетерпением."
+   ],
+   [
+    "I need some fresh air.",
+    "Мне нужен свежий воздух."
+   ],
+   [
     "I'm in a good mood.",
     "У меня хорошее настроение."
    ],
@@ -1553,12 +1545,20 @@
     "Я не в настроении."
    ],
    [
-    "I can't wait!",
-    "Не могу дождаться!"
-   ],
-   [
     "I'm having a rough day.",
     "У меня тяжёлый день."
+   ],
+   [
+    "I think it's a good idea.",
+    "Думаю, это хорошая идея."
+   ],
+   [
+    "I'm really excited about the trip.",
+    "Очень жду поездку."
+   ],
+   [
+    "I'm not a big fan of it.",
+    "Я не большой фанат этого."
    ]
   ],
   "hear": [
@@ -1686,8 +1686,12 @@
   ],
   "say": [
    [
-    "I'm going to try it.",
-    "Я попробую."
+    "Let me check.",
+    "Дай проверю."
+   ],
+   [
+    "I don't know.",
+    "Не знаю."
    ],
    [
     "I want to go.",
@@ -1698,12 +1702,8 @@
     "Мне надо идти."
    ],
    [
-    "Let me check.",
-    "Дай проверю."
-   ],
-   [
-    "I don't know.",
-    "Не знаю."
+    "I'm going to try it.",
+    "Я попробую."
    ]
   ],
   "hear": [
@@ -1828,10 +1828,6 @@
   ],
   "say": [
    [
-    "Make yourself at home.",
-    "Чувствуй себя как дома."
-   ],
-   [
     "Help yourself.",
     "Угощайся."
    ],
@@ -1840,56 +1836,60 @@
     "Я угощаю."
    ],
    [
-    "That means a lot to me.",
-    "Это много для меня значит."
+    "Get home safe.",
+    "Доберись хорошо."
+   ],
+   [
+    "Make yourself at home.",
+    "Чувствуй себя как дома."
    ],
    [
     "I'm here for you.",
     "Я рядом."
    ],
    [
-    "You can count on me.",
-    "Можешь на меня рассчитывать."
-   ],
-   [
     "Take care of yourself.",
     "Береги себя."
-   ],
-   [
-    "Get home safe.",
-    "Доберись хорошо."
-   ],
-   [
-    "Text me when you're home.",
-    "Напиши, как будешь дома."
    ],
    [
     "I'm glad you came.",
     "Я рад, что ты пришёл."
    ],
    [
-    "It was great seeing you.",
-    "Было здорово увидеться."
-   ],
-   [
     "Say hi to everyone.",
     "Передавай всем привет."
-   ],
-   [
-    "Sorry to keep you waiting.",
-    "Прости, что заставил ждать."
-   ],
-   [
-    "I didn't mean to upset you.",
-    "Я не хотел тебя расстроить."
    ],
    [
     "I'm proud of you.",
     "Я тобой горжусь."
    ],
    [
+    "You can count on me.",
+    "Можешь на меня рассчитывать."
+   ],
+   [
+    "Text me when you're home.",
+    "Напиши, как будешь дома."
+   ],
+   [
+    "It was great seeing you.",
+    "Было здорово увидеться."
+   ],
+   [
+    "Sorry to keep you waiting.",
+    "Прости, что заставил ждать."
+   ],
+   [
     "I'm sorry to hear that.",
     "Жаль это слышать."
+   ],
+   [
+    "That means a lot to me.",
+    "Это много для меня значит."
+   ],
+   [
+    "I didn't mean to upset you.",
+    "Я не хотел тебя расстроить."
    ]
   ],
   "hear": [
@@ -2003,6 +2003,10 @@
   ],
   "say": [
    [
+    "I'm nearly done.",
+    "Я почти закончил."
+   ],
+   [
     "I'll be right back.",
     "Сейчас вернусь."
    ],
@@ -2015,8 +2019,12 @@
     "Я спешу."
    ],
    [
-    "I'm nearly done.",
-    "Я почти закончил."
+    "I've got to go.",
+    "Мне пора."
+   ],
+   [
+    "I worked all day.",
+    "Я работал весь день."
    ],
    [
     "I've got a lot on.",
@@ -2031,20 +2039,12 @@
     "Буду через десять минут."
    ],
    [
-    "I've got to go.",
-    "Мне пора."
-   ],
-   [
     "I woke up early today.",
     "Сегодня я встал рано."
    ],
    [
     "I had a busy day.",
     "У меня был насыщенный день."
-   ],
-   [
-    "I worked all day.",
-    "Я работал весь день."
    ],
    [
     "I went for a walk.",

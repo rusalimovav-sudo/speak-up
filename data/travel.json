@@ -60,12 +60,12 @@
     "Простите? (не расслышал)"
    ],
    [
-    "Could you say that again, please?",
-    "Можете повторить, пожалуйста?"
+    "Do you mean…?",
+    "Вы имеете в виду…?"
    ],
    [
-    "Could you speak more slowly, please?",
-    "Можете говорить медленнее?"
+    "Got it, thanks.",
+    "Понял, спасибо."
    ],
    [
     "Sorry, I don't understand.",
@@ -76,32 +76,12 @@
     "Что это значит?"
    ],
    [
-    "What's the word for this in English?",
-    "Как это по-английски?"
-   ],
-   [
-    "Can you write it down, please?",
-    "Можете написать?"
-   ],
-   [
     "Can you show me?",
     "Можете показать?"
    ],
    [
-    "My English isn't very good.",
-    "Мой английский не очень хорош."
-   ],
-   [
-    "Do you mean…?",
-    "Вы имеете в виду…?"
-   ],
-   [
     "Just a second, please.",
     "Секунду, пожалуйста."
-   ],
-   [
-    "Got it, thanks.",
-    "Понял, спасибо."
    ],
    [
     "I didn't catch that.",
@@ -112,24 +92,44 @@
     "Можно помедленнее?"
    ],
    [
-    "How do you spell that?",
-    "Как это пишется?"
-   ],
-   [
     "Could you speak up?",
     "Можно погромче?"
-   ],
-   [
-    "Did I get that right?",
-    "Я правильно понял?"
    ],
    [
     "Could you explain that?",
     "Можете объяснить?"
    ],
    [
+    "My English isn't very good.",
+    "Мой английский не очень хорош."
+   ],
+   [
+    "How do you spell that?",
+    "Как это пишется?"
+   ],
+   [
+    "Did I get that right?",
+    "Я правильно понял?"
+   ],
+   [
     "How do you pronounce it?",
     "Как это произносится?"
+   ],
+   [
+    "Could you say that again, please?",
+    "Можете повторить, пожалуйста?"
+   ],
+   [
+    "Could you speak more slowly, please?",
+    "Можете говорить медленнее?"
+   ],
+   [
+    "Can you write it down, please?",
+    "Можете написать?"
+   ],
+   [
+    "What's the word for this in English?",
+    "Как это по-английски?"
    ]
   ],
   "hear": [
@@ -305,20 +305,8 @@
   ],
   "say": [
    [
-    "I'd like to check in, please.",
-    "Я бы хотел зарегистрироваться."
-   ],
-   [
     "Here's my passport.",
     "Вот мой паспорт."
-   ],
-   [
-    "Can I have a window seat?",
-    "Можно место у окна?"
-   ],
-   [
-    "I have one bag to check.",
-    "У меня одна сумка в багаж."
    ],
    [
     "Is this a carry-on?",
@@ -335,6 +323,18 @@
    [
     "Is the flight on time?",
     "Рейс по расписанию?"
+   ],
+   [
+    "I'd like to check in, please.",
+    "Я бы хотел зарегистрироваться."
+   ],
+   [
+    "Can I have a window seat?",
+    "Можно место у окна?"
+   ],
+   [
+    "I have one bag to check.",
+    "У меня одна сумка в багаж."
    ],
    [
     "Do I need to take this out?",
@@ -530,14 +530,6 @@
   ],
   "say": [
    [
-    "Excuse me, I think that's my seat.",
-    "Простите, кажется, это моё место."
-   ],
-   [
-    "Can I get some water, please?",
-    "Можно воды?"
-   ],
-   [
     "Chicken, please.",
     "Курицу, пожалуйста."
    ],
@@ -546,16 +538,24 @@
     "Можно плед?"
    ],
    [
+    "How long is the flight?",
+    "Сколько лететь?"
+   ],
+   [
+    "Can I get some water, please?",
+    "Можно воды?"
+   ],
+   [
     "Excuse me, can I get out?",
     "Простите, можно пройти?"
    ],
    [
-    "Is it okay if I put my seat back?",
-    "Ничего, если я откину кресло?"
+    "Excuse me, I think that's my seat.",
+    "Простите, кажется, это моё место."
    ],
    [
-    "How long is the flight?",
-    "Сколько лететь?"
+    "Is it okay if I put my seat back?",
+    "Ничего, если я откину кресло?"
    ]
   ],
   "hear": [
@@ -692,6 +692,10 @@
   ],
   "say": [
    [
+    "For two weeks.",
+    "На две недели."
+   ],
+   [
     "I'm here on vacation.",
     "Я здесь в отпуске."
    ],
@@ -700,12 +704,8 @@
     "Я здесь по работе."
    ],
    [
-    "For two weeks.",
-    "На две недели."
-   ],
-   [
-    "I'm staying at a hotel downtown.",
-    "Я остановлюсь в отеле в центре."
+    "No, nothing to declare.",
+    "Нет, нечего декларировать."
    ],
    [
     "I'm staying with a friend.",
@@ -716,12 +716,12 @@
     "Да, вот обратный билет."
    ],
    [
-    "No, nothing to declare.",
-    "Нет, нечего декларировать."
-   ],
-   [
     "It's my first time here.",
     "Я здесь впервые."
+   ],
+   [
+    "I'm staying at a hotel downtown.",
+    "Я остановлюсь в отеле в центре."
    ]
   ],
   "hear": [
@@ -896,12 +896,8 @@
   ],
   "say": [
    [
-    "Hi, are you Mike? For Alex?",
-    "Привет, вы Майк? Заказ на Алекса?"
-   ],
-   [
-    "Can you take me to this address?",
-    "Отвезёте по этому адресу?"
+    "Keep the change.",
+    "Сдачи не надо."
    ],
    [
     "To the airport, please.",
@@ -910,10 +906,6 @@
    [
     "How long will it take?",
     "Сколько ехать?"
-   ],
-   [
-    "How much is it to downtown?",
-    "Сколько до центра?"
    ],
    [
     "Can you open the trunk?",
@@ -928,16 +920,24 @@
     "Можно картой?"
    ],
    [
-    "Keep the change.",
-    "Сдачи не надо."
+    "How long does it take?",
+    "Сколько времени это занимает?"
+   ],
+   [
+    "Hi, are you Mike? For Alex?",
+    "Привет, вы Майк? Заказ на Алекса?"
+   ],
+   [
+    "How much is it to downtown?",
+    "Сколько до центра?"
    ],
    [
     "Could you drop me off here?",
     "Высадите меня здесь?"
    ],
    [
-    "How long does it take?",
-    "Сколько времени это занимает?"
+    "Can you take me to this address?",
+    "Отвезёте по этому адресу?"
    ]
   ],
   "hear": [
@@ -1104,20 +1104,8 @@
   ],
   "say": [
    [
-    "Where can I buy a ticket?",
-    "Где купить билет?"
-   ],
-   [
-    "One ticket to Boston, please.",
-    "Один билет до Бостона."
-   ],
-   [
     "Round trip, please.",
     "Туда-обратно, пожалуйста."
-   ],
-   [
-    "Does this train go to Brooklyn?",
-    "Этот поезд идёт до Бруклина?"
    ],
    [
     "Which line goes downtown?",
@@ -1128,14 +1116,6 @@
     "Где пересадка?"
    ],
    [
-    "Is this the right platform?",
-    "Это та платформа?"
-   ],
-   [
-    "How many stops is it?",
-    "Сколько остановок?"
-   ],
-   [
     "Is this seat taken?",
     "Это место занято?"
    ],
@@ -1144,12 +1124,32 @@
     "Я проехал свою остановку."
    ],
    [
+    "Does this go downtown?",
+    "Это идёт в центр?"
+   ],
+   [
+    "One ticket to Boston, please.",
+    "Один билет до Бостона."
+   ],
+   [
+    "Is this the right platform?",
+    "Это та платформа?"
+   ],
+   [
+    "How many stops is it?",
+    "Сколько остановок?"
+   ],
+   [
     "Where do I get off?",
     "Где мне выходить?"
    ],
    [
-    "Does this go downtown?",
-    "Это идёт в центр?"
+    "Where can I buy a ticket?",
+    "Где купить билет?"
+   ],
+   [
+    "Does this train go to Brooklyn?",
+    "Этот поезд идёт до Бруклина?"
    ]
   ],
   "hear": [
@@ -1288,14 +1288,6 @@
   ],
   "say": [
    [
-    "Hi, I have a reservation under Ivanov.",
-    "Здравствуйте, у меня бронь на Иванова."
-   ],
-   [
-    "I'd like to check in.",
-    "Я хочу заселиться."
-   ],
-   [
     "What time is breakfast?",
     "Во сколько завтрак?"
    ],
@@ -1308,28 +1300,36 @@
     "Во сколько выезд?"
    ],
    [
-    "Can I leave my bags here?",
-    "Можно оставить сумки здесь?"
+    "The Wi-Fi isn't working.",
+    "Wi-Fi не работает."
+   ],
+   [
+    "I'd like to check in.",
+    "Я хочу заселиться."
    ],
    [
     "The air conditioning doesn't work.",
     "Кондиционер не работает."
    ],
    [
-    "Could I get some more towels?",
-    "Можно ещё полотенец?"
+    "Can I leave my bags here?",
+    "Можно оставить сумки здесь?"
    ],
    [
-    "My room is very noisy. Can I change rooms?",
-    "В номере очень шумно. Можно поменять?"
+    "Could I get some more towels?",
+    "Можно ещё полотенец?"
    ],
    [
     "Can I have a late checkout?",
     "Можно поздний выезд?"
    ],
    [
-    "The Wi-Fi isn't working.",
-    "Wi-Fi не работает."
+    "Hi, I have a reservation under Ivanov.",
+    "Здравствуйте, у меня бронь на Иванова."
+   ],
+   [
+    "My room is very noisy. Can I change rooms?",
+    "В номере очень шумно. Можно поменять?"
    ]
   ],
   "hear": [
@@ -1517,14 +1517,6 @@
   ],
   "say": [
    [
-    "Can I get a medium latte, please?",
-    "Можно средний латте?"
-   ],
-   [
-    "Can I get that with oat milk?",
-    "Можно на овсяном молоке?"
-   ],
-   [
     "For here, please.",
     "Здесь, пожалуйста."
    ],
@@ -1537,32 +1529,40 @@
     "Это всё, спасибо."
    ],
    [
-    "What do you recommend?",
-    "Что посоветуете?"
-   ],
-   [
-    "Can I have a glass of water?",
-    "Можно стакан воды?"
-   ],
-   [
     "Where's the restroom?",
     "Где туалет?"
-   ],
-   [
-    "Can I get a coffee, please?",
-    "Можно мне кофе?"
-   ],
-   [
-    "I'll have the same.",
-    "Мне то же самое."
    ],
    [
     "What's in it?",
     "Что входит в состав?"
    ],
    [
+    "What do you recommend?",
+    "Что посоветуете?"
+   ],
+   [
+    "I'll have the same.",
+    "Мне то же самое."
+   ],
+   [
+    "Can I get a coffee, please?",
+    "Можно мне кофе?"
+   ],
+   [
     "Can I charge my phone here?",
     "Можно здесь зарядить телефон?"
+   ],
+   [
+    "Can I get a medium latte, please?",
+    "Можно средний латте?"
+   ],
+   [
+    "Can I get that with oat milk?",
+    "Можно на овсяном молоке?"
+   ],
+   [
+    "Can I have a glass of water?",
+    "Можно стакан воды?"
    ]
   ],
   "hear": [
@@ -1763,48 +1763,12 @@
   ],
   "say": [
    [
-    "A table for two, please.",
-    "Столик на двоих."
-   ],
-   [
-    "Can we sit outside?",
-    "Можно сесть на улице?"
-   ],
-   [
-    "Can we see the menu, please?",
-    "Можно меню?"
-   ],
-   [
-    "I'll have the steak, medium rare.",
-    "Мне стейк средней прожарки."
-   ],
-   [
     "What's this dish?",
     "Что это за блюдо?"
    ],
    [
     "Is it spicy?",
     "Это острое?"
-   ],
-   [
-    "I'm allergic to nuts.",
-    "У меня аллергия на орехи."
-   ],
-   [
-    "Can we get the check, please?",
-    "Можно счёт?"
-   ],
-   [
-    "Can we split the check?",
-    "Можно раздельный счёт?"
-   ],
-   [
-    "Everything was great, thank you.",
-    "Всё было отлично, спасибо."
-   ],
-   [
-    "Could I have this without onions?",
-    "Можно это без лука?"
    ],
    [
     "Keep the change.",
@@ -1815,8 +1779,44 @@
     "Было очень вкусно!"
    ],
    [
+    "Can we sit outside?",
+    "Можно сесть на улице?"
+   ],
+   [
+    "I'm allergic to nuts.",
+    "У меня аллергия на орехи."
+   ],
+   [
+    "A table for two, please.",
+    "Столик на двоих."
+   ],
+   [
+    "Can we split the check?",
+    "Можно раздельный счёт?"
+   ],
+   [
+    "Everything was great, thank you.",
+    "Всё было отлично, спасибо."
+   ],
+   [
     "Do I need to book?",
     "Нужно бронировать?"
+   ],
+   [
+    "Can we see the menu, please?",
+    "Можно меню?"
+   ],
+   [
+    "I'll have the steak, medium rare.",
+    "Мне стейк средней прожарки."
+   ],
+   [
+    "Can we get the check, please?",
+    "Можно счёт?"
+   ],
+   [
+    "Could I have this without onions?",
+    "Можно это без лука?"
    ]
   ],
   "hear": [
@@ -2009,26 +2009,6 @@
   ],
   "say": [
    [
-    "I'm just looking, thanks.",
-    "Я просто смотрю, спасибо."
-   ],
-   [
-    "How much is this?",
-    "Сколько это стоит?"
-   ],
-   [
-    "Do you have this in a medium?",
-    "Есть такое в размере M?"
-   ],
-   [
-    "Do you have it in black?",
-    "Есть в чёрном?"
-   ],
-   [
-    "Can I try this on?",
-    "Можно примерить?"
-   ],
-   [
     "It's too big.",
     "Слишком большое."
    ],
@@ -2037,24 +2017,16 @@
     "Беру."
    ],
    [
-    "Can I pay by card?",
-    "Можно картой?"
-   ],
-   [
-    "I'd like to return this.",
-    "Я хочу это вернуть."
-   ],
-   [
     "No bag, thanks.",
     "Пакет не нужен."
    ],
    [
-    "Do you have this in a different size?",
-    "Есть это другого размера?"
+    "I'm just looking, thanks.",
+    "Я просто смотрю, спасибо."
    ],
    [
-    "Do you have this in another color?",
-    "Есть другой цвет?"
+    "How much is this?",
+    "Сколько это стоит?"
    ],
    [
     "Is this on sale?",
@@ -2073,12 +2045,40 @@
     "Вы принимаете карты?"
    ],
    [
+    "Can I try this on?",
+    "Можно примерить?"
+   ],
+   [
+    "Can I pay by card?",
+    "Можно картой?"
+   ],
+   [
+    "I'd like to return this.",
+    "Я хочу это вернуть."
+   ],
+   [
     "Could I have a receipt?",
     "Можно чек?"
    ],
    [
+    "Do you have it in black?",
+    "Есть в чёрном?"
+   ],
+   [
     "Do you have a smaller size?",
     "Есть размер поменьше?"
+   ],
+   [
+    "Do you have this in a medium?",
+    "Есть такое в размере M?"
+   ],
+   [
+    "Do you have this in another color?",
+    "Есть другой цвет?"
+   ],
+   [
+    "Do you have this in a different size?",
+    "Есть это другого размера?"
    ]
   ],
   "hear": [
@@ -2239,36 +2239,12 @@
   ],
   "say": [
    [
-    "I have a headache.",
-    "У меня болит голова."
-   ],
-   [
-    "I have a cold and a sore throat.",
-    "У меня простуда и болит горло."
-   ],
-   [
-    "I think I have a fever.",
-    "Кажется, у меня температура."
-   ],
-   [
     "My stomach hurts.",
     "У меня болит живот."
    ],
    [
-    "Do you have something for a cough?",
-    "Есть что-нибудь от кашля?"
-   ],
-   [
-    "How often should I take it?",
-    "Как часто принимать?"
-   ],
-   [
-    "Do I need a prescription?",
-    "Нужен рецепт?"
-   ],
-   [
-    "I need to see a doctor.",
-    "Мне нужно к врачу."
+    "I have a headache.",
+    "У меня болит голова."
    ],
    [
     "I'm allergic to penicillin.",
@@ -2279,16 +2255,40 @@
     "Я плохо себя чувствую."
    ],
    [
+    "Do I need a prescription?",
+    "Нужен рецепт?"
+   ],
+   [
     "I feel a bit dizzy.",
     "У меня немного кружится голова."
+   ],
+   [
+    "I'm feeling a lot better.",
+    "Мне намного лучше."
+   ],
+   [
+    "I think I have a fever.",
+    "Кажется, у меня температура."
+   ],
+   [
+    "How often should I take it?",
+    "Как часто принимать?"
+   ],
+   [
+    "I need to see a doctor.",
+    "Мне нужно к врачу."
+   ],
+   [
+    "Do you have something for a cough?",
+    "Есть что-нибудь от кашля?"
    ],
    [
     "I think I'm coming down with something.",
     "Кажется, я заболеваю."
    ],
    [
-    "I'm feeling a lot better.",
-    "Мне намного лучше."
+    "I have a cold and a sore throat.",
+    "У меня простуда и болит горло."
    ]
   ],
   "hear": [
@@ -2432,32 +2432,24 @@
   ],
   "say": [
    [
-    "Excuse me, how do I get to the museum?",
-    "Простите, как пройти к музею?"
-   ],
-   [
-    "Is it far from here?",
-    "Это далеко отсюда?"
+    "I'm lost.",
+    "Я заблудился."
    ],
    [
     "Can I walk there?",
     "Можно дойти пешком?"
    ],
    [
-    "Is there a pharmacy near here?",
-    "Здесь рядом есть аптека?"
+    "Which way is downtown?",
+    "В какой стороне центр?"
    ],
    [
-    "Can you show me on the map?",
-    "Покажете на карте?"
+    "Is it far from here?",
+    "Это далеко отсюда?"
    ],
    [
     "So, left at the light?",
     "То есть налево на светофоре?"
-   ],
-   [
-    "I'm lost.",
-    "Я заблудился."
    ],
    [
     "How do I get there?",
@@ -2468,8 +2460,16 @@
     "Я правильно иду?"
    ],
    [
-    "Which way is downtown?",
-    "В какой стороне центр?"
+    "Is there a pharmacy near here?",
+    "Здесь рядом есть аптека?"
+   ],
+   [
+    "Can you show me on the map?",
+    "Покажете на карте?"
+   ],
+   [
+    "Excuse me, how do I get to the museum?",
+    "Простите, как пройти к музею?"
    ]
   ],
   "hear": [
@@ -2602,8 +2602,20 @@
   ],
   "say": [
    [
-    "Can you help me, please?",
-    "Помогите, пожалуйста."
+    "My bad.",
+    "Моя вина."
+   ],
+   [
+    "Something went wrong.",
+    "Что-то пошло не так."
+   ],
+   [
+    "It's not working.",
+    "Это не работает."
+   ],
+   [
+    "I completely forgot.",
+    "Я совсем забыл."
    ],
    [
     "I lost my wallet.",
@@ -2618,48 +2630,32 @@
     "Я опоздал на рейс."
    ],
    [
-    "Where is the nearest police station?",
-    "Где ближайший полицейский участок?"
-   ],
-   [
     "Please call an ambulance.",
     "Вызовите скорую."
-   ],
-   [
-    "Can I use your phone?",
-    "Можно позвонить с вашего телефона?"
-   ],
-   [
-    "Do you have a phone charger?",
-    "У вас есть зарядка?"
    ],
    [
     "My bag didn't arrive.",
     "Мой багаж не прилетел."
    ],
    [
-    "Something went wrong.",
-    "Что-то пошло не так."
-   ],
-   [
-    "It's not working.",
-    "Это не работает."
-   ],
-   [
     "I have no idea.",
     "Понятия не имею."
    ],
    [
-    "I completely forgot.",
-    "Я совсем забыл."
-   ],
-   [
-    "My bad.",
-    "Моя вина."
-   ],
-   [
     "It was an accident.",
     "Это вышло случайно."
+   ],
+   [
+    "My order hasn't arrived.",
+    "Мой заказ не пришёл."
+   ],
+   [
+    "Can you help me, please?",
+    "Помогите, пожалуйста."
+   ],
+   [
+    "Can I use your phone?",
+    "Можно позвонить с вашего телефона?"
    ],
    [
     "My phone's about to die.",
@@ -2670,8 +2666,12 @@
     "Не могу найти телефон."
    ],
    [
-    "My order hasn't arrived.",
-    "Мой заказ не пришёл."
+    "Where is the nearest police station?",
+    "Где ближайший полицейский участок?"
+   ],
+   [
+    "Do you have a phone charger?",
+    "У вас есть зарядка?"
    ]
   ],
   "hear": [
@@ -2823,16 +2823,8 @@
   ],
   "say": [
    [
-    "Can I pay by card?",
-    "Можно картой?"
-   ],
-   [
     "Do you take cash?",
     "Вы принимаете наличные?"
-   ],
-   [
-    "Where is the nearest ATM?",
-    "Где ближайший банкомат?"
    ],
    [
     "Is there a fee?",
@@ -2843,18 +2835,6 @@
     "Чаевые включены?"
    ],
    [
-    "I'd like to leave a tip.",
-    "Я хочу оставить чаевые."
-   ],
-   [
-    "Can I get change for twenty?",
-    "Можете разменять двадцатку?"
-   ],
-   [
-    "I think there's a mistake on the bill.",
-    "Кажется, в счёте ошибка."
-   ],
-   [
     "I was charged twice.",
     "С меня списали дважды."
    ],
@@ -2863,12 +2843,32 @@
     "Моя карта не проходит."
    ],
    [
+    "Can I pay by card?",
+    "Можно картой?"
+   ],
+   [
+    "Where is the nearest ATM?",
+    "Где ближайший банкомат?"
+   ],
+   [
     "Can I pay in dollars?",
     "Можно заплатить долларами?"
    ],
    [
+    "I'd like to leave a tip.",
+    "Я хочу оставить чаевые."
+   ],
+   [
+    "Can I get change for twenty?",
+    "Можете разменять двадцатку?"
+   ],
+   [
     "Can you split it into two cards?",
     "Можно разделить на две карты?"
+   ],
+   [
+    "I think there's a mistake on the bill.",
+    "Кажется, в счёте ошибка."
    ]
   ],
   "hear": [
@@ -3050,28 +3050,8 @@
   ],
   "say": [
    [
-    "I'd like a SIM card, please.",
-    "Мне нужна SIM-карта."
-   ],
-   [
     "Do you have eSIM?",
     "У вас есть eSIM?"
-   ],
-   [
-    "How much is the data plan?",
-    "Сколько стоит тариф с интернетом?"
-   ],
-   [
-    "I need data for two weeks.",
-    "Мне нужен интернет на две недели."
-   ],
-   [
-    "Can you set it up for me?",
-    "Можете мне всё настроить?"
-   ],
-   [
-    "My phone has no signal.",
-    "У меня нет сигнала."
    ],
    [
     "The internet isn't working.",
@@ -3082,20 +3062,40 @@
     "Какой пароль от Wi-Fi?"
    ],
    [
+    "My phone has no signal.",
+    "У меня нет сигнала."
+   ],
+   [
     "Is there free Wi-Fi here?",
     "Здесь есть бесплатный Wi-Fi?"
+   ],
+   [
+    "Is there an outlet here?",
+    "Здесь есть розетка?"
+   ],
+   [
+    "I'd like a SIM card, please.",
+    "Мне нужна SIM-карта."
+   ],
+   [
+    "How much is the data plan?",
+    "Сколько стоит тариф с интернетом?"
+   ],
+   [
+    "I need data for two weeks.",
+    "Мне нужен интернет на две недели."
    ],
    [
     "Where can I charge my phone?",
     "Где можно зарядить телефон?"
    ],
    [
-    "Do you have a charger I can borrow?",
-    "Можно одолжить зарядку?"
+    "Can you set it up for me?",
+    "Можете мне всё настроить?"
    ],
    [
-    "Is there an outlet here?",
-    "Здесь есть розетка?"
+    "Do you have a charger I can borrow?",
+    "Можно одолжить зарядку?"
    ]
   ],
   "hear": [
@@ -3271,8 +3271,8 @@
   ],
   "say": [
    [
-    "Hi, I'm your guest for tonight.",
-    "Здравствуйте, я ваш гость на сегодня."
+    "Thanks for everything!",
+    "Спасибо за всё!"
    ],
    [
     "We'll arrive around eight.",
@@ -3281,10 +3281,6 @@
    [
     "What's the door code?",
     "Какой код от двери?"
-   ],
-   [
-    "I can't open the lockbox.",
-    "Не могу открыть сейф с ключами."
    ],
    [
     "Where can I park?",
@@ -3299,24 +3295,28 @@
     "Нет горячей воды."
    ],
    [
-    "Where do I put the trash?",
-    "Куда выносить мусор?"
+    "I can't open the lockbox.",
+    "Не могу открыть сейф с ключами."
    ],
    [
     "Can we check in early?",
     "Можно заселиться пораньше?"
    ],
    [
-    "Can we check out a bit later?",
-    "Можно выехать чуть позже?"
+    "Hi, I'm your guest for tonight.",
+    "Здравствуйте, я ваш гость на сегодня."
+   ],
+   [
+    "Where do I put the trash?",
+    "Куда выносить мусор?"
    ],
    [
     "Where should I leave the keys?",
     "Где оставить ключи?"
    ],
    [
-    "Thanks for everything!",
-    "Спасибо за всё!"
+    "Can we check out a bit later?",
+    "Можно выехать чуть позже?"
    ]
   ],
   "hear": [
@@ -3481,6 +3481,14 @@
     "Два билета, пожалуйста."
    ],
    [
+    "Can I take photos?",
+    "Можно фотографировать?"
+   ],
+   [
+    "Where is the entrance?",
+    "Где вход?"
+   ],
+   [
     "How much is a ticket?",
     "Сколько стоит билет?"
    ],
@@ -3493,28 +3501,20 @@
     "В понедельник открыто?"
    ],
    [
-    "Is there a tour in English?",
-    "Есть экскурсия на английском?"
-   ],
-   [
-    "What time does the next tour start?",
-    "Во сколько следующая экскурсия?"
-   ],
-   [
     "How long is the tour?",
     "Сколько длится экскурсия?"
    ],
    [
-    "Can I take photos?",
-    "Можно фотографировать?"
-   ],
-   [
-    "Where is the entrance?",
-    "Где вход?"
+    "Is there a tour in English?",
+    "Есть экскурсия на английском?"
    ],
    [
     "Is this the line for tickets?",
     "Это очередь за билетами?"
+   ],
+   [
+    "What time does the next tour start?",
+    "Во сколько следующая экскурсия?"
    ],
    [
     "Do I need to book in advance?",
@@ -3657,6 +3657,281 @@
       "me",
       "Then two for tomorrow at ten, please.",
       "Тогда два на завтра в десять."
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "car",
+  "cat": "travel",
+  "title": "Авто: аренда, заправка, парковка",
+  "goal": "Взять машину напрокат, заправиться, припарковаться, поговорить с полицией",
+  "words": [
+   [
+    "rental car",
+    "арендованная машина"
+   ],
+   [
+    "driver's license",
+    "водительские права"
+   ],
+   [
+    "insurance",
+    "страховка"
+   ],
+   [
+    "deposit",
+    "залог"
+   ],
+   [
+    "gas station",
+    "заправка"
+   ],
+   [
+    "full tank",
+    "полный бак"
+   ],
+   [
+    "parking lot",
+    "парковка"
+   ],
+   [
+    "flat tire",
+    "спущенное колесо"
+   ],
+   [
+    "speed limit",
+    "ограничение скорости"
+   ],
+   [
+    "GPS",
+    "навигатор"
+   ]
+  ],
+  "say": [
+   [
+    "Is insurance included?",
+    "Страховка включена?"
+   ],
+   [
+    "Is it automatic?",
+    "Коробка автомат?"
+   ],
+   [
+    "I have a reservation.",
+    "У меня бронь."
+   ],
+   [
+    "Here's my driver's license.",
+    "Вот мои права."
+   ],
+   [
+    "I need full insurance.",
+    "Мне нужна полная страховка."
+   ],
+   [
+    "Pump number four, please.",
+    "Колонка номер четыре."
+   ],
+   [
+    "Fill it up, please.",
+    "Полный бак, пожалуйста."
+   ],
+   [
+    "Where can I park?",
+    "Где можно припарковаться?"
+   ],
+   [
+    "Is parking free here?",
+    "Здесь бесплатная парковка?"
+   ],
+   [
+    "The car won't start.",
+    "Машина не заводится."
+   ],
+   [
+    "How much is the deposit?",
+    "Какой залог?"
+   ],
+   [
+    "I have a flat tire.",
+    "У меня спустило колесо."
+   ],
+   [
+    "This is a rental car.",
+    "Это арендованная машина."
+   ],
+   [
+    "There are scratches here already.",
+    "Здесь уже есть царапины."
+   ],
+   [
+    "Where do I return the car?",
+    "Куда вернуть машину?"
+   ],
+   [
+    "How much is parking per hour?",
+    "Сколько стоит час парковки?"
+   ],
+   [
+    "Do I return it with a full tank?",
+    "Вернуть с полным баком?"
+   ],
+   [
+    "I'm sorry, officer. I didn't see the sign.",
+    "Простите, офицер. Я не увидел знак."
+   ]
+  ],
+  "hear": [
+   [
+    "Can I see your driver's license?",
+    "Можно ваши права?",
+    "Sure, here it is.",
+    "Конечно, вот."
+   ],
+   [
+    "Would you like to add insurance?",
+    "Хотите добавить страховку?",
+    "Yes, full insurance, please.",
+    "Да, полную страховку."
+   ],
+   [
+    "We'll put a five-hundred-dollar hold on your card.",
+    "Мы заблокируем на карте 500 долларов.",
+    "Okay. When will it be released?",
+    "Хорошо. Когда разблокируют?"
+   ],
+   [
+    "Please return it with a full tank.",
+    "Верните с полным баком.",
+    "Okay, no problem.",
+    "Хорошо, без проблем."
+   ],
+   [
+    "Which pump?",
+    "Какая колонка?",
+    "Pump number four.",
+    "Номер четыре."
+   ],
+   [
+    "Do you know how fast you were going?",
+    "Знаете, с какой скоростью вы ехали?",
+    "No, sorry, officer.",
+    "Нет, извините, офицер."
+   ],
+   [
+    "License and registration, please.",
+    "Права и документы на машину, пожалуйста.",
+    "Here you go. It's a rental.",
+    "Пожалуйста. Машина арендованная."
+   ],
+   [
+    "You can't park here.",
+    "Здесь нельзя парковаться.",
+    "Sorry. Where can I park?",
+    "Извините. Где можно?"
+   ],
+   [
+    "Pay at the machine before you leave.",
+    "Оплатите в автомате перед выездом.",
+    "Okay, thanks.",
+    "Хорошо, спасибо."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Берём машину напрокат",
+    "lines": [
+     [
+      "A",
+      "Hi, how can I help you?",
+      "Здравствуйте, чем помочь?"
+     ],
+     [
+      "me",
+      "Hi. I have a reservation under Ivanov.",
+      "Здравствуйте. У меня бронь на Иванова."
+     ],
+     [
+      "A",
+      "Great. Can I see your driver's license and a credit card?",
+      "Отлично. Права и кредитку, пожалуйста."
+     ],
+     [
+      "me",
+      "Here you go. Is insurance included?",
+      "Пожалуйста. Страховка включена?"
+     ],
+     [
+      "A",
+      "Basic insurance is. Would you like full coverage?",
+      "Базовая — да. Хотите полную?"
+     ],
+     [
+      "me",
+      "Yes, full insurance, please.",
+      "Да, полную, пожалуйста."
+     ],
+     [
+      "A",
+      "Please return it with a full tank.",
+      "Верните с полным баком."
+     ],
+     [
+      "me",
+      "Okay. Is it automatic?",
+      "Хорошо. Коробка автомат?"
+     ],
+     [
+      "A",
+      "Yes, it is. You're all set.",
+      "Да. Всё готово."
+     ]
+    ]
+   },
+   {
+    "title": "Остановила полиция",
+    "lines": [
+     [
+      "A",
+      "Good afternoon. Do you know why I stopped you?",
+      "Добрый день. Знаете, почему я вас остановил?"
+     ],
+     [
+      "me",
+      "No, sorry, officer.",
+      "Нет, извините, офицер."
+     ],
+     [
+      "A",
+      "You were going fifty in a thirty zone.",
+      "Вы ехали пятьдесят там, где тридцать."
+     ],
+     [
+      "me",
+      "I'm sorry. I didn't see the sign.",
+      "Простите. Я не увидел знак."
+     ],
+     [
+      "A",
+      "License and registration, please.",
+      "Права и документы на машину."
+     ],
+     [
+      "me",
+      "Here you go. It's a rental car.",
+      "Пожалуйста. Машина арендованная."
+     ],
+     [
+      "A",
+      "Okay. This is a warning. Watch your speed.",
+      "Хорошо. Это предупреждение. Следите за скоростью."
+     ],
+     [
+      "me",
+      "Thank you, officer.",
+      "Спасибо, офицер."
      ]
     ]
    }
