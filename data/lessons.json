@@ -1,5 +1,4 @@
-[
-{"week":1,"type":"topic","topic":"survival","verb":"be"},
+[{"week":1,"type":"topic","topic":"survival","verb":"be"},
 {"week":1,"type":"topic","topic":"greetings","verb":"have"},
 {"week":1,"type":"topic","topic":"aboutme","verb":"want"},
 {"week":1,"type":"topic","topic":"aboutme","verb":"need","dialog":0},
@@ -34,5 +33,15 @@
 {"week":6,"type":"trip","title":"Поездка: заселение","topics":["taxi","hotel"],"verb":"see"},
 {"week":6,"type":"trip","title":"Поездка: город","topics":["directions","transport","cafe"],"verb":"buy"},
 {"week":6,"type":"trip","title":"Поездка: вечер","topics":["restaurant","shopping","problems"],"verb":"say"},
-{"week":6,"type":"review","title":"Итоговый урок","topics":["survival","greetings","aboutme","smalltalk","keeptalking","requests","plans"],"verb":"ask"}
-]
+{"week":6,"type":"review","title":"Итоговый урок","topics":["survival","greetings","aboutme","smalltalk","keeptalking","requests","plans"],"verb":"ask"},
+{"week":7,"type":"topic","topic":"myday","verb":"go"},
+{"week":7,"type":"topic","topic":"myday","verb":"get","dialog":1},
+{"week":7,"type":"topic","topic":"friends","verb":"like"},
+{"week":7,"type":"topic","topic":"friends","verb":"say","dialog":1},
+{"week":7,"type":"topic","topic":"keeptalking","verb":"know"},
+{"week":7,"type":"topic","topic":"survival","verb":"ask"},
+{"week":8,"type":"topic","topic":"requests","verb":"can"},
+{"week":8,"type":"topic","topic":"plans","verb":"want"},
+{"week":8,"type":"topic","topic":"work","verb":"need"},
+{"week":8,"type":"topic","topic":"feelings","verb":"be"},
+{"week":8,"type":"review","title":"Повторение: новые фразы","topics":["myday","friends","keeptalking","survival","requests","plans","feelings"],"verb":"have"}]

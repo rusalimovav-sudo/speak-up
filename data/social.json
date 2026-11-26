@@ -687,6 +687,30 @@
    [
     "I'll be there in a minute.",
     "Буду через минуту."
+   ],
+   [
+    "Count me in.",
+    "Я в деле. Я с вами."
+   ],
+   [
+    "Does Friday work for you?",
+    "Пятница тебе подходит?"
+   ],
+   [
+    "I'll meet you there.",
+    "Встретимся на месте."
+   ],
+   [
+    "I'll pick you up.",
+    "Я за тобой заеду."
+   ],
+   [
+    "Can we move it to six?",
+    "Можем перенести на шесть?"
+   ],
+   [
+    "See you then!",
+    "Тогда до встречи!"
    ]
   ],
   "hear": [
@@ -737,6 +761,14 @@
    [
     "Let's play it by ear.",
     "Решим по ситуации."
+   ],
+   [
+    "Wanna take a walk?",
+    "Хочешь прогуляться?"
+   ],
+   [
+    "Want to come along?",
+    "Хочешь с нами?"
    ]
   ],
   "dialogs": [
@@ -838,6 +870,42 @@
    [
     "Thanks, I really appreciate it.",
     "Спасибо, очень ценю."
+   ],
+   [
+    "Could you hold this?",
+    "Можете подержать?"
+   ],
+   [
+    "Can I borrow this?",
+    "Можно это одолжить?"
+   ],
+   [
+    "Can you show me how?",
+    "Покажете, как?"
+   ],
+   [
+    "Can you keep an eye on my bag?",
+    "Присмотрите за моей сумкой?"
+   ],
+   [
+    "Is it OK if I sit here?",
+    "Ничего, если я тут сяду?"
+   ],
+   [
+    "Could you let me through?",
+    "Можно пройти?"
+   ],
+   [
+    "That's very kind of you.",
+    "Очень мило с вашей стороны."
+   ],
+   [
+    "I owe you one.",
+    "Я твой должник."
+   ],
+   [
+    "Could you check that for me?",
+    "Можете это проверить?"
    ]
   ],
   "hear": [
@@ -860,6 +928,18 @@
    [
     "It's no big deal.",
     "Ничего страшного."
+   ],
+   [
+    "Need a hand?",
+    "Помочь?"
+   ],
+   [
+    "Do you mind if I sit here?",
+    "Не против, если я сяду?"
+   ],
+   [
+    "Could you move over a little?",
+    "Можете чуть подвинуться?"
    ]
   ],
   "dialogs": [
@@ -967,6 +1047,26 @@
    [
     "I'm afraid I can't make it.",
     "Боюсь, я не смогу прийти."
+   ],
+   [
+    "Whatever works for you.",
+    "Как тебе удобно."
+   ],
+   [
+    "I'll pass, thanks.",
+    "Я пас, спасибо."
+   ],
+   [
+    "Let's give it a try.",
+    "Давай попробуем."
+   ],
+   [
+    "Maybe some other time.",
+    "Может, в другой раз."
+   ],
+   [
+    "We'll see how it goes.",
+    "Посмотрим, как пойдёт."
    ]
   ],
   "hear": [],
@@ -1119,6 +1219,58 @@
    [
     "I see what you mean.",
     "Понимаю, что ты имеешь в виду."
+   ],
+   [
+    "I knew it!",
+    "Я так и знал!"
+   ],
+   [
+    "Lucky you!",
+    "Везёт тебе!"
+   ],
+   [
+    "What a shame.",
+    "Как жаль."
+   ],
+   [
+    "Sounds like fun.",
+    "Звучит весело."
+   ],
+   [
+    "I can imagine.",
+    "Представляю."
+   ],
+   [
+    "How come?",
+    "Как так? Почему?"
+   ],
+   [
+    "I see your point.",
+    "Понимаю твою мысль."
+   ],
+   [
+    "I guess so.",
+    "Наверное, да."
+   ],
+   [
+    "Not really.",
+    "Не особо."
+   ],
+   [
+    "To be honest…",
+    "Если честно…"
+   ],
+   [
+    "If you ask me…",
+    "По-моему…"
+   ],
+   [
+    "I feel the same way.",
+    "Я думаю так же."
+   ],
+   [
+    "You might be right.",
+    "Может, ты и прав."
    ]
   ],
   "hear": [
@@ -1139,10 +1291,6 @@
     "О, неплохо."
    ],
    [
-    "Tell me about it.",
-    "И не говори."
-   ],
-   [
     "You know what I mean?",
     "Понимаешь, о чём я?"
    ],
@@ -1161,6 +1309,14 @@
    [
     "You're kidding!",
     "Ты шутишь!"
+   ],
+   [
+    "Good for you!",
+    "Молодец!"
+   ],
+   [
+    "I couldn't agree more.",
+    "Полностью согласен."
    ]
   ],
   "dialogs": [
@@ -1333,6 +1489,46 @@
    [
     "You never know!",
     "Кто знает!"
+   ],
+   [
+    "I'm worn out.",
+    "Я без сил."
+   ],
+   [
+    "I didn't sleep well.",
+    "Я плохо спал."
+   ],
+   [
+    "I need some fresh air.",
+    "Мне нужен свежий воздух."
+   ],
+   [
+    "I'm starving.",
+    "Умираю с голоду."
+   ],
+   [
+    "I'm full.",
+    "Я наелся."
+   ],
+   [
+    "I'm freezing.",
+    "Я замёрз."
+   ],
+   [
+    "I'm in a good mood.",
+    "У меня хорошее настроение."
+   ],
+   [
+    "I'm not in the mood.",
+    "Я не в настроении."
+   ],
+   [
+    "I can't wait!",
+    "Не могу дождаться!"
+   ],
+   [
+    "I'm having a rough day.",
+    "У меня тяжёлый день."
    ]
   ],
   "hear": [
@@ -1564,6 +1760,344 @@
       "A",
       "Cool, I gotta go. See ya!",
       "Супер, мне пора. Пока!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "friends",
+  "cat": "social",
+  "title": "Друзья: поддержать и позаботиться",
+  "goal": "Поддержать, поблагодарить, извиниться, попрощаться по-дружески",
+  "words": [
+   [
+    "support",
+    "поддержка"
+   ],
+   [
+    "proud",
+    "гордый"
+   ],
+   [
+    "apology",
+    "извинение"
+   ],
+   [
+    "safe",
+    "безопасный, в безопасности"
+   ],
+   [
+    "count on",
+    "рассчитывать на"
+   ]
+  ],
+  "say": [
+   [
+    "Make yourself at home.",
+    "Чувствуй себя как дома."
+   ],
+   [
+    "Help yourself.",
+    "Угощайся."
+   ],
+   [
+    "It's on me.",
+    "Я угощаю."
+   ],
+   [
+    "That means a lot to me.",
+    "Это много для меня значит."
+   ],
+   [
+    "I'm here for you.",
+    "Я рядом."
+   ],
+   [
+    "You can count on me.",
+    "Можешь на меня рассчитывать."
+   ],
+   [
+    "Take care of yourself.",
+    "Береги себя."
+   ],
+   [
+    "Get home safe.",
+    "Доберись хорошо."
+   ],
+   [
+    "Text me when you're home.",
+    "Напиши, как будешь дома."
+   ],
+   [
+    "I'm glad you came.",
+    "Я рад, что ты пришёл."
+   ],
+   [
+    "It was great seeing you.",
+    "Было здорово увидеться."
+   ],
+   [
+    "Say hi to everyone.",
+    "Передавай всем привет."
+   ],
+   [
+    "Sorry to keep you waiting.",
+    "Прости, что заставил ждать."
+   ],
+   [
+    "I didn't mean to upset you.",
+    "Я не хотел тебя расстроить."
+   ],
+   [
+    "I'm proud of you.",
+    "Я тобой горжусь."
+   ],
+   [
+    "I'm sorry to hear that.",
+    "Жаль это слышать."
+   ]
+  ],
+  "hear": [
+   [
+    "It's no trouble at all.",
+    "Никаких проблем."
+   ],
+   [
+    "You're the best!",
+    "Ты лучший!"
+   ],
+   [
+    "Don't mention it.",
+    "Не за что."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Трудный день у друга",
+    "lines": [
+     [
+      "A",
+      "I had the worst day. I lost my wallet and missed the train.",
+      "У меня был худший день. Потерял кошелёк и опоздал на поезд."
+     ],
+     [
+      "me",
+      "Oh no, I'm sorry to hear that. Are you okay?",
+      "Ох, жаль это слышать. Ты в порядке?"
+     ],
+     [
+      "A",
+      "Yeah, just tired.",
+      "Да, просто устал."
+     ],
+     [
+      "me",
+      "Come over. Dinner's on me.",
+      "Приходи. Ужин за мой счёт."
+     ],
+     [
+      "A",
+      "You're the best. That means a lot to me.",
+      "Ты лучший. Это много для меня значит."
+     ],
+     [
+      "me",
+      "I'm here for you. You can count on me.",
+      "Я рядом. Можешь на меня рассчитывать."
+     ]
+    ]
+   },
+   {
+    "title": "Прощание после встречи",
+    "lines": [
+     [
+      "me",
+      "It was great seeing you!",
+      "Было здорово увидеться!"
+     ],
+     [
+      "A",
+      "You too. Thanks for coming.",
+      "Взаимно. Спасибо, что пришёл."
+     ],
+     [
+      "me",
+      "Get home safe. Text me when you're home.",
+      "Доберись хорошо. Напиши, как будешь дома."
+     ],
+     [
+      "A",
+      "Will do. Say hi to your family!",
+      "Обязательно. Передавай привет семье!"
+     ],
+     [
+      "me",
+      "I will. Take care!",
+      "Передам. Береги себя!"
+     ]
+    ]
+   }
+  ]
+ },
+ {
+  "id": "myday",
+  "cat": "social",
+  "title": "Мой день и время",
+  "goal": "Рассказать, как прошёл день, сказать, что спешишь, опаздываешь или занят",
+  "words": [
+   [
+    "busy",
+    "занятой"
+   ],
+   [
+    "rush",
+    "спешка"
+   ],
+   [
+    "late",
+    "поздно, опоздавший"
+   ],
+   [
+    "early",
+    "рано"
+   ],
+   [
+    "tired",
+    "уставший"
+   ]
+  ],
+  "say": [
+   [
+    "I'll be right back.",
+    "Сейчас вернусь."
+   ],
+   [
+    "Give me a minute.",
+    "Дай минутку."
+   ],
+   [
+    "I'm in a rush.",
+    "Я спешу."
+   ],
+   [
+    "I'm nearly done.",
+    "Я почти закончил."
+   ],
+   [
+    "I've got a lot on.",
+    "У меня много дел."
+   ],
+   [
+    "I lost track of time.",
+    "Я забыл о времени."
+   ],
+   [
+    "I'll be there in ten.",
+    "Буду через десять минут."
+   ],
+   [
+    "I've got to go.",
+    "Мне пора."
+   ],
+   [
+    "I woke up early today.",
+    "Сегодня я встал рано."
+   ],
+   [
+    "I had a busy day.",
+    "У меня был насыщенный день."
+   ],
+   [
+    "I worked all day.",
+    "Я работал весь день."
+   ],
+   [
+    "I went for a walk.",
+    "Я сходил погулять."
+   ],
+   [
+    "I'm going to bed early tonight.",
+    "Сегодня лягу пораньше."
+   ]
+  ],
+  "hear": [
+   [
+    "How was your day?",
+    "Как прошёл день?"
+   ],
+   [
+    "What's taking so long?",
+    "Почему так долго?"
+   ],
+   [
+    "Better late than never.",
+    "Лучше поздно, чем никогда."
+   ]
+  ],
+  "dialogs": [
+   {
+    "title": "Как прошёл день",
+    "lines": [
+     [
+      "A",
+      "Hey! How was your day?",
+      "Привет! Как прошёл день?"
+     ],
+     [
+      "me",
+      "Busy. I woke up early and worked all day.",
+      "Насыщенно. Встал рано и работал весь день."
+     ],
+     [
+      "A",
+      "Did you get a break?",
+      "Удалось отдохнуть?"
+     ],
+     [
+      "me",
+      "Not really. I've got a lot on this week.",
+      "Не особо. На этой неделе много дел."
+     ],
+     [
+      "A",
+      "Let's get dinner, then.",
+      "Тогда пойдём поужинаем."
+     ],
+     [
+      "me",
+      "Sounds good. Give me a minute, I'm nearly done.",
+      "Отлично. Дай минуту, я почти закончил."
+     ]
+    ]
+   },
+   {
+    "title": "Опаздываю",
+    "lines": [
+     [
+      "A",
+      "Where are you? We're all here.",
+      "Ты где? Мы все уже здесь."
+     ],
+     [
+      "me",
+      "Sorry, I lost track of time. I'm on my way.",
+      "Прости, забыл о времени. Я уже еду."
+     ],
+     [
+      "A",
+      "How long?",
+      "Долго ещё?"
+     ],
+     [
+      "me",
+      "I'll be there in ten.",
+      "Буду через десять минут."
+     ],
+     [
+      "A",
+      "No rush. Better late than never!",
+      "Не спеши. Лучше поздно, чем никогда!"
      ]
     ]
    }

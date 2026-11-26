@@ -102,6 +102,34 @@
    [
     "Got it, thanks.",
     "Понял, спасибо."
+   ],
+   [
+    "I didn't catch that.",
+    "Я не расслышал."
+   ],
+   [
+    "Could you slow down?",
+    "Можно помедленнее?"
+   ],
+   [
+    "How do you spell that?",
+    "Как это пишется?"
+   ],
+   [
+    "Could you speak up?",
+    "Можно погромче?"
+   ],
+   [
+    "Did I get that right?",
+    "Я правильно понял?"
+   ],
+   [
+    "Could you explain that?",
+    "Можете объяснить?"
+   ],
+   [
+    "How do you pronounce it?",
+    "Как это произносится?"
    ]
   ],
   "hear": [
@@ -1066,6 +1094,14 @@
    [
     "I missed my stop.",
     "Я проехал свою остановку."
+   ],
+   [
+    "Where do I get off?",
+    "Где мне выходить?"
+   ],
+   [
+    "Does this go downtown?",
+    "Это идёт в центр?"
    ]
   ],
   "hear": [
@@ -1240,6 +1276,10 @@
    [
     "Can I have a late checkout?",
     "Можно поздний выезд?"
+   ],
+   [
+    "The Wi-Fi isn't working.",
+    "Wi-Fi не работает."
    ]
   ],
   "hear": [
@@ -1463,6 +1503,10 @@
    [
     "What's in it?",
     "Что входит в состав?"
+   ],
+   [
+    "Can I charge my phone here?",
+    "Можно здесь зарядить телефон?"
    ]
   ],
   "hear": [
@@ -1697,6 +1741,10 @@
    [
     "That was delicious!",
     "Было очень вкусно!"
+   ],
+   [
+    "Do I need to book?",
+    "Нужно бронировать?"
    ]
   ],
   "hear": [
@@ -1933,6 +1981,14 @@
    [
     "Do you take cards?",
     "Вы принимаете карты?"
+   ],
+   [
+    "Could I have a receipt?",
+    "Можно чек?"
+   ],
+   [
+    "Do you have a smaller size?",
+    "Есть размер поменьше?"
    ]
   ],
   "hear": [
@@ -2117,6 +2173,22 @@
    [
     "I'm allergic to penicillin.",
     "У меня аллергия на пенициллин."
+   ],
+   [
+    "I'm not feeling well.",
+    "Я плохо себя чувствую."
+   ],
+   [
+    "I feel a bit dizzy.",
+    "У меня немного кружится голова."
+   ],
+   [
+    "I think I'm coming down with something.",
+    "Кажется, я заболеваю."
+   ],
+   [
+    "I'm feeling a lot better.",
+    "Мне намного лучше."
    ]
   ],
   "hear": [
@@ -2482,6 +2554,18 @@
    [
     "It was an accident.",
     "Это вышло случайно."
+   ],
+   [
+    "My phone's about to die.",
+    "Телефон вот-вот сядет."
+   ],
+   [
+    "I can't find my phone.",
+    "Не могу найти телефон."
+   ],
+   [
+    "My order hasn't arrived.",
+    "Мой заказ не пришёл."
    ]
   ],
   "hear": [
