@@ -17,7 +17,7 @@ const store = {
   get(k, def) { try { const v = localStorage.getItem('su_' + k); return v ? JSON.parse(v) : def; } catch { return def; } },
   set(k, v) { try { localStorage.setItem('su_' + k, JSON.stringify(v)); } catch { /* хранилище недоступно */ } },
 };
-const S = Object.assign({ mic: true, text: true, rate: 0.95, ruVoice: true, voiceRu: '', voiceA: '', voiceB: '' }, store.get('settings', {}));
+const S = Object.assign({ mic: true, text: true, rate: 0.95, ruVoice: true, voiceRu: '', voiceA: '', voiceB: '', neural: true }, store.get('settings', {}));
 const saveSettings = () => store.set('settings', S);
 if (!S.micFix) { S.mic = true; S.micFix = 1; saveSettings(); }
 
@@ -76,8 +76,32 @@ function beep() {
   } catch { /* звук недоступен */ }
 }
 
+// ---------- записи нейросетью (app/audio) ----------
+function cyrb53(str, seed = 0) {
+  let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+  for (let i = 0; i < str.length; i++) { const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+let CLIPS = new Set();
+async function loadClips() { try { CLIPS = new Set(await fetch('audio/index.json').then(r => r.json())); } catch { CLIPS = new Set(); } }
+const clipFor = (voice, text) => { if (!S.neural) return null; const k = cyrb53(voice + '|' + String(text).trim()); return CLIPS.has(k) ? 'audio/' + k + '.mp3' : null; };
+let CUR_AUDIO = null;
+function playClip(url, rate, ctx) {
+  return new Promise(res => {
+    const a = new Audio(url); CUR_AUDIO = a;
+    a.playbackRate = rate || 1; a.preservesPitch = true;
+    let done = false; const fin = ok => { if (done) return; done = true; clearTimeout(t); if (CUR_AUDIO === a) CUR_AUDIO = null; res(ok); };
+    a.onended = () => fin(true); a.onerror = () => fin(false);
+    const t = setTimeout(() => fin(true), 20000);
+    a.play().catch(() => fin(false));
+  }).then(ok => { ctx && ctx.check(); return ok; });
+}
+const PREFIX = /^(Как сказать|Скажи|Спроси|Ответь): ([\s\S]+)$/;
+
 function mkCtx() { const c = { dead: false, reason: null, check() { if (c.dead) throw c.reason; } }; return c; }
-function killCtx(c, reason = 'stop') { if (!c || c.dead) return; c.dead = true; c.reason = reason; try { speechSynthesis.cancel(); } catch { } stopRec(); }
+function killCtx(c, reason = 'stop') { if (!c || c.dead) return; c.dead = true; c.reason = reason; try { speechSynthesis.cancel(); } catch { } if (CUR_AUDIO) { try { CUR_AUDIO.pause(); } catch { } CUR_AUDIO = null; } stopRec(); }
 
 function sleep(ms, ctx) {
   return new Promise(res => { const end = Date.now() + ms; const t = setInterval(() => { if (Date.now() >= end || (ctx && ctx.dead)) { clearInterval(t); res(); } }, 80); })
@@ -87,11 +111,21 @@ function sleep(ms, ctx) {
 // lang: 'en' | 'ru'; voice: 'A' | 'B'
 function speak(text, o = {}, ctx) {
   const lang = o.lang || 'en';
-  if (lang === 'ru' && (!S.ruVoice || !TTS.ru)) {   // подсказка только текстом на экране
+  if (lang === 'ru' && !S.ruVoice) {   // подсказка только текстом на экране
     if (o.cue) beep();
     return sleep(Math.max(o.cue ? 1200 : 1500, text.length * (o.cue ? 40 : 55)), ctx);
   }
-  if (!('speechSynthesis' in window)) return sleep(1500, ctx);
+  const v = lang === 'ru' ? 'R' : (o.voice === 'B' ? 'B' : 'A');
+  const rate = lang === 'ru' ? 1 : (o.rate || S.rate) / 0.95;
+  const url = clipFor(v, text);
+  if (url) return playClip(url, rate, ctx).then(ok => ok ? undefined : speakTTS(text, o, ctx));
+  if (lang === 'ru') { const m = String(text).match(PREFIX); const u1 = m && clipFor('R', m[1] + ':'), u2 = m && clipFor('R', m[2].trim());
+    if (u1 && u2) return playClip(u1, 1, ctx).then(() => playClip(u2, 1, ctx)).then(ok => ok ? undefined : speakTTS(m[2], o, ctx)); }
+  return speakTTS(text, o, ctx);
+}
+function speakTTS(text, o = {}, ctx) {
+  const lang = o.lang || 'en';
+  if (!('speechSynthesis' in window) || (lang === 'ru' && !TTS.ru)) return sleep(1500, ctx);
   return new Promise(res => {
     const u = new SpeechSynthesisUtterance(text);
     if (lang === 'ru') { u.voice = TTS.ru; u.lang = 'ru-RU'; u.rate = 1.05; }
@@ -683,6 +717,8 @@ function viewSettings() {
   $('#view').innerHTML = `<div><h1>Настройки</h1><div class="muted">Сохраняются на этом телефоне.</div></div>
     <div class="card">
       <h3>Голоса</h3>
+      <label class="toggle"><input type="checkbox" id="sNeural" ${S.neural ? 'checked' : ''}> Живые голоса (записи нейросетью)</label>
+      <div class="muted small">${CLIPS.size ? `Записано фраз: ${CLIPS.size}. Где записи нет (например, случайные числа) — говорит синтезатор телефона. Выбор голосов ниже — для синтезатора.` : 'Записи ещё не загружены — говорит синтезатор телефона.'}</div>
       <div class="field"><label for="vRu">Русские подсказки</label>
         <div class="row"><select id="vRu">${voiceOptions(ruList, TTS.ru)}</select><button class="btn sm" data-test="ru">Слушать</button></div></div>
       <label class="toggle"><input type="checkbox" id="sRuVoice" ${S.ruVoice ? 'checked' : ''}> Русские подсказки голосом</label>
@@ -711,6 +747,7 @@ function viewSettings() {
     stopAll(); AUX = mkCtx(); const w = b.dataset.test;
     (w === 'ru' ? speak('Скажи: где здесь туалет?', { lang: 'ru', cue: true }, AUX) : speak(w === 'A' ? 'Hi! Can I get a coffee, please?' : 'Sure. What size?', { voice: w }, AUX)).catch(() => { });
   });
+  $('#sNeural').onchange = e => { S.neural = e.target.checked; saveSettings(); };
   $('#sRuVoice').onchange = e => { S.ruVoice = e.target.checked; saveSettings(); };
   $('#sMic').onchange = e => { S.mic = e.target.checked; saveSettings(); };
   $('#sText').onchange = e => { S.text = e.target.checked; saveSettings(); };
@@ -755,7 +792,7 @@ function viewListen() {
     </div>`;
   bindModes();
   if (it.rEn) $('#hReply').onclick = () => replyDrill(it);
-  const play = () => { stopAll(); AUX = mkCtx(); speak(spoken(it.en), { rate: LS.speed, voice: Math.random() < .5 ? 'A' : 'B' }, AUX).catch(() => { }); };
+  const play = () => { stopAll(); AUX = mkCtx(); speak(spoken(it.en), { rate: LS.speed, voice: 'B' }, AUX).catch(() => { }); };
   $('#hPlay').onclick = play;
   $('#hShow').onclick = () => { LS.shown = !LS.shown; viewListen(); };
   $('#hNext').onclick = () => { stopAll(); LS.i = (LS.i + 1) % items.length; LS.shown = false; viewListen(); };
@@ -1079,7 +1116,7 @@ $$('#tabs button').forEach(b => b.onclick = () => render(b.dataset.tab));
 $('#gear').onclick = () => render(TAB === 'settings' ? 'lesson' : 'settings');
 
 (async function init() {
-  try { await loadData(); }
+  try { await Promise.all([loadData(), loadClips()]); }
   catch (e) { $('#view').innerHTML = `<div class="card"><h2>Не удалось загрузить фразы</h2><div class="muted">Проверь интернет и открой приложение ещё раз.</div></div>`; console.error(e); return; }
   migrateProgress(); updateStreak(); render('lesson');
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => { });
