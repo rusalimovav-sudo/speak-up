@@ -107,15 +107,21 @@
   "hear": [
    [
     "Hey, how's it going?",
-    "Привет, как оно?"
+    "Привет, как оно?",
+    "Good, thanks. And you?",
+    "Хорошо, спасибо. А у тебя?"
    ],
    [
     "What's up?",
-    "Как жизнь? / Что нового?"
+    "Как жизнь? / Что нового?",
+    "Not much. You?",
+    "Ничего особенного. А у тебя?"
    ],
    [
     "How are you doing?",
-    "Как поживаешь?"
+    "Как поживаешь?",
+    "I'm doing well, thanks.",
+    "У меня всё хорошо, спасибо."
    ],
    [
     "Not bad, you?",
@@ -147,7 +153,9 @@
    ],
    [
     "How have you been?",
-    "Как поживал?"
+    "Как поживал?",
+    "Pretty good, actually.",
+    "Вообще-то неплохо."
    ],
    [
     "What have you been up to?",
@@ -322,27 +330,39 @@
   "hear": [
    [
     "Where are you from?",
-    "Откуда ты?"
+    "Откуда ты?",
+    "I'm from Russia.",
+    "Я из России."
    ],
    [
     "What do you do?",
-    "Чем занимаешься? (кем работаешь)"
+    "Чем занимаешься? (кем работаешь)",
+    "I have my own business.",
+    "У меня свой бизнес."
    ],
    [
     "How long have you been here?",
-    "Как долго ты здесь?"
+    "Как долго ты здесь?",
+    "Just a few days.",
+    "Всего несколько дней."
    ],
    [
     "What brings you here?",
-    "Что тебя сюда привело?"
+    "Что тебя сюда привело?",
+    "I'm on vacation.",
+    "Я в отпуске."
    ],
    [
     "Do you have any kids?",
-    "У тебя есть дети?"
+    "У тебя есть дети?",
+    "Yes, I have two kids.",
+    "Да, у меня двое детей."
    ],
    [
     "What do you do for fun?",
-    "Чем любишь заниматься?"
+    "Чем любишь заниматься?",
+    "I like traveling.",
+    "Люблю путешествовать."
    ],
    [
     "Your English is really good!",
@@ -497,11 +517,15 @@
    ],
    [
     "How do you like it here so far?",
-    "Как тебе тут пока?"
+    "Как тебе тут пока?",
+    "I love it!",
+    "Очень нравится!"
    ],
    [
     "Have you tried the food here?",
-    "Пробовал здешнюю еду?"
+    "Пробовал здешнюю еду?",
+    "Not yet. What do you recommend?",
+    "Ещё нет. Что посоветуешь?"
    ],
    [
     "You should check out the park.",
@@ -720,11 +744,15 @@
    ],
    [
     "We're getting drinks tonight, wanna come?",
-    "Мы идём выпить вечером, пойдёшь?"
+    "Мы идём выпить вечером, пойдёшь?",
+    "Sure, sounds good!",
+    "Конечно, отлично!"
    ],
    [
     "Does seven work for you?",
-    "Семь тебе подходит?"
+    "Семь тебе подходит?",
+    "Seven is perfect.",
+    "Семь — идеально."
    ],
    [
     "Let's meet in front of the hotel.",
@@ -752,7 +780,9 @@
    ],
    [
     "Are you free this weekend?",
-    "Ты свободен на выходных?"
+    "Ты свободен на выходных?",
+    "Yes, I am. Why?",
+    "Да. А что?"
    ],
    [
     "Do you wanna go out?",
@@ -1534,11 +1564,15 @@
   "hear": [
    [
     "What did you think?",
-    "Как тебе?"
+    "Как тебе?",
+    "I really liked it.",
+    "Мне очень понравилось."
    ],
    [
     "Did you like it?",
-    "Тебе понравилось?"
+    "Тебе понравилось?",
+    "Yes, it was great!",
+    "Да, было здорово!"
    ],
    [
     "It's not my thing.",
@@ -2024,7 +2058,9 @@
   "hear": [
    [
     "How was your day?",
-    "Как прошёл день?"
+    "Как прошёл день?",
+    "Busy, but good.",
+    "Насыщенный, но хороший."
    ],
    [
     "What's taking so long?",

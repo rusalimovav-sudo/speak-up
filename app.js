@@ -41,6 +41,7 @@ async function loadData() {
   DATA = { core, topics, lessons, patterns: expandPatterns(patterns), topic: id => topics.find(t => t.id === id), verb: v => core.verbs.find(x => x.verb === v) };
   for (const t of topics) for (const [en, ru] of t.say) if (!ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'say', topic: t.id });
   for (const t of topics) for (const d of t.dialogs) for (const [who, en, ru] of d.lines) if (who === 'me' && !ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'line', topic: t.id });
+  for (const t of topics) for (const x of t.hear) if (x[2] && !ITEMS.has(x[2])) ITEMS.set(x[2], { en: x[2], ru: x[3], kind: 'reply', topic: t.id });
   for (const p of DATA.patterns) for (const g of p.groups) for (const it of g.items) if (!ITEMS.has(it.en)) ITEMS.set(it.en, { ...it, kind: 'pattern', set: p.id });
   for (const v of core.verbs) v.cells.forEach(([en, ru], i) => { if (!ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'core', verb: v.verb, cell: i }); });
 }
@@ -241,6 +242,18 @@ function streak() {
   while (days.has(today(d))) { n++; d.setDate(d.getDate() - 1); }
   return n;
 }
+const INSERTED_IDS = ['topic-money', 'topic-connect', 'topic-apartment', 'topic-sightseeing'];
+function curIndex(p) { const i = DATA.lessons.findIndex(l => !p.done.includes(l.id)); return i < 0 ? DATA.lessons.length : i; }
+function migrateProgress() {
+  const p = prog();
+  if (!p.done) {
+    const old = DATA.lessons.filter(l => !INSERTED_IDS.includes(l.id));
+    p.done = old.slice(0, p.lesson).map(l => l.id);
+    const sr = store.get('run', null);
+    if (sr && !sr.lessonId && old[sr.idx]) { sr.lessonId = old[sr.idx].id; store.set('run', sr); }
+  }
+  p.lesson = curIndex(p); store.set('progress', p);
+}
 function markDay() { const p = prog(); if (!p.days.includes(today())) p.days.push(today()); store.set('progress', p); }
 function updateStreak() { const n = streak(); $('#streak').textContent = n ? `${n} ${plural(n, 'день', 'дня', 'дней')} подряд` : ''; }
 function plural(n, a, b, c) { n = Math.abs(n) % 100; const n1 = n % 10; if (n > 10 && n < 20) return c; if (n1 > 1 && n1 < 5) return b; if (n1 === 1) return a; return c; }
@@ -340,6 +353,13 @@ function buildLesson(idx) {
     while (fi < fillers.length) steps.push(P(fillers[fi++], 'filler'));
   }
 
+  // 4b. понять и ответить: вопрос собеседника на слух -> твой ответ вслух
+  const qa = shuffle(topicIds.flatMap(id => DATA.topic(id).hear.filter(x => x[2]))).slice(0, L.type === 'topic' ? 5 : 6);
+  if (qa.length) {
+    steps.push({ t: 'phase', name: 'Понять и ответить' }, { t: 'narr', ru: 'Теперь тебя спрашивают. Послушай и ответь по-английски.' });
+    qa.forEach(([en, ru, rEn, rRu]) => { used.add(rEn); steps.push({ t: 'qa', en, ru, rEn, rRu }); });
+  }
+
   // 5. сборка — всё вперемешку
   const mix = shuffle([...newItems, ...shuffle(coreItems).slice(0, 3)]);
   if (mix.length) {
@@ -364,6 +384,7 @@ function estimateMin(lesson) {
     else if (st.t === 'intro') { const ch = chunksFromEnd(st.item.en); sec += 6 + w * 0.42 * 3.3 + pauseFor(st.item.en) / 1000 + ch.reduce((a, c) => a + words(c) * 0.42 + pauseFor(c) / 1000, 0); }
     else if (st.t === 'rep') sec += w * 0.42 + pauseFor(st.en) / 1000;
     else if (st.t === 'line') sec += w * 0.42 + 0.5;
+    else if (st.t === 'qa') sec += 5 + words(st.en) * 0.84 + words(st.rEn) * 0.42 + pauseFor(st.rEn) / 1000;
   }
   return Math.max(1, Math.round(sec / 60));
 }
@@ -411,14 +432,18 @@ function showEn(en, marks, force) {
   el.innerHTML = marks ? w.map((x, i) => `<span class="w ${marks[i] ? 'ok' : 'no'}">${h(x)}</span>`).join('') : h(en);
 }
 
-const isCheck = st => st.t === 'prompt' || st.t === 'role' || st.t === 'intro';
+const isCheck = st => st.t === 'prompt' || st.t === 'role' || st.t === 'intro' || st.t === 'qa';
 // незаконченный урок хранится в телефоне: шаги, позиция и результаты — можно продолжить с того же места
 function saveRun(run) {
   if (!run || run.finished) return;
   const { lesson } = run;
-  store.set('run', { idx: lesson.idx, title: lesson.title, steps: lesson.steps, i: run.i, results: [...run.results], checked: run.checked, ok: run.ok, date: today() });
+  store.set('run', { idx: lesson.idx, lessonId: lesson.L && lesson.L.id, title: lesson.title, steps: lesson.steps, i: run.i, results: [...run.results], checked: run.checked, ok: run.ok, date: today() });
 }
-const savedRun = () => { const r = store.get('run', null); return r && r.steps && r.i < r.steps.length ? r : null; };
+const savedRun = () => {
+  const r = store.get('run', null); if (!(r && r.steps && r.i < r.steps.length)) return null;
+  if (r.lessonId && DATA) { const i = DATA.lessons.findIndex(l => l.id === r.lessonId); if (i >= 0) r.idx = i; }
+  return r;
+};
 const clearRun = () => store.set('run', null);
 window.addEventListener('pagehide', () => saveRun(RUN));
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveRun(RUN); });
@@ -541,6 +566,18 @@ async function runStep(st, ctx, run) {
       await checkAnswer(en, it, 'first', run, ctx, true);
       return;
     }
+    case 'qa': {
+      // 1-й раз — только звук, 2-й — с текстом, потом подсказка, что ответить, и проверка ответа
+      ru.textContent = ''; showEn(''); heard.textContent = ''; setState('speak', 'Слушай вопрос');
+      await speak(spoken(st.en), { voice: 'B' }, ctx); await sleep(800, ctx);
+      ru.textContent = st.ru; showEn(st.en); setState('speak', 'Ещё раз');
+      await speak(spoken(st.en), { voice: 'B' }, ctx);
+      ru.textContent = `${st.ru} → ответь: ${st.rRu}`;
+      await speak('Ответь: ' + spoken(st.rRu), { lang: 'ru', cue: true }, ctx);
+      showEn('');
+      await checkAnswer(st.rEn, ITEMS.get(st.rEn), 'qa', run, ctx, false);
+      return;
+    }
     case 'rep':
       showEn(st.en); heard.textContent = ''; setState('speak', 'Слушай');
       await speak(st.en, { rate: S.rate * 0.9 }, ctx);
@@ -567,7 +604,9 @@ function finishLesson(run) {
   const pass = score >= PASS;
   const p = prog();
   p.history.push({ date: today(), lesson: lesson.idx, score: Math.round(score * 100), checked: run.checked });
-  if (pass && lesson.idx === p.lesson) p.lesson = Math.min(p.lesson + 1, DATA.lessons.length);
+  p.done = p.done || [];
+  if (pass && !p.done.includes(lesson.L.id)) p.done.push(lesson.L.id);
+  p.lesson = curIndex(p);
   if (!p.days.includes(today())) p.days.push(today());
   store.set('progress', p); updateStreak();
   $('#view').innerHTML = `<div class="card hero">
@@ -583,7 +622,7 @@ function finishLesson(run) {
 }
 
 // ---------- экран «Урок» ----------
-function lessonStatus(i, p) { return i < p.lesson ? 'done' : i === p.lesson ? 'now' : ''; }
+function lessonStatus(i, p) { return (p.done || []).includes(DATA.lessons[i].id) ? 'done' : i === p.lesson ? 'now' : ''; }
 function viewLesson() {
   const p = prog(), N = DATA.lessons.length, idx = Math.min(p.lesson, N - 1);
   const L = DATA.lessons[idx], lesson = buildLesson(idx), s = srs(), sr = savedRun();
@@ -599,7 +638,7 @@ function viewLesson() {
       <h1>${h(lessonTitle(L))}</h1>
       <div class="muted">${h(goal)}</div>
       ${repeat ? `<div class="muted small">Прошлый раз ${last.score}% — повторяем этот урок.</div>` : ''}
-      <div class="bar"><i style="width:${100 * Math.min(p.lesson, N) / N}%"></i></div>
+      <div class="bar"><i style="width:${100 * (p.done || []).length / N}%"></i></div>
       ${sr ? `<button class="btn primary big" id="resumeBtn">${ICON_PLAY.replace('<svg', '<svg width="20" height="20" fill="currentColor"')} Продолжить урок ${sr.idx + 1} · ${Math.round(100 * sr.i / sr.steps.length)}%</button>
         <button class="btn ghost" id="startBtn">${sr.idx === idx ? 'Начать этот урок заново' : `Начать урок ${idx + 1} · ~${estimateMin(lesson)} мин`}</button>`
       : `<button class="btn primary big" id="startBtn">${ICON_PLAY.replace('<svg', '<svg width="20" height="20" fill="currentColor"')} Начать урок · ~${estimateMin(lesson)} мин</button>`}
@@ -669,23 +708,28 @@ function viewSettings() {
   $('#sText').onchange = e => { S.text = e.target.checked; saveSettings(); };
   $$('[data-rate]').forEach(el => el.onclick = () => { S.rate = +el.dataset.rate; saveSettings(); viewSettings(); });
   if (resetAsk) {
-    $('#resetYes').onclick = () => { store.set('srs', {}); store.set('progress', { lesson: 0, days: [], history: [] }); resetAsk = false; updateStreak(); viewSettings(); };
+    $('#resetYes').onclick = () => { store.set('srs', {}); store.set('progress', { lesson: 0, days: [], history: [], done: [] }); resetAsk = false; updateStreak(); viewSettings(); };
     $('#resetNo').onclick = () => { resetAsk = false; viewSettings(); };
   } else $('#reset').onclick = () => { resetAsk = true; viewSettings(); };
 }
 
 // ---------- экран «Слух» ----------
-const LS = { topic: null, i: 0, speed: 1.0, shown: false };
+const LS = { mode: 'phrases', topic: null, i: 0, speed: 1.0, shown: false };
 function hearItems(id) {
-  if (id === 'all') return DATA.topics.flatMap(t => t.hear.map(([en, ru]) => ({ en, ru, t: t.title })));
-  const t = DATA.topic(id); return t.hear.map(([en, ru]) => ({ en, ru, t: t.title }));
+  const map = t => t.hear.map(([en, ru, rEn, rRu]) => ({ en, ru, rEn, rRu, t: t.title }));
+  if (id === 'all') return DATA.topics.flatMap(map);
+  return map(DATA.topic(id));
 }
+const modeChips = () => `<div class="chips"><button class="chip ${LS.mode === 'phrases' ? 'on' : ''}" data-mode="phrases">Фразы на слух</button><button class="chip ${LS.mode === 'numbers' ? 'on' : ''}" data-mode="numbers">Числа на слух</button></div>`;
+function bindModes() { $$('[data-mode]').forEach(el => el.onclick = () => { stopAll(); LS.mode = el.dataset.mode; viewListen(); }); }
 function viewListen() {
+  if (LS.mode === 'numbers') return viewNumbers();
   if (!LS.topic) LS.topic = 'survival';
   const items = hearItems(LS.topic); if (LS.i >= items.length) LS.i = 0;
   const it = items[LS.i];
   $('#view').innerHTML = `
-    <div><h1>Слух</h1><div class="muted">Так говорят тебе. Слушай без текста, скажи вслух, что это значит, потом проверь.</div></div>
+    <div><h1>Слух</h1><div class="muted">Так говорят тебе. Слушай без текста, пойми смысл, потом проверь. Где есть вопрос — ответь вслух.</div></div>
+    ${modeChips()}
     <div class="chips">${[['all', 'Всё вперемешку'], ...DATA.topics.map(t => [t.id, t.title])].map(([id, tt]) => `<button class="chip ${LS.topic === id ? 'on' : ''}" data-t="${id}">${h(tt)}</button>`).join('')}</div>
     <div class="card">
       <div class="phase"><span>${h(it.t)}</span><span>${LS.i + 1} / ${items.length}</span></div>
@@ -698,8 +742,11 @@ function viewListen() {
         <button class="btn" id="hNext">Дальше</button>
       </div>
       <div class="row"><span class="muted small">Скорость</span>${[0.8, 1.0, 1.2, 1.4].map(r => `<button class="chip ${LS.speed === r ? 'on' : ''}" data-sp="${r}">${r.toFixed(1)}</button>`).join('')}</div>
+      ${it.rEn ? '<button class="btn primary" id="hReply">Ответить вслух</button><div class="heard" id="hRes"></div>' : ''}
       <button class="btn ghost" id="hAuto">Автоматически по кругу</button>
     </div>`;
+  bindModes();
+  if (it.rEn) $('#hReply').onclick = () => replyDrill(it);
   const play = () => { stopAll(); AUX = mkCtx(); speak(spoken(it.en), { rate: LS.speed, voice: Math.random() < .5 ? 'A' : 'B' }, AUX).catch(() => { }); };
   $('#hPlay').onclick = play;
   $('#hShow').onclick = () => { LS.shown = !LS.shown; viewListen(); };
@@ -709,6 +756,132 @@ function viewListen() {
   $$('[data-sp]').forEach(el => el.onclick = () => { LS.speed = +el.dataset.sp; viewListen(); });
   $('#hAuto').onclick = () => autoListen(items);
 }
+// вопрос -> подсказка, что ответить -> ответ вслух с проверкой
+async function replyDrill(it) {
+  stopAll(); const ctx = AUX = mkCtx(); const res = $('#hRes');
+  try {
+    res.textContent = 'Слушай вопрос…';
+    await speak(spoken(it.en), { rate: LS.speed, voice: 'B' }, ctx);
+    res.innerHTML = `Ответь: <b>${h(it.rRu)}</b>`;
+    await speak('Ответь: ' + spoken(it.rRu), { lang: 'ru', cue: true }, ctx);
+    if (S.mic && RecAPI) {
+      res.innerHTML += ' <span class="verdict no">● говори</span>';
+      const alts = await listen(pauseFor(it.rEn) + 2500, ctx);
+      if (typeof alts === 'string') res.innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`;
+      else if (alts) {
+        const r = compare(it.rEn, alts), ok = r.score >= PASS, rec = recordAnswer(it.rEn, ok);
+        res.innerHTML = (r.heard ? `«${h(r.heard)}» <span class="verdict ${ok ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не расслышал</span>') + answerBadge(rec) + `<div class="answer-en" style="font-size:18px">${h(it.rEn)}</div>`;
+      }
+    } else { await sleep(pauseFor(it.rEn), ctx); res.innerHTML = `<div class="answer-en" style="font-size:18px">${h(it.rEn)}</div>`; }
+    await speak(spoken(it.rEn), {}, ctx);
+  } catch { /* остановлено */ }
+}
+
+// ---------- «Числа на слух»: цены, время, выходы, номера, телефоны, даты ----------
+const NS = { cat: 'all', cur: null, ok: 0, n: 0, shown: false, res: '' };
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const two = n => n === 0 ? "o'clock" : n < 10 ? 'oh ' + ONES[n] : num2w(n);
+const ORD = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth', 'twentieth'];
+const ordinal = n => n <= 20 ? ORD[n] : n === 30 ? 'thirtieth' : (n < 30 ? 'twenty-' : 'thirty-') + ORD[n % 10];
+const NUM_CATS = {
+  price: { title: 'Цены', gen() {
+    const d = rnd(2, 89), c = pick([0, 25, 50, 75, 99, 10, 45, 80, 5]);
+    const say = c === 0 ? `That's ${num2w(d)} dollars.` : pick([`That'll be ${num2w(d)} ${c < 10 ? 'oh ' + ONES[c] : num2w(c)}.`, `Your total is ${num2w(d)} ${c < 10 ? 'oh ' + ONES[c] : num2w(c)}.`]);
+    const show = '$' + d + '.' + String(c).padStart(2, '0');
+    return { say, show, ru: 'Цена', ok: [String(d) + String(c).padStart(2, '0'), c === 0 ? String(d) : null] };
+  } },
+  time: { title: 'Время', gen() {
+    const hh = rnd(1, 12), m = pick([0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]);
+    const t = num2w(hh) + ' ' + two(m);
+    const say = pick([`Boarding starts at ${t}.`, `Breakfast is until ${t}.`, `The tour starts at ${t}.`, `Your train leaves at ${t}.`, `Check-out is at ${t}.`]);
+    return { say, show: hh + ':' + String(m).padStart(2, '0'), ru: 'Время', ok: [String(hh) + String(m).padStart(2, '0'), m === 0 ? String(hh) : null] };
+  } },
+  gate: { title: 'Выход и рейс', gen() {
+    if (Math.random() < .5) { const L = pick(['A', 'B', 'C', 'D', 'E']), g = rnd(1, 48); return { say: `Your gate is ${L} ${num2w(g)}.`, show: 'Gate ' + L + g, ru: 'Выход', ok: [String(g)] }; }
+    const f = rnd(100, 989); return { say: `Flight ${num2w(Math.floor(f / 100))} ${two(f % 100) === "o'clock" ? 'hundred' : two(f % 100)} is now boarding.`, show: 'Flight ' + f, ru: 'Рейс', ok: [String(f)] };
+  } },
+  room: { title: 'Номер комнаты', gen() {
+    const fl = rnd(2, 14), r = rnd(1, 30), num = fl * 100 + r;
+    return { say: `You're in room ${num2w(fl)} ${two(r)}.`, show: 'Room ' + num, ru: 'Номер', ok: [String(num)] };
+  } },
+  phone: { title: 'Телефон', gen() {
+    const d = Array.from({ length: 10 }, (_, i) => i === 0 ? rnd(2, 9) : rnd(0, 9));
+    const w = x => x === 0 ? 'oh' : ONES[x];
+    const say = `My number is ${d.slice(0, 3).map(w).join(' ')}, ${d.slice(3, 6).map(w).join(' ')}, ${d.slice(6).map(w).join(' ')}.`;
+    return { say, show: d.slice(0, 3).join('') + '-' + d.slice(3, 6).join('') + '-' + d.slice(6).join(''), ru: 'Телефон', ok: [d.join('')] };
+  } },
+  date: { title: 'Даты', gen() {
+    const m = pick([['January', 'января'], ['March', 'марта'], ['May', 'мая'], ['June', 'июня'], ['July', 'июля'], ['August', 'августа'], ['October', 'октября'], ['December', 'декабря']]), dd = rnd(1, 30);
+    return { say: pick([`Your reservation is for ${m[0]} ${ordinal(dd)}.`, `Check-in is on ${m[0]} ${ordinal(dd)}.`]), show: dd + ' ' + m[1], ru: 'Дата', ok: [String(dd)] };
+  } },
+};
+// «twelve fifty» / «12.50» / «four oh five» -> «1250» / «1250» / «405»
+function heardDigits(text) {
+  const toks = text.toLowerCase().replace(/[$,]/g, ' ').replace(/(\d)[.:](\d)/g, '$1$2').replace(/-/g, ' ').split(/\s+/).filter(Boolean);
+  const unit = w => { const i = ONES.indexOf(w); return w === 'oh' || w === 'o' ? 0 : i; };
+  const ordIdx = w => ORD.indexOf(w);
+  let out = '', i = 0;
+  while (i < toks.length) {
+    const w = toks[i];
+    if (/^\d+$/.test(w)) { out += w; i++; continue; }
+    const m = w.match(/^(\d+)(st|nd|rd|th)$/); if (m) { out += m[1]; i++; continue; }
+    const tIdx = TENS.indexOf(w);
+    if (tIdx >= 2) { const u = unit(toks[i + 1] || ''), o = ordIdx(toks[i + 1] || ''); if (u >= 1 && u <= 9) { out += String(tIdx * 10 + u); i += 2; } else if (o >= 1 && o <= 9) { out += String(tIdx * 10 + o); i += 2; } else { out += String(tIdx * 10); i++; } continue; }
+    if (w === 'twentieth') { out += '20'; i++; continue; }
+    if (w === 'thirtieth') { out += '30'; i++; continue; }
+    const o = ordIdx(w); if (o >= 1) { out += String(o); i++; continue; }
+    const u = unit(w);
+    if (u >= 0) { if (toks[i + 1] === 'hundred') { out += String(u); i += 2; const n2 = toks[i] && TENS.indexOf(toks[i]) < 0 && unit(toks[i]) < 0; if (n2 || !toks[i]) out += '00'; continue; } out += String(u); i++; continue; }
+    i++;
+  }
+  return out;
+}
+function numbersCheck(cur, alts) {
+  const want = cur.ok.filter(Boolean);
+  for (const a of alts) { const d = heardDigits(a); if (want.some(w => d === w || d.endsWith(w) || (w.length > 2 && d.includes(w)))) return { ok: true, heard: a }; }
+  return { ok: false, heard: alts[0] || '' };
+}
+function newNumber() { const cats = NS.cat === 'all' ? Object.keys(NUM_CATS) : [NS.cat]; NS.cur = NUM_CATS[pick(cats)].gen(); NS.shown = false; NS.res = ''; }
+function viewNumbers() {
+  if (!NS.cur) newNumber();
+  const c = NS.cur;
+  $('#view').innerHTML = `<div><h1>Слух</h1><div class="muted">Цены, время, номера — то, на чём в поездке чаще всего путаются. Послушай и скажи число вслух.</div></div>
+    ${modeChips()}
+    <div class="chips">${[['all', 'Всё вперемешку'], ...Object.entries(NUM_CATS).map(([k, v]) => [k, v.title])].map(([k, tt]) => `<button class="chip ${NS.cat === k ? 'on' : ''}" data-nc="${k}">${tt}</button>`).join('')}</div>
+    <div class="card">
+      <div class="phase"><span>${h(c.ru)}</span><span>${NS.n ? `верно ${NS.ok} из ${NS.n}` : ''}</span></div>
+      <button class="btn primary big" id="nPlay">${ICON_PLAY.replace('<svg', '<svg width="20" height="20" fill="currentColor"')} Слушать</button>
+      <div class="stack" style="min-height:64px">${NS.shown ? `<div class="answer-en">${h(c.show)}</div><div class="muted">${h(c.say)}</div>` : '<div class="muted">Число скрыто. Слушай столько раз, сколько нужно.</div>'}<div class="heard">${NS.res}</div></div>
+      <div class="row">
+        ${S.mic && RecAPI ? '<button class="btn primary" id="nSay">Сказать число</button>' : ''}
+        <button class="btn" id="nShow">Показать</button><span class="spacer"></span><button class="btn" id="nNext">Следующее</button>
+      </div>
+      <div class="row"><span class="muted small">Скорость</span>${[0.8, 1.0, 1.2, 1.4].map(r => `<button class="chip ${LS.speed === r ? 'on' : ''}" data-sp="${r}">${r.toFixed(1)}</button>`).join('')}</div>
+    </div>`;
+  bindModes();
+  const play = () => { stopAll(); AUX = mkCtx(); speak(c.say, { rate: LS.speed, voice: Math.random() < .5 ? 'A' : 'B' }, AUX).catch(() => { }); };
+  $('#nPlay').onclick = play;
+  $('#nShow').onclick = () => { NS.shown = true; viewNumbers(); };
+  $('#nNext').onclick = () => { stopAll(); newNumber(); viewNumbers(); play(); };
+  $$('[data-nc]').forEach(el => el.onclick = () => { stopAll(); NS.cat = el.dataset.nc; newNumber(); viewNumbers(); });
+  $$('[data-sp]').forEach(el => el.onclick = () => { LS.speed = +el.dataset.sp; viewNumbers(); });
+  if ($('#nSay')) $('#nSay').onclick = async () => {
+    stopAll(); const ctx = AUX = mkCtx();
+    try {
+      $('#nSay').textContent = '● говори…';
+      const alts = await listen(6000, ctx);
+      if (typeof alts === 'string') { NS.res = `<span class="verdict no">${MICERR[alts]}</span>`; }
+      else {
+        const r = numbersCheck(c, alts || []); NS.n++; if (r.ok) NS.ok++;
+        NS.res = r.heard ? `Ты сказал: «${h(r.heard)}» <span class="verdict ${r.ok ? 'ok' : 'no'}">${r.ok ? 'верно' : 'не то число'}</span>` : '<span class="verdict no">Не расслышал</span>';
+        NS.shown = true;
+      }
+      viewNumbers();
+    } catch { /* остановлено */ }
+  };
+}
+
 async function autoListen(items) {
   stopAll(); const ctx = AUX = mkCtx();
   try {
@@ -900,6 +1073,6 @@ $('#gear').onclick = () => render(TAB === 'settings' ? 'lesson' : 'settings');
 (async function init() {
   try { await loadData(); }
   catch (e) { $('#view').innerHTML = `<div class="card"><h2>Не удалось загрузить фразы</h2><div class="muted">Проверь интернет и открой приложение ещё раз.</div></div>`; console.error(e); return; }
-  updateStreak(); render('lesson');
+  migrateProgress(); updateStreak(); render('lesson');
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => { });
 })();
