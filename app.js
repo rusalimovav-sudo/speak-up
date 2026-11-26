@@ -25,13 +25,23 @@ if (!S.micFix) { S.mic = true; S.micFix = 1; saveSettings(); }
 let DATA = null;           // {core, topics, lessons}
 const ITEMS = new Map();   // key(en) -> {en, ru, kind, topic?, verb?}
 
+// шаблоны: конструкция × слова -> готовые пары фраз
+function expandPatterns(sets) {
+  const fill = (tpl, f) => tpl.replace(/\{(\w+)\}/g, (_, k) => {
+    if (k === 'ax') return (/^[aeiou]|^ATM/i.test(f.x) ? 'an ' : 'a ') + f.x;
+    if (k === 'Nom') return f.nom[0].toUpperCase() + f.nom.slice(1);
+    return f[k] ?? '';
+  });
+  return sets.map(p => ({ ...p, groups: p.fillers.map(f => ({ label: f.x || f.base, items: p.templates.map(t => ({ en: fill(t.en, f), ru: fill(t.ru, f) })) })) }));
+}
 async function loadData() {
   const get = f => fetch('data/' + f).then(r => r.json());
-  const [core, travel, social, lessons] = await Promise.all([get('core.json'), get('travel.json'), get('social.json'), get('lessons.json')]);
+  const [core, travel, social, lessons, patterns] = await Promise.all([get('core.json'), get('travel.json'), get('social.json'), get('lessons.json'), get('patterns.json').catch(() => [])]);
   const topics = [...travel, ...social];
-  DATA = { core, topics, lessons, topic: id => topics.find(t => t.id === id), verb: v => core.verbs.find(x => x.verb === v) };
+  DATA = { core, topics, lessons, patterns: expandPatterns(patterns), topic: id => topics.find(t => t.id === id), verb: v => core.verbs.find(x => x.verb === v) };
   for (const t of topics) for (const [en, ru] of t.say) if (!ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'say', topic: t.id });
   for (const t of topics) for (const d of t.dialogs) for (const [who, en, ru] of d.lines) if (who === 'me' && !ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'line', topic: t.id });
+  for (const p of DATA.patterns) for (const g of p.groups) for (const it of g.items) if (!ITEMS.has(it.en)) ITEMS.set(it.en, { ...it, kind: 'pattern', set: p.id });
   for (const v of core.verbs) v.cells.forEach(([en, ru], i) => { if (!ITEMS.has(en)) ITEMS.set(en, { en, ru, kind: 'core', verb: v.verb, cell: i }); });
 }
 
@@ -300,9 +310,10 @@ function buildLesson(idx) {
   let recall = [];
   const boxOf = it => s[it.en] ? s[it.en].box : -1;
   if (L.type !== 'topic') recall = shuffle(pool.filter(it => !newSet.has(it.en) && !due.includes(it))).sort((a, b) => boxOf(a) - boxOf(b)).slice(0, L.type === 'trip' ? 16 : 10);
+  const patItems = shuffle((DATA.patterns || []).filter(p => topicIds.some(id => p.topics.includes(id))).flatMap(p => p.groups.flatMap(g => g.items))).slice(0, 4).map(it => ITEMS.get(it.en));
   const older = shuffle([...ITEMS.values()].filter(it => it.kind === 'say' && s[it.en] && !newSet.has(it.en) && !due.includes(it) && !recall.includes(it))).slice(0, 4);
   const fillers = [];
-  const ci = shuffle(coreItems), rc = shuffle(recall), ol = older;
+  const ci = shuffle(coreItems), rc = shuffle(recall), ol = [...older, ...patItems];
   while (ci.length || rc.length || ol.length) { if (rc.length) fillers.push(rc.shift()); if (ci.length) fillers.push(ci.shift()); if (rc.length) fillers.push(rc.shift()); if (ol.length) fillers.push(ol.shift()); }
 
   if (newItems.length || fillers.length) {
@@ -539,7 +550,7 @@ async function runStep(st, ctx, run) {
       await speak(spoken(st.en), { voice: st.who === 'me' ? 'A' : 'B' }, ctx); await sleep(250, ctx); return;
     case 'prompt': case 'role': {
       const en = st.item ? st.item.en : st.en, ruTx = st.item ? st.item.ru : st.ru;
-      const label = st.t === 'role' ? 'Твоя реплика' : st.item.kind === 'core' ? `Ядро · ${st.item.verb}` : { review: 'Повторение', first: 'Новая фраза', recall: 'Вспомни', filler: 'Вспомни', final: 'Сборка', fix: 'Доп. повтор', weak: 'Доп. повтор' }[st.mode];
+      const label = st.t === 'role' ? 'Твоя реплика' : st.item.kind === 'core' ? `Ядро · ${st.item.verb}` : st.item.kind === 'pattern' ? 'Шаблон' : { review: 'Повторение', first: 'Новая фраза', recall: 'Вспомни', filler: 'Вспомни', final: 'Сборка', fix: 'Доп. повтор', weak: 'Доп. повтор' }[st.mode];
       ru.textContent = ruTx; showEn(''); heard.textContent = ''; setState('speak', label);
       await speak(`${promptWord(en)}: ${spoken(ruTx)}`, { lang: 'ru', cue: true }, ctx);
       await checkAnswer(en, st.item, st.mode, run, ctx, false);
@@ -782,52 +793,66 @@ async function runDialog(d, role) {
 }
 
 // ---------- экран «Ядро» ----------
-const CS = { v: 0, marks: {} };
+// ---------- экран «Ядро»: глаголы + шаблоны ----------
+const CS = { mode: 'verb', v: 0, set: 0, g: 0, marks: {} };
 function viewCore() {
-  const v = DATA.core.verbs[CS.v];
-  const rows = ['Настоящее', 'Прошедшее', 'Будущее'];
-  $('#view').innerHTML = `<div><h1>Ядро</h1><div class="muted">16 главных глаголов в трёх временах. Цель — сказать фразу за 3 секунды.</div></div>
-    <div class="chips">${DATA.core.verbs.map((x, i) => `<button class="chip ${i === CS.v ? 'on' : ''}" data-v="${i}">${h(x.verb)}</button>`).join('')}</div>
-    <div class="card">
-      <div><h2>${h(v.verb)} — ${h(v.ru)}</h2><div class="muted small">${h(v.forms)}</div></div>
+  const sets = DATA.patterns || [];
+  const chips = `<div class="chips">${DATA.core.verbs.map((x, i) => `<button class="chip ${CS.mode === 'verb' && i === CS.v ? 'on' : ''}" data-v="${i}">${h(x.verb)}</button>`).join('')}</div>
+    <div class="chips">${sets.map((x, i) => `<button class="chip ${CS.mode === 'set' && i === CS.set ? 'on' : ''}" data-s="${i}">Шаблон: ${h(x.title)}</button>`).join('')}</div>`;
+  const tile = (it, key) => { const m = CS.marks[key]; return `<div class="tile ${m === true ? 'ok' : m === false ? 'no' : ''}" data-k="${h(key)}" data-en="${h(it.en)}"><b>${h(it.ru)}</b><span>${h(it.en)}</span></div>`; };
+  let body;
+  if (CS.mode === 'verb') {
+    const v = DATA.core.verbs[CS.v], rows = ['Настоящее', 'Прошедшее', 'Будущее'];
+    body = `<div><h2>${h(v.verb)} — ${h(v.ru)}</h2><div class="muted small">${h(v.forms)}</div></div>
       <div class="gridhead"><span>+ да</span><span>? вопрос</span><span>− нет</span></div>
-      ${rows.map((r, ri) => `<div class="muted small" style="font-weight:700">${r}</div><div class="tile-grid">${v.cells.slice(ri * 3, ri * 3 + 3).map(([en, ru], k) => {
-    const i = ri * 3 + k, m = CS.marks[v.verb + i];
-    return `<div class="tile ${m === true ? 'ok' : m === false ? 'no' : ''}" data-c="${i}"><b>${h(ru)}</b><span>${h(en)}</span></div>`;
-  }).join('')}</div>`).join('')}
-      <button class="btn primary big" id="cTrain">Тренировка на скорость</button>
-      <div class="prompt-ru" id="cRu" style="min-height:0"></div><div class="answer-en" id="cEn"></div><div class="heard" id="cHd"></div>
-    </div>`;
-  $$('[data-v]').forEach(el => el.onclick = () => { stopAll(); CS.v = +el.dataset.v; viewCore(); });
-  $$('[data-c]').forEach(el => el.onclick = () => { stopAll(); AUX = mkCtx(); speak(v.cells[+el.dataset.c][0], {}, AUX).catch(() => { }); });
-  $('#cTrain').onclick = () => coreDrill(v);
+      ${rows.map((r, ri) => `<div class="muted small" style="font-weight:700">${r}</div><div class="tile-grid">${v.cells.slice(ri * 3, ri * 3 + 3).map(([en, ru]) => tile({ en, ru }, en)).join('')}</div>`).join('')}
+      <button class="btn primary big" id="cTrain">Тренировка на скорость</button>`;
+  } else {
+    const set = sets[CS.set], g = set.groups[CS.g];
+    body = `<div><h2>${h(set.title)}</h2><div class="muted small">${h(set.about)}</div></div>
+      <div class="chips">${set.groups.map((x, i) => `<button class="chip ${i === CS.g ? 'on' : ''}" data-g="${i}">${h(x.label)}</button>`).join('')}</div>
+      <div class="stack">${g.items.map(it => tile(it, it.en)).join('')}</div>
+      <div class="row"><button class="btn primary" id="cTrain">Тренировка: ${h(g.label)}</button><button class="btn" id="cMix">Вперемешку · 10</button></div>`;
+  }
+  $('#view').innerHTML = `<div><h1>Ядро</h1><div class="muted">Глаголы в трёх временах и шаблоны: одна конструкция — разные слова. Цель — сказать за 3 секунды.</div></div>
+    ${chips}<div class="card">${body}
+      <div class="prompt-ru" id="cRu" style="min-height:0"></div><div class="answer-en" id="cEn"></div><div class="heard" id="cHd"></div></div>`;
+  $$('[data-v]').forEach(el => el.onclick = () => { stopAll(); CS.mode = 'verb'; CS.v = +el.dataset.v; viewCore(); });
+  $$('[data-s]').forEach(el => el.onclick = () => { stopAll(); CS.mode = 'set'; CS.set = +el.dataset.s; CS.g = 0; viewCore(); });
+  $$('[data-g]').forEach(el => el.onclick = () => { stopAll(); CS.g = +el.dataset.g; viewCore(); });
+  $$('[data-k]').forEach(el => el.onclick = () => { stopAll(); AUX = mkCtx(); speak(el.dataset.en, {}, AUX).catch(() => { }); });
+  const list = CS.mode === 'verb' ? DATA.core.verbs[CS.v].cells.map(([en, ru]) => ({ en, ru })) : sets[CS.set].groups[CS.g].items;
+  $('#cTrain').onclick = () => speedDrill(list, $('#cTrain'));
+  if ($('#cMix')) $('#cMix').onclick = () => speedDrill(shuffle(sets[CS.set].groups.flatMap(x => x.items)).slice(0, 10), $('#cMix'));
 }
-async function coreDrill(v) {
+async function speedDrill(list, btn) {
   stopAll(); const ctx = AUX = mkCtx(); keepAwake(true);
-  const btn = $('#cTrain'); btn.textContent = 'Остановить'; btn.onclick = () => { stopAll(); viewCore(); };
-  const order = shuffle(v.cells.map((_, i) => i)); let ok = 0;
+  const label = btn.textContent; btn.textContent = 'Остановить'; btn.onclick = () => { stopAll(); viewCore(); };
+  const order = shuffle(list); let ok = 0, checked = 0; const res = new Map();
   try {
-    for (const i of order) {
-      const [en, ru] = v.cells[i];
+    for (const { en, ru } of order) {
       $('#cRu').textContent = ru; $('#cEn').textContent = ''; $('#cHd').textContent = '';
       await speak(ru, { lang: 'ru', cue: true }, ctx);
       let good = null;
       if (S.mic && RecAPI) {
         $('#cHd').innerHTML = '<span class="verdict no">● говори</span>';
         const alts = await listen(3000 + words(en) * 400, ctx);
-        if (typeof alts === 'string') $('#cHd').innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`; else if (alts) { const r = compare(en, alts); good = r.score >= PASS; const rec = recordAnswer(en, good); $('#cHd').innerHTML = (r.heard ? `«${h(r.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не успел</span>') + answerBadge(rec); }
+        if (typeof alts === 'string') $('#cHd').innerHTML = `<span class="verdict no">${MICERR[alts]}</span>`;
+        else if (alts) { const r = compare(en, alts); good = r.score >= PASS; const rec = recordAnswer(en, good); $('#cHd').innerHTML = (r.heard ? `«${h(r.heard)}» <span class="verdict ${good ? 'ok' : 'no'}">${Math.round(r.score * 100)}%</span>` : '<span class="verdict no">не успел</span>') + answerBadge(rec); }
       } else await sleep(3000, ctx);
       $('#cEn').textContent = en;
-      if (good !== null) { CS.marks[v.verb + i] = good; const t = $(`[data-c="${i}"]`); t.classList.remove('ok', 'no'); t.classList.add(good ? 'ok' : 'no'); if (good) ok++; }
+      if (good !== null) {
+        checked++; if (good) ok++; CS.marks[en] = good; res.set(en, { ok: good });
+        const t = $$('[data-k]').find(x => x.dataset.k === en); if (t) { t.classList.remove('ok', 'no'); t.classList.add(good ? 'ok' : 'no'); }
+      }
       await speak(en, {}, ctx); await sleep(500, ctx);
     }
-    $('#cRu').textContent = S.mic && RecAPI ? `Готово: ${ok} из 9 за 3 секунды` : 'Готово! Пройди ещё раз быстрее.';
+    $('#cRu').textContent = checked ? `Готово: ${ok} из ${order.length} за 3 секунды` : 'Готово! Пройди ещё раз быстрее.';
     $('#cEn').textContent = ''; $('#cHd').textContent = '';
-    srsUpdate(new Map(order.filter(i => CS.marks[v.verb + i] !== undefined).map(i => [v.cells[i][0], { ok: CS.marks[v.verb + i] }])));
-    markDay(); updateStreak();
+    srsUpdate(res); markDay(); updateStreak();
   } catch { /* остановлено */ }
   keepAwake(false);
-  btn.textContent = 'Тренировка на скорость'; btn.onclick = () => coreDrill(v);
+  btn.textContent = label; btn.onclick = () => speedDrill(list, btn);
 }
 
 // ---------- экран «Темы» ----------

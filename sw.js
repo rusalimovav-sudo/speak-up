@@ -1,7 +1,7 @@
 // Офлайн-кэш: отдаём из кэша сразу, в фоне обновляем. Меняй VERSION при выпуске новой версии.
-const VERSION = 'su-v7';
+const VERSION = 'su-v8';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest',
-  'data/core.json', 'data/travel.json', 'data/social.json', 'data/lessons.json',
+  'data/core.json', 'data/travel.json', 'data/social.json', 'data/lessons.json', 'data/patterns.json',
   'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES))); self.skipWaiting(); });

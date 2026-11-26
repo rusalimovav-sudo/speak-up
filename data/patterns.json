@@ -1,0 +1,83 @@
+[
+{
+ "id":"routine","title":"Распорядок дня","topics":["myday","aboutme","smalltalk"],
+ "about":"Одно действие — пять предложений: каждый день, не по выходным, вопрос про сегодня, планы на завтра, вчера.",
+ "templates":[
+  {"en":"I {base} every day.","ru":"Я {pres} каждый день."},
+  {"en":"I don't {base} on weekends.","ru":"По выходным я не {pres}."},
+  {"en":"Did you {base} today?","ru":"Ты сегодня {past}?"},
+  {"en":"I'm going to {base} tomorrow.","ru":"Завтра я собираюсь {inf}."},
+  {"en":"I {pastEn} yesterday.","ru":"Вчера я {past}."}
+ ],
+ "fillers":[
+  {"base":"wake up early","pastEn":"woke up early","pres":"просыпаюсь рано","inf":"проснуться рано","past":"проснулся рано"},
+  {"base":"take a shower","pastEn":"took a shower","pres":"принимаю душ","inf":"принять душ","past":"принимал душ"},
+  {"base":"have breakfast","pastEn":"had breakfast","pres":"завтракаю","inf":"позавтракать","past":"завтракал"},
+  {"base":"make coffee","pastEn":"made coffee","pres":"варю кофе","inf":"сварить кофе","past":"варил кофе"},
+  {"base":"go to work","pastEn":"went to work","pres":"хожу на работу","inf":"пойти на работу","past":"ходил на работу"},
+  {"base":"check my email","pastEn":"checked my email","pres":"проверяю почту","inf":"проверить почту","past":"проверял почту"},
+  {"base":"have lunch","pastEn":"had lunch","pres":"обедаю","inf":"пообедать","past":"обедал"},
+  {"base":"call my family","pastEn":"called my family","pres":"звоню семье","inf":"позвонить семье","past":"звонил семье"},
+  {"base":"go to the gym","pastEn":"went to the gym","pres":"хожу в зал","inf":"пойти в зал","past":"ходил в зал"},
+  {"base":"cook dinner","pastEn":"cooked dinner","pres":"готовлю ужин","inf":"приготовить ужин","past":"готовил ужин"},
+  {"base":"go for a walk","pastEn":"went for a walk","pres":"хожу гулять","inf":"пойти погулять","past":"ходил гулять"},
+  {"base":"watch TV","pastEn":"watched TV","pres":"смотрю телевизор","inf":"посмотреть телевизор","past":"смотрел телевизор"},
+  {"base":"go to bed late","pastEn":"went to bed late","pres":"ложусь поздно","inf":"лечь поздно","past":"лёг поздно"}
+ ]
+},
+{
+ "id":"city","title":"Город: куда пройти","topics":["directions","transport","taxi","problems"],
+ "about":"Одно место — пять вопросов: где, как добраться, далеко ли, есть ли рядом, мне нужно туда.",
+ "templates":[
+  {"en":"Where is the {x}?","ru":"Где {nom}?"},
+  {"en":"How do I get to the {x}?","ru":"Как добраться до {gen}?"},
+  {"en":"Is the {x} far from here?","ru":"{Nom} далеко отсюда?"},
+  {"en":"Is there {ax} near here?","ru":"Здесь рядом есть {nom}?"},
+  {"en":"I need to get to the {x}.","ru":"Мне нужно добраться до {gen}."}
+ ],
+ "fillers":[
+  {"x":"hospital","nom":"больница","gen":"больницы"},
+  {"x":"pharmacy","nom":"аптека","gen":"аптеки"},
+  {"x":"supermarket","nom":"супермаркет","gen":"супермаркета"},
+  {"x":"bus stop","nom":"автобусная остановка","gen":"автобусной остановки"},
+  {"x":"subway station","nom":"станция метро","gen":"станции метро"},
+  {"x":"train station","nom":"вокзал","gen":"вокзала"},
+  {"x":"airport","nom":"аэропорт","gen":"аэропорта"},
+  {"x":"bank","nom":"банк","gen":"банка"},
+  {"x":"ATM","nom":"банкомат","gen":"банкомата"},
+  {"x":"museum","nom":"музей","gen":"музея"},
+  {"x":"beach","nom":"пляж","gen":"пляжа"},
+  {"x":"mall","nom":"торговый центр","gen":"торгового центра"},
+  {"x":"post office","nom":"почта","gen":"почты"},
+  {"x":"police station","nom":"полицейский участок","gen":"полицейского участка"},
+  {"x":"restroom","nom":"туалет","gen":"туалета"},
+  {"x":"hotel","nom":"отель","gen":"отеля"}
+ ]
+},
+{
+ "id":"order","title":"Кафе: заказ","topics":["cafe","restaurant"],
+ "about":"Одно блюдо — четыре фразы: попросить, выбрать, взять с собой, спросить цену.",
+ "templates":[
+  {"en":"Can I get {x}, please?","ru":"Можно мне {acc}?"},
+  {"en":"I'll have {x}.","ru":"Я возьму {acc}."},
+  {"en":"Could I get {x} to go?","ru":"Можно {acc} с собой?"},
+  {"en":"How much is {x}?","ru":"Сколько стоит {nom}?"}
+ ],
+ "fillers":[
+  {"x":"a coffee","nom":"кофе","acc":"кофе"},
+  {"x":"a latte","nom":"латте","acc":"латте"},
+  {"x":"a cup of tea","nom":"чашка чая","acc":"чашку чая"},
+  {"x":"a bottle of water","nom":"бутылка воды","acc":"бутылку воды"},
+  {"x":"an orange juice","nom":"апельсиновый сок","acc":"апельсиновый сок"},
+  {"x":"a muffin","nom":"маффин","acc":"маффин"},
+  {"x":"a croissant","nom":"круассан","acc":"круассан"},
+  {"x":"a sandwich","nom":"сэндвич","acc":"сэндвич"},
+  {"x":"a salad","nom":"салат","acc":"салат"},
+  {"x":"the soup","nom":"суп","acc":"суп"},
+  {"x":"the chicken","nom":"курица","acc":"курицу"},
+  {"x":"the fish","nom":"рыба","acc":"рыбу"},
+  {"x":"a burger","nom":"бургер","acc":"бургер"},
+  {"x":"a piece of cake","nom":"кусок торта","acc":"кусок торта"}
+ ]
+}
+]
